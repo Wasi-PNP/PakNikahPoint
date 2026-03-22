@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Matching — PakNikahPoint</title>
+<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-emblem"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/><path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/><circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/><circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/></svg></div><div class="logo-text"><span class="logo-main">PakNikahPoint</span><span class="logo-urdu">پاک نکاح پوائنٹ</span><span class="logo-tag">Professional Matchmaking</span></div></div>
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-item"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="register.html?gender=boy" class="nav-item"><span class="ni">♂</span>Register Boy</a></li>
+    <li><a href="register.html?gender=girl" class="nav-item"><span class="ni">♀</span>Register Girl</a></li>
+    <li><a href="profiles.html" class="nav-item"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="matching.html" class="nav-item active"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="search.html" class="nav-item"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="admin.html" class="nav-item"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+    <li><a href="packages.html" class="nav-item"><span class="ni">💎</span>Packages &amp; Ads</a></li>
+    <li><a href="charity.html" class="nav-item"><span class="ni">🤲</span>خیراتی سیکشن</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v2.0 • 2025</div>
+</nav>
+
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left"><button class="toggle-btn" onclick="toggleSidebar()">☰</button><div class="breadcrumb"><span>PakNikahPoint</span> › <strong>Smart Matching Engine</strong></div></div>
+    <div class="topbar-right"><span class="topbar-date" id="topDate"></span><span class="admin-chip">Admin</span></div>
+  </header>
+
+  <div class="page-body">
+    <div style="display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;">
+      <div>
+        <div class="panel" style="margin-bottom:16px;">
+          <div class="panel-hdr"><span class="panel-title">❤ Find Matches</span></div>
+          <div class="panel-body">
+            <div class="form-group" style="margin-bottom:12px;">
+              <label class="filter-label">For Gender</label>
+              <select class="form-control" id="matchGender" onchange="loadProfileSelector()">
+                <option value="boy">♂ Find for Boy</option>
+                <option value="girl">♀ Find for Girl</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label class="filter-label">Select Profile</label>
+              <select class="form-control" id="matchProfile"><option value="">-- Select Profile --</option></select>
+            </div>
+            <button class="btn-primary" style="width:100%;" onclick="runMatching()">❤ Find Top 5 Matches</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hdr"><span class="panel-title">Scoring Criteria</span></div>
+          <div class="panel-body" style="padding:12px;">
+            <div id="criteriaList"></div>
+            <div style="text-align:center;margin-top:8px;font-size:13px;font-weight:700;color:var(--gold);font-family:'Cinzel',serif;padding:8px;background:var(--gold-pale);border-radius:8px;">Total: 100 Points</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div id="matchingHero" class="panel" style="text-align:center;padding:60px 30px;">
+          <div style="font-size:64px;margin-bottom:16px;">❤</div>
+          <div style="font-family:'Cinzel',serif;font-size:20px;color:var(--green-deep);margin-bottom:8px;">Smart Matching Engine</div>
+          <div style="color:var(--text-light);">Select a profile and click "Find Top 5 Matches"</div>
+        </div>
+        <div id="matchResults" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h2 style="font-family:'Cinzel',serif;font-size:18px;color:var(--green-deep);" id="matchResultTitle">Top Matches</h2>
+            <button class="btn-gold" style="padding:8px 18px;font-size:13px;" onclick="saveTopMatch()">💾 Save Best Match</button>
+          </div>
+          <div id="matchList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="../js/db.js">
+</script>
+<script src="../js/daily.js"></script>
+<script src="../js/app.js"></script>
+<script>
+const criteria = ['City','Age Difference','Education','Religious Education','Caste','Sect','Marital Status','Profession','Residence','Height'];
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadProfileSelector();
+  document.getElementById('criteriaList').innerHTML = criteria.map(c=>`
+    <div style="display:flex;justify-content:space-between;padding:5px 8px;border-radius:6px;margin-bottom:3px;background:var(--cream);font-size:13px;">
+      <span>${c}</span><span style="font-weight:700;color:var(--green-mid);font-family:'Cinzel',serif;">10 pts</span>
+    </div>`).join('');
+  
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) {
+    const gender = code.startsWith('L-') ? 'boy' : 'girl';
+    document.getElementById('matchGender').value = gender;
+    loadProfileSelector(() => { document.getElementById('matchProfile').value = code; runMatching(); });
+  }
+});
+
+function loadProfileSelector(cb) {
+  const gender = document.getElementById('matchGender').value;
+  const profiles = gender === 'boy' ? PNP_DB.getBoys() : PNP_DB.getGirls();
+  const sel = document.getElementById('matchProfile');
+  sel.innerHTML = '<option value="">-- Select Profile --</option>';
+  profiles.forEach(p => {
+    const o = document.createElement('option');
+    o.value = p.pnpCode;
+    o.textContent = `${p.pnpCode} — ${p.name} (${p.age}y, ${p.city})`;
+    sel.appendChild(o);
+  });
+  if (cb) cb();
+}
+
+function runMatching() {
+  const code = document.getElementById('matchProfile').value;
+  if (!code) { showToast('Please select a profile first','error'); return; }
+  const gender = document.getElementById('matchGender').value;
+  const matches = PNP_DB.findTopMatches(code, gender, 5);
+  const subject = PNP_DB.getProfileByCode(code);
+  document.getElementById('matchingHero').style.display = 'none';
+  document.getElementById('matchResults').style.display = 'block';
+  document.getElementById('matchResultTitle').textContent = `Top ${matches.length} Matches for ${subject.name}`;
+  if (!matches.length) {
+    document.getElementById('matchList').innerHTML = '<div class="empty-msg">No profiles to match. Add more profiles.</div>';
+    return;
+  }
+  const rankEmoji = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+  document.getElementById('matchList').innerHTML = matches.map((m,i) => {
+    const boy = gender==='boy'?subject:m.profile, girl=gender==='boy'?m.profile:subject;
+    const cls = m.score>=70?'score-high':m.score>=50?'score-mid':'score-low';
+    const breakdown = Object.entries(m.breakdown).map(([k,v])=>`
+      <div class="score-item"><span class="score-item-label">${k}</span><span class="score-item-val ${v===0?'zero':''}">${v}/10</span></div>`).join('');
+    const breakdownSafe = JSON.stringify(m.breakdown).replace(/"/g,'&quot;');
+    return `<div class="match-card rank-${i+1}" style="flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="match-rank">${rankEmoji[i]}</div>
+        <div class="match-avatar">${gender==='boy'?'♀':'♂'}</div>
+        <div class="match-info">
+          <div class="match-names">${m.profile.name}</div>
+          <div class="match-meta">${m.profile.age} yrs • ${m.profile.city} • ${m.profile.caste||'—'}</div>
+          <div style="font-size:11px;color:var(--text-light);">${m.profile.pnpCode}</div>
+        </div>
+        <div class="match-score-ring ${cls}" style="margin-left:auto;">
+          <div class="score-number">${m.score}</div><div class="score-label">/100</div>
+        </div>
+      </div>
+      <div class="score-breakdown" style="margin-top:12px;">${breakdown}</div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="card-btn card-btn-primary" onclick="viewProfile('${m.profile.pnpCode}')">View Profile</button>
+        <button class="card-btn card-btn-match" onclick="PNP_DB.saveMatch('${boy.pnpCode}','${girl.pnpCode}',${m.score},{});showToast('Match saved!','success')">💾 Save</button>
+        <button class="card-btn card-btn-wa" onclick="waShareMatch('${subject.pnpCode}','${m.profile.pnpCode}',${m.score})">📱 WhatsApp</button>
+        <button class="card-btn" style="background:var(--gold-pale);color:var(--gold);" onclick="generateRishtaCard('${m.profile.pnpCode}')">📄 Rishta Card</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function saveTopMatch() {
+  const code = document.getElementById('matchProfile').value, gender = document.getElementById('matchGender').value;
+  if (!code) return;
+  const matches = PNP_DB.findTopMatches(code, gender, 1);
+  if (!matches.length) return;
+  const s = PNP_DB.getProfileByCode(code);
+  const boy = gender==='boy'?s:matches[0].profile, girl = gender==='boy'?matches[0].profile:s;
+  PNP_DB.saveMatch(boy.pnpCode, girl.pnpCode, matches[0].score, matches[0].breakdown);
+  showToast(`Best match saved! Score: ${matches[0].score}/100`, 'success');
+}
+
+function waShareMatch(c1, c2, score) {
+  const p1=PNP_DB.getProfileByCode(c1), p2=PNP_DB.getProfileByCode(c2);
+  if (!p1||!p2) return;
+  const s=PNP_DB.getSettings();
+  const msg=`🌙 *PakNikahPoint — Match Found!*\n\n*Compatibility: ${score}/100*\n\n*Profile 1:*\n${p1.pnpCode} — ${p1.name}\nAge: ${p1.age} • City: ${p1.city}\n\n*Profile 2:*\n${p2.pnpCode} — ${p2.name}\nAge: ${p2.age} • City: ${p2.city}\n\n📞 ${s.phone||'PakNikahPoint'}\n_Managed with respect 🤝_`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
+<script>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+}
+</script>
+</body>
+</html>

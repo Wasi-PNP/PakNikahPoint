@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PakNikahPoint — Professional Matchmaking System</title>
+<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<!-- PWA -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PakNikahPoint">
+<style>
+#pwa-install-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #C9A84C;
+  color: #0D3B2E;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(201,168,76,0.4); }
+  50% { box-shadow: 0 4px 30px rgba(201,168,76,0.8); }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-emblem">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+        <path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/>
+        <circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/>
+        <circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-main">PakNikahPoint</span>
+      <span class="logo-urdu">پاک نکاح پوائنٹ</span>
+      <span class="logo-tag">Professional Matchmaking</span>
+    </div>
+  </div>
+
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="index.html" class="nav-item active"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="pages/register.html?gender=boy" class="nav-item"><span class="ni">♂</span>Register Boy</a></li>
+    <li><a href="pages/register.html?gender=girl" class="nav-item"><span class="ni">♀</span>Register Girl</a></li>
+    <li><a href="pages/profiles.html" class="nav-item"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="pages/matching.html" class="nav-item"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="pages/search.html" class="nav-item"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="pages/admin.html" class="nav-item"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="pages/gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v2.0 &nbsp;•&nbsp; 2025</div>
+</nav>
+
+<main class="main-content" id="mainContent">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <div class="breadcrumb"><span>PakNikahPoint</span> › <strong>Dashboard</strong></div>
+    </div>
+    <div class="topbar-right">
+      <div class="qs-wrap">
+        <span class="qs-icon">⌕</span>
+        <input type="text" id="quickSearch" class="qs-input" placeholder="Search by name or PNP code…" oninput="runQuickSearch(this.value)">
+      </div>
+      <span class="topbar-date" id="topDate"></span>
+      <span class="admin-chip">Admin</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+    <div class="dashboard-hero">
+      <div>
+        <div class="hero-arabic">بسم الله الرحمن الرحيم</div>
+        <div class="hero-sub">Welcome to PakNikahPoint — Rishtay with Respect &amp; Responsibility</div>
+      </div>
+      <div class="hero-divider"></div>
+    </div>
+
+    <div id="dailyWidgetContainer"></div>
+    <div class="stats-row">
+      <div class="stat-card blue">
+        <div class="stat-icon-box">♂</div>
+        <div><div class="stat-num" id="totalBoys">0</div><div class="stat-lbl">Boys Profiles</div><div class="stat-urdu">لڑکے</div></div>
+      </div>
+      <div class="stat-card rose">
+        <div class="stat-icon-box">♀</div>
+        <div><div class="stat-num" id="totalGirls">0</div><div class="stat-lbl">Girls Profiles</div><div class="stat-urdu">لڑکیاں</div></div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-icon-box">❤</div>
+        <div><div class="stat-num" id="totalMatches">0</div><div class="stat-lbl">Matches Made</div><div class="stat-urdu">رشتے</div></div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-icon-box">⊛</div>
+        <div><div class="stat-num" id="totalProfiles">0</div><div class="stat-lbl">Total Profiles</div><div class="stat-urdu">کل پروفائل</div></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <section class="panel">
+        <div class="panel-hdr"><span class="panel-title">Latest Registrations</span><a href="pages/profiles.html" class="see-all">View All →</a></div>
+        <div id="latestRegs" class="panel-body">
+          <div class="empty-msg">📋 No profiles yet. <a href="pages/register.html">Add first</a></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panel-hdr"><span class="panel-title">Recent Matches</span><a href="pages/matching.html" class="see-all">View All →</a></div>
+        <div id="latestMatchList" class="panel-body">
+          <div class="empty-msg">💑 No matches yet. <a href="pages/matching.html">Run engine</a></div>
+        </div>
+      </section>
+    </div>
+
+    <section id="searchResultsSection" style="display:none" class="panel">
+      <div class="panel-hdr">
+        <span class="panel-title">Search Results</span>
+        <button onclick="clearQuickSearch()" class="see-all">Clear ✕</button>
+      </div>
+      <div id="searchResultsBody" class="panel-body"></div>
+    </section>
+
+    <section class="quick-actions-section">
+      <h2 class="section-heading">Quick Actions</h2>
+      <div class="qa-grid">
+        <a href="pages/register.html?gender=boy" class="qa-btn qa-boy"><span>♂</span><div>Register Boy<small>لڑکا رجسٹر کریں</small></div></a>
+        <a href="pages/register.html?gender=girl" class="qa-btn qa-girl"><span>♀</span><div>Register Girl<small>لڑکی رجسٹر کریں</small></div></a>
+        <a href="pages/matching.html" class="qa-btn qa-match"><span>❤</span><div>Find Match<small>رشتہ ڈھونڈیں</small></div></a>
+        <a href="pages/search.html" class="qa-btn qa-search"><span>⌕</span><div>Search Profiles<small>پروفائل تلاش کریں</small></div></a>
+        <a href="pages/admin.html" class="qa-btn qa-admin"><span>⚙</span><div>Admin Panel<small>انتظامیہ</small></div></a>
+        <a href="pages/gallery.html" class="qa-btn qa-gallery"><span>⊞</span><div>Photo Gallery<small>تصویر گیلری</small></div></a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="js/db.js"></script>
+<script src="js/daily.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{const c=document.getElementById("dailyWidgetContainer");if(c&&typeof PNP_DAILY!=="undefined")c.innerHTML=PNP_DAILY.buildWidget();});</script>
+
+<!-- ═══ GAS URL سیٹ کریں ═══ -->
+<script>
+(function(){
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxek-gphMpD_M3s8b4VI76wsIxjlufMdfc3VPpXnpsYF3WdVhiOVRqKU4e0KyveIpEjAA/exec';
+  const s = PNP_DB.getSettings();
+  if(!s.gasUrl || s.gasUrl !== GAS_URL){
+    s.gasUrl = GAS_URL;
+    PNP_DB.saveSettings(s);
+    console.log('✅ GAS URL محفوظ ہو گیا');
+  }
+})();
+</script>
+
+<!-- ═══ PWA Install Button ═══ -->
+<button id="pwa-install-btn" onclick="installPWA()">
+  📲 ایپ انسٹال کریں
+</button>
+
+<!-- ═══ Service Worker + PWA ═══ -->
+<script>
+let deferredPrompt = null;
+
+// Service Worker رجسٹر کریں
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ SW رجسٹر:', reg.scope))
+      .catch(err => console.log('❌ SW Error:', err));
+  });
+}
+
+// Install prompt پکڑیں
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('pwa-install-btn');
+  if(btn) btn.style.display = 'block';
+});
+
+// Install بٹن کا کام
+function installPWA(){
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(choice => {
+    if(choice.outcome === 'accepted'){
+      console.log('✅ PWA انسٹال ہو گئی');
+      const btn = document.getElementById('pwa-install-btn');
+      if(btn) btn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  });
+}
+
+// انسٹال کے بعد بٹن چھپائیں
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('pwa-install-btn');
+  if(btn) btn.style.display = 'none';
+});
+</script>
+</body>
+</html>

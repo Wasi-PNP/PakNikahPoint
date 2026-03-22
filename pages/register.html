@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Profile — PakNikahPoint</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PakNikahPoint">
+<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+.step{display:none;}
+.step.active{display:block;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.progress-wrap{background:rgba(0,0,0,0.06);border-radius:10px;height:8px;margin-bottom:20px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green-mid),var(--gold));border-radius:10px;transition:width 0.4s ease;}
+.step-info{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.step-title-main{font-family:'Cinzel',serif;font-size:15px;color:var(--green-deep);font-weight:700;}
+.step-counter{font-size:12px;color:var(--text-light);background:var(--cream);padding:4px 12px;border-radius:20px;}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:10px 0;}
+.opt-card{border:2px solid rgba(0,0,0,0.08);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;font-size:13px;transition:all 0.2s;background:white;line-height:1.4;}
+.opt-card:hover{border-color:var(--green-light);background:var(--green-pale);}
+.opt-card.sel{border-color:var(--green-mid);background:var(--green-pale);font-weight:700;color:var(--green-deep);}
+.opt-card.sel-blue{border-color:var(--blue);background:var(--blue-pale);font-weight:700;color:var(--blue);}
+.opt-card.sel-rose{border-color:var(--rose);background:var(--rose-pale);font-weight:700;color:var(--rose);}
+.cond-box{background:var(--green-pale);border-left:4px solid var(--green-mid);border-radius:0 10px 10px 0;padding:16px;margin:12px 0;display:none;}
+.cond-box.show{display:block;animation:fadeIn 0.3s ease;}
+.nav-btns{display:flex;gap:12px;justify-content:space-between;padding:16px 20px;border-top:1px solid rgba(0,0,0,0.06);background:white;position:sticky;bottom:0;z-index:10;border-radius:0 0 10px 10px;}
+.req{color:#e74c3c;margin-left:2px;}
+.gender-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0;}
+.gender-card{border:2px solid rgba(0,0,0,0.1);border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.3s;background:white;}
+.gender-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.gender-card .gi{font-size:52px;margin-bottom:10px;}
+.gender-card .gl{font-family:'Cinzel',serif;font-size:16px;font-weight:700;}
+.gender-card .gu{font-size:13px;color:var(--text-light);margin-top:4px;}
+.section-head{background:linear-gradient(90deg,var(--green-pale),white);padding:12px 20px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;gap:10px;margin:0;}
+.section-head h3{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--green-deep);}
+.section-icon{font-size:18px;color:var(--gold);}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-emblem"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/><path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/><circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/><circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/></svg></div>
+    <div class="logo-text"><span class="logo-main">PakNikahPoint</span><span class="logo-urdu">پاک نکاح پوائنٹ</span><span class="logo-tag">Professional Matchmaking</span></div>
+  </div>
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-item"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="register.html" class="nav-item active"><span class="ni">✎</span>Register Profile</a></li>
+    <li><a href="profiles.html" class="nav-item"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="matching.html" class="nav-item"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="search.html" class="nav-item"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="admin.html" class="nav-item"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+    <li><a href="packages.html" class="nav-item"><span class="ni">💎</span>Packages &amp; Ads</a></li>
+    <li><a href="charity.html" class="nav-item"><span class="ni">🤲</span>خیراتی سیکشن</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v3.0 • 2025</div>
+</nav>
+
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <div class="breadcrumb"><span>PakNikahPoint</span> › <strong>Register Profile</strong></div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="topDate"></span>
+      <span class="admin-chip">Admin</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <!-- PNP Code -->
+    <div class="pnp-code-display" id="pnpBox">
+      <div><div class="pnp-code-label">PNP Code</div><div class="pnp-code-value" id="codeShow">---</div></div>
+      <div style="font-size:13px;color:var(--text-light);">جنس منتخب کرنے پر خودبخود بنے گا</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap"><div class="progress-fill" id="pBar" style="width:8%"></div></div>
+
+    <div class="panel">
+
+      <!-- ═══════════════════════════════════════
+           STEP 1 — نام
+      ═══════════════════════════════════════ -->
+      <div class="step active" id="s1">
+        <div class="section-head"><span class="section-icon">✎</span><h3>نام — Full Name</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info">
+            <span class="step-title-main">اپنا پورا نام لکھیں</span>
+            <span class="step-counter">مرحلہ 1 / 13</span>
+          </div>
+          <div class="form-group">
+            <label>پورا نام <span class="req">*</span></label>
+            <input type="text" id="f_name" class="form-control" placeholder="مثال: محمد علی خان / فاطمہ زہرہ" style="font-size:16px;padding:12px;">
+          </div>
+        </div>
+        <div class="nav-btns"><div></div><button class="btn-primary" onclick="go(2)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 2 — جنس
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s2">
+        <div class="section-head"><span class="section-icon">👤</span><h3>جنس — Gender</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info">
+            <span class="step-title-main">اپنی جنس منتخب کریں</span>
+            <span class="step-counter">مرحلہ 2 / 13</span>
+          </div>
+          <div class="gender-grid">
+            <div class="gender-card" id="gBoy" onclick="pickGender('boy')">
+              <div class="gi">♂</div>
+              <div class="gl">لڑکا</div>
+              <div class="gu">Boy / Male</div>
+            </div>
+            <div class="gender-card" id="gGirl" onclick="pickGender('girl')">
+              <div class="gi">♀</div>
+              <div class="gl">لڑکی</div>
+              <div class="gu">Girl / Female</div>
+            </div>
+          </div>
+          <input type="hidden" id="f_gender">
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(1)">← پچھلا</button><button class="btn-primary" onclick="go(3)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 3 — ازدواجی حیثیت
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s3">
+        <div class="section-head"><span class="section-icon">💍</span><h3>ازدواجی حیثیت — Marital Status</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info">
+            <span class="step-title-main">اپنی ازدواجی حیثیت منتخب کریں <span class="req">*</span></span>
+            <span class="step-counter">مرحلہ 3 / 13</span>
+          </div>
+          <div class="opt-grid">
+            <div class="opt-card" onclick="pickMarital('پہلی شادی',this)">💚<br>پہلی شادی</div>
+            <div class="opt-card" onclick="pickMarital('دیر سے شادی',this)">⏰<br>دیر سے شادی</div>
+            <div class="opt-card" onclick="pickMarital('دوسری شادی',this)">2️⃣<br>دوسری شادی</div>
+            <div class="opt-card" onclick="pickMarital('تیسری شادی',this)">3️⃣<br>تیسری شادی</div>
+            <div class="opt-card" onclick="pickMarital('چوتھی شادی',this)">4️⃣<br>چوتھی شادی</div>
+
+            <div class="opt-card" onclick="pickMarital('بیوہ',this)">🕊️<br>بیوہ</div>
+            <div class="opt-card" onclick="pickMarital('رنڈوا',this)">🕊️<br>رنڈوا</div>
+          </div>
+          <input type="hidden" id="f_marital">
+
+          <!-- دیر سے شادی -->
+          <div class="cond-box" id="cb_late">
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--green-deep);margin-bottom:12px;">⏰ دیر سے شادی کی وجہ</div>
+            <div class="form-group">
+              <label>وجہ منتخب کریں <span class="req">*</span></label>
+              <select id="f_lateReason" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>تعلیم مکمل کرنا تھی</option>
+                <option>مالی حالات ٹھیک نہیں تھے</option>
+                <option>مناسب رشتہ نہیں ملا</option>
+                <option>خاندانی وجوہات</option>
+                <option>والدین کی ذمہ داری</option>
+                <option>صحت کے مسائل</option>
+                <option>خود پسند نہیں آئی</option>
+                <option>دیگر</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- دوسری/تیسری/چوتھی شادی -->
+          <div class="cond-box" id="cb_remarry">
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--green-deep);margin-bottom:12px;">💍 پچھلی شادی کی تفصیل</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>دوسری / تیسری / چوتھی شادی کی وجہ <span class="req">*</span></label>
+                <select id="f_remarryReason" class="form-control" onchange="checkRemarryReason()">
+                  <option value="">منتخب کریں</option>
+                  <option>طلاق</option>
+                  <option>خلع</option>
+                  <option>شریک حیات کا انتقال</option>
+                  <option>اولاد کا نہ ہونا</option>
+                  <option>بیٹے کی خواہش</option>
+                  <option>بچوں کی نگہداشت</option>
+                  <option>شریک حیات کی لاعلاج بیماری</option>
+                  <option>شریک حیات کی جسمانی معذوری</option>
+                  <option>شرعی اجازت سے ذاتی فیصلہ</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>کیا پہلی بیوی ابھی بھی نکاح میں ہے؟</label>
+                <select id="f_firstWife" class="form-control">
+                  <option value="">منتخب کریں</option>
+                  <option>ہاں</option><option>نہیں</option><option>لاگو نہیں</option>
+                </select>
+              </div>
+            </div>
+            <!-- طلاق/خلع کی وجہ -->
+            <div id="cb_remarryDivReason" style="display:none;margin-top:10px;background:#fff8f0;border-radius:8px;padding:14px;border:1px solid #f0d0a0;">
+              <div class="form-group">
+                <label>طلاق / خلع کی وجہ</label>
+                <select id="f_remarryDivDetail" class="form-control">
+                  <option value="">منتخب کریں</option>
+                  <option>اولاد کا نہ ہونا (بانجھ پن)</option>
+                  <option>بیٹا نہ ہونا</option>
+                  <option>نا موافق مزاج</option>
+                  <option>گھریلو تشدد</option>
+                  <option>مالی مسائل</option>
+                  <option>بد کردار ہونا</option>
+                  <option>علیحدہ گھر نہ دینا</option>
+                  <option>سسرالی مداخلت</option>
+                  <option>منشیات / شراب نوشی</option>
+                  <option>جوا کھیلنا</option>
+                  <option>مجرمانہ سرگرمیاں</option>
+                  <option>خاندانی دباؤ</option>
+                  <option>بیرون ملک جا کر رابطہ نہ کرنا</option>
+                  <option>مذہبی نظریات میں شدید فرق</option>
+                  <option>دین پر عمل نہ کرنا</option>
+                  <option>بتانا نہیں چاہتے</option>
+                </select>
+              </div>
+            </div>
+            <!-- دوسری شادی میں بچے -->
+            <div class="form-group" style="margin-top:10px;">
+              <label>کیا بچے ہیں؟ <span class="req">*</span></label>
+              <div class="opt-grid" style="grid-template-columns:1fr 1fr;">
+                <div class="opt-card" onclick="pickRemarryChildren('نہیں',this)" id="rc_no">❌ نہیں</div>
+                <div class="opt-card" onclick="pickRemarryChildren('ہاں',this)" id="rc_yes">✅ ہاں</div>
+              </div>
+              <input type="hidden" id="f_remarryChildren">
+            </div>
+            <div id="cb_remarryChildDetail" style="display:none;margin-top:10px;background:white;border-radius:8px;padding:14px;border:1px solid rgba(0,0,0,0.08);">
+              <div class="form-grid three">
+                <div class="form-group"><label>کل بچے</label><input type="number" id="f_rTotal" class="form-control" placeholder="مثال: 3" min="0"></div>
+                <div class="form-group"><label>لڑکے</label><input type="number" id="f_rBoys" class="form-control" placeholder="مثال: 2" min="0"></div>
+                <div class="form-group"><label>لڑکیاں</label><input type="number" id="f_rGirls" class="form-control" placeholder="مثال: 1" min="0"></div>
+              </div>
+              <div class="form-group"><label>بچوں کی عمریں</label><input type="text" id="f_rAges" class="form-control" placeholder="مثال: 8، 5، 3 سال"></div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>بچے کس کے ساتھ؟</label>
+                  <select id="f_rWith" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میرے ساتھ</option><option>سابق کے ساتھ</option>
+                    <option>دادا دادی کے ساتھ</option><option>نانا نانی کے ساتھ</option>
+                    <option>مشترکہ وقت</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>قانونی Custody</label>
+                  <select id="f_rCustody" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میرے پاس</option><option>سابق کے پاس</option>
+                    <option>ابھی فیصلہ نہیں آیا</option>
+                    <option>کیس زیر التوا ہے</option>
+                    <option>مشترکہ</option><option>ابھی سوچنا ہے</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>نان نفقہ کی ذمہ داری</label>
+                  <select id="f_rMaint" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میری ہے</option><option>پارٹنر کی ہے</option>
+                    <option>مشترکہ ہے</option><option>خاندان کی ہے</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- طلاق / خلع -->
+          <div class="cond-box" id="cb_divorce">
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--green-deep);margin-bottom:12px;">📋 طلاق / خلع کی تفصیل</div>
+            <div class="form-group">
+              <label>وجہ <span class="req">*</span></label>
+              <select id="f_divReason" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>ناموافق مزاج</option><option>گھریلو تشدد</option>
+                <option>مالی مسائل</option><option>خاندانی دباؤ</option>
+                <option>بے وفائی</option><option>دینی اختلافات</option>
+                <option>بتانا نہیں چاہتے</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-top:12px;">
+              <label>کیا بچے ہیں؟ <span class="req">*</span></label>
+              <div class="opt-grid" style="grid-template-columns:1fr 1fr;">
+                <div class="opt-card" onclick="pickDivChildren('نہیں',this)" id="dc_no">❌ نہیں</div>
+                <div class="opt-card" onclick="pickDivChildren('ہاں',this)" id="dc_yes">✅ ہاں</div>
+              </div>
+              <input type="hidden" id="f_divChildren">
+            </div>
+            <div id="cb_divChildDetail" style="display:none;margin-top:10px;background:white;border-radius:8px;padding:14px;border:1px solid rgba(0,0,0,0.08);">
+              <div class="form-grid three">
+                <div class="form-group"><label>کل بچے</label><input type="number" id="f_dTotal" class="form-control" placeholder="3" min="0"></div>
+                <div class="form-group"><label>لڑکے</label><input type="number" id="f_dBoys" class="form-control" placeholder="2" min="0"></div>
+                <div class="form-group"><label>لڑکیاں</label><input type="number" id="f_dGirls" class="form-control" placeholder="1" min="0"></div>
+              </div>
+              <div class="form-group"><label>بچوں کی عمریں</label><input type="text" id="f_dAges" class="form-control" placeholder="مثال: 8، 5، 3 سال"></div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>بچے کس کے ساتھ رہتے ہیں؟</label>
+                  <select id="f_dWith" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میرے ساتھ</option><option>سابق کے ساتھ</option>
+                    <option>دادا دادی کے ساتھ</option><option>نانا نانی کے ساتھ</option>
+                    <option>مشترکہ وقت</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>قانونی Custody کس کے پاس؟</label>
+                  <select id="f_dCustody" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میرے پاس</option><option>سابق کے پاس</option>
+                    <option>ابھی فیصلہ نہیں آیا</option>
+                    <option>کیس زیر التوا ہے</option>
+                    <option>مشترکہ Custody</option>
+                    <option>ابھی سوچنا ہے</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>نان نفقہ کی ذمہ داری</label>
+                  <select id="f_dMaint" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میری ہے</option><option>پارٹنر کی ہے</option>
+                    <option>مشترکہ ہے</option><option>خاندان کی ہے</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- بیوہ / رنڈوا -->
+          <div class="cond-box" id="cb_widow">
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--green-deep);margin-bottom:12px;">🕊️ بیوہ / رنڈوا کی تفصیل</div>
+            <div class="form-grid">
+              <div class="form-group"><label>شریک حیات کا انتقال کب ہوا؟</label><input type="text" id="f_passedYear" class="form-control" placeholder="مثال: 2020"></div>
+            </div>
+            <div class="form-group" style="margin-top:12px;">
+              <label>کیا بچے ہیں؟ <span class="req">*</span></label>
+              <div class="opt-grid" style="grid-template-columns:1fr 1fr;">
+                <div class="opt-card" onclick="pickWidowChildren('نہیں',this)" id="wc_no">❌ نہیں</div>
+                <div class="opt-card" onclick="pickWidowChildren('ہاں',this)" id="wc_yes">✅ ہاں</div>
+              </div>
+              <input type="hidden" id="f_widowChildren">
+            </div>
+            <div id="cb_widowChildDetail" style="display:none;margin-top:10px;background:white;border-radius:8px;padding:14px;border:1px solid rgba(0,0,0,0.08);">
+              <div class="form-grid three">
+                <div class="form-group"><label>کل بچے</label><input type="number" id="f_wTotal" class="form-control" placeholder="3" min="0"></div>
+                <div class="form-group"><label>لڑکے</label><input type="number" id="f_wBoys" class="form-control" placeholder="2" min="0"></div>
+                <div class="form-group"><label>لڑکیاں</label><input type="number" id="f_wGirls" class="form-control" placeholder="1" min="0"></div>
+              </div>
+              <div class="form-group"><label>بچوں کی عمریں</label><input type="text" id="f_wAges" class="form-control" placeholder="مثال: 10، 7، 4 سال"></div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>بچے کس کے ساتھ رہتے ہیں؟</label>
+                  <select id="f_wWith" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میرے ساتھ</option>
+                    <option>دادا دادی کے ساتھ</option>
+                    <option>نانا نانی کے ساتھ</option>
+                    <option>مشترکہ</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>قانونی Custody</label>
+                  <select id="f_wCustody" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میرے پاس</option>
+                    <option>ابھی فیصلہ نہیں آیا</option>
+                    <option>مشترکہ</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>نان نفقہ کی ذمہ داری</label>
+                  <select id="f_wMaint" class="form-control">
+                    <option value="">منتخب کریں</option>
+                    <option>میری ہے</option>
+                    <option>مشترکہ ہے</option>
+                    <option>خاندان کی ہے</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(2)">← پچھلا</button><button class="btn-primary" onclick="go(4)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 4 — مذہب، مسلک، ذات
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s4">
+        <div class="section-head"><span class="section-icon">☪</span><h3>مذہب، مسلک اور ذات</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">مذہبی معلومات</span><span class="step-counter">مرحلہ 4 / 13</span></div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>مذہب <span class="req">*</span></label>
+              <select id="f_religion" class="form-control">
+                <option>اسلام</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>مسلک <span class="req">*</span></label>
+              <select id="f_sect" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>سنی</option><option>شیعہ</option>
+                <option>بریلوی</option><option>دیوبندی</option>
+                <option>اہل حدیث</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>ذات / برادری <span class="req">*</span></label>
+              <input type="text" id="f_caste" class="form-control" placeholder="مثال: سید، پٹھان، راجپوت، انصاری، بٹ…">
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(3)">← پچھلا</button><button class="btn-primary" onclick="go(6)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 5 — پاکستان سے پہلے کا علاقہ
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s6">
+        <div class="section-head"><span class="section-icon">🏡</span><h3>آبائی علاقہ — پاکستان سے پہلے</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">خاندانی پس منظر</span><span class="step-counter">مرحلہ 5 / 14</span></div>
+          <div class="form-group">
+            <label>کیا آپ کا خاندان 1947 سے پہلے کسی اور علاقے سے آیا تھا؟</label>
+            <div style="display:flex;gap:12px;margin:10px 0;">
+              <button type="button" id="migBtn_yes" class="gender-card" style="flex:1;padding:16px;" onclick="toggleMigrant('yes')">
+                <div class="gi">✅</div><div class="gl">ہاں</div>
+              </button>
+              <button type="button" id="migBtn_no" class="gender-card" style="flex:1;padding:16px;" onclick="toggleMigrant('no')">
+                <div class="gi">❌</div><div class="gl">نہیں / معلوم نہیں</div>
+              </button>
+            </div>
+            <input type="hidden" id="f_migrant" value="">
+          </div>
+
+          <div id="migrantDetails" style="display:none;">
+            <div class="form-group">
+              <label>کون سے ملک / خطے سے آئے؟</label>
+              <select id="f_originCountry" class="form-control" onchange="updateOriginCities()">
+                <option value="">منتخب کریں</option>
+                <option value="ہندوستان">🇮🇳 ہندوستان (India)</option>
+                <option value="افغانستان">🇦🇫 افغانستان</option>
+                <option value="ایران">🇮🇷 ایران</option>
+                <option value="وسط ایشیا">🌍 وسط ایشیا (بخارا، سمرقند وغیرہ)</option>
+                <option value="دیگر">دیگر</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="originCityGroup">
+              <label>کون سے علاقے / شہر سے؟</label>
+              <select id="f_originCity" class="form-control" onchange="checkOtherCity()">
+                <option value="">پہلے ملک منتخب کریں</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="otherCityGroup" style="display:none;">
+              <label>علاقے کا نام لکھیں</label>
+              <input type="text" id="f_originCityOther" class="form-control" placeholder="مثال: میرٹھ، بریلی، حیدرآباد دکن...">
+            </div>
+
+            <div class="form-group">
+              <label>کون سی نسل / برادری سے تعلق ہے؟ (اختیاری)</label>
+              <select id="f_originCommunity" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option value="مہاجر">مہاجر</option>
+                <option value="پٹھان">پٹھان</option>
+                <option value="بلوچ">بلوچ</option>
+                <option value="سندھی">سندھی</option>
+                <option value="پنجابی">پنجابی</option>
+                <option value="کشمیری">کشمیری</option>
+                <option value="دیگر">دیگر</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="nav-btns"><button class="btn-outline" onclick="go(4)">← پچھلا</button><button class="btn-primary" onclick="go(7)">اگلا ←</button></div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 6 — عمر، قد، وزن، رنگت
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s6">
+        <div class="section-head"><span class="section-icon">📏</span><h3>عمر، قد، وزن اور رنگت</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">ذاتی تفصیلات</span><span class="step-counter">مرحلہ 6 / 14</span></div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>عمر <span class="req">*</span></label>
+              <input type="number" id="f_age" class="form-control" placeholder="مثال: 28" min="18" max="70">
+            </div>
+            <div class="form-group">
+              <label>قد <span class="req">*</span></label>
+              <select id="f_height" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>4'10"</option><option>5'0"</option><option>5'1"</option><option>5'2"</option>
+                <option>5'3"</option><option>5'4"</option><option>5'5"</option><option>5'6"</option>
+                <option>5'7"</option><option>5'8"</option><option>5'9"</option><option>5'10"</option>
+                <option>5'11"</option><option>6'0"</option><option>6'1"</option><option>6'2"+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>وزن</label>
+              <select id="f_weight" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>50 کلو سے کم</option><option>50-55 کلو</option><option>55-60 کلو</option>
+                <option>60-65 کلو</option><option>65-70 کلو</option><option>70-75 کلو</option>
+                <option>75-80 کلو</option><option>80-90 کلو</option><option>90+ کلو</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>رنگت</label>
+              <select id="f_complexion" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>بہت گوری</option><option>گوری</option>
+                <option>گندمی</option><option>سانولی</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(4)">← پچھلا</button><button class="btn-primary" onclick="go(7)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 6 — تعلیم، دینی تعلیم، داڑھی/پردہ
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s7">
+        <div class="section-head"><span class="section-icon">🎓</span><h3>تعلیم اور دینی عمل</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">تعلیمی اور دینی معلومات</span><span class="step-counter">مرحلہ 7 / 14</span></div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>تعلیم <span class="req">*</span></label>
+              <select id="f_education" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>میٹرک سے کم</option><option>میٹرک</option>
+                <option>انٹرمیڈیٹ</option><option>گریجویٹ</option>
+                <option>ماسٹرز</option><option>پی ایچ ڈی</option>
+                <option>حافظ/حافظہ</option><option>عالم/عالمہ</option>
+                <option>ڈپلومہ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>دینی تعلیم</label>
+              <select id="f_religiousEdu" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>بنیادی اسلامی</option><option>حافظ/حافظہ</option>
+                <option>عالم/عالمہ</option><option>مفتی</option>
+                <option>قاری</option><option>کوئی نہیں</option>
+              </select>
+            </div>
+            <!-- داڑھی — صرف لڑکے کے لیے -->
+            <div class="form-group" id="beardGroup">
+              <label>داڑھی <span style="font-size:11px;color:var(--text-light)">(صرف لڑکوں کے لیے)</span></label>
+              <select id="f_beard" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>مکمل داڑھی (سنت)</option>
+                <option>چھوٹی داڑھی</option>
+                <option>شیو کرتے ہیں</option>
+                <option>کبھی کبھار</option>
+              </select>
+            </div>
+            <!-- پردہ — صرف لڑکی کے لیے -->
+            <div class="form-group" id="pardaGroup">
+              <label>پردہ / حجاب <span style="font-size:11px;color:var(--text-light)">(صرف لڑکیوں کے لیے)</span></label>
+              <select id="f_parda" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>مکمل پردہ (نقاب)</option>
+                <option>حجاب</option>
+                <option>سادہ لباس</option>
+                <option>نہیں</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(6)">← پچھلا</button><button class="btn-primary" onclick="go(8)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 7 — پیشہ
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s8">
+        <div class="section-head"><span class="section-icon">💼</span><h3>پیشہ — Profession</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">پیشے کی معلومات</span><span class="step-counter">مرحلہ 8 / 14</span></div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>پیشہ <span class="req">*</span></label>
+              <select id="f_profession" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>ڈاکٹر</option><option>انجینئر</option><option>استاد</option>
+                <option>کاروبار</option><option>سرکاری ملازمت</option>
+                <option>پرائیویٹ ملازمت</option><option>آئی ٹی / ٹیک</option>
+                <option>وکیل</option><option>اکاؤنٹنٹ</option><option>بینکر</option>
+                <option>کسان</option><option>طالب علم</option>
+                <option>گھریلو</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>ادارے / کمپنی کا نام</label>
+              <input type="text" id="f_employer" class="form-control" placeholder="مثال: PTCL، ہسپتال…">
+            </div>
+            <div class="form-group">
+              <label>ماہانہ آمدن (تقریباً)</label>
+              <select id="f_income" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>30,000 سے کم</option><option>30,000 - 50,000</option>
+                <option>50,000 - 80,000</option><option>80,000 - 1,20,000</option>
+                <option>1,20,000 - 2,00,000</option><option>2,00,000 سے زیادہ</option>
+                <option>بتانا نہیں چاہتے</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(7)">← پچھلا</button><button class="btn-primary" onclick="go(9)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 8 — رہائش
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s9">
+        <div class="section-head"><span class="section-icon">🏠</span><h3>رہائش — Residence</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">رہائش کی تفصیل <span class="req">*</span></span><span class="step-counter">مرحلہ 9 / 14</span></div>
+
+          <div class="form-group" style="margin-bottom:16px;">
+            <label>رہائش کی نوعیت <span class="req">*</span></label>
+            <div class="opt-grid">
+              <div class="opt-card" onclick="pickRes('اپنی ذاتی',this)">🏠<br>اپنی ذاتی</div>
+              <div class="opt-card" onclick="pickRes('کرائے پر',this)">🔑<br>کرائے پر</div>
+              <div class="opt-card" onclick="pickRes('سرکاری',this)">🏛️<br>سرکاری</div>
+              <div class="opt-card" onclick="pickRes('کمپنی کی طرف سے',this)">🏢<br>کمپنی کی</div>
+              <div class="opt-card" onclick="pickRes('خاندانی',this)">👨‍👩‍👦<br>خاندانی</div>
+            </div>
+            <input type="hidden" id="f_resType">
+          </div>
+
+          <!-- رہائش کی نوعیت — مرلے سب کے لیے -->
+          <div class="cond-box show" id="cb_marla" style="display:block;">
+            <div class="form-group">
+              <label>رہائش کا رقبہ</label>
+              <select id="f_marla" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>3 مرلے سے کم</option><option>3 مرلے</option>
+                <option>5 مرلے</option><option>7 مرلے</option>
+                <option>10 مرلے</option><option>1 کنال</option>
+                <option>2 کنال</option><option>3 کنال یا زیادہ</option>
+                <option>فلیٹ / اپارٹمنٹ</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- اپنی ذاتی -->
+          <div class="cond-box" id="cb_own">
+            <div class="form-group">
+              <label>مکان کی قسم</label>
+              <select id="f_houseType" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>مکان</option><option>فلیٹ</option>
+                <option>بنگلہ</option><option>کوٹھی</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- کرائے پر -->
+          <div class="cond-box" id="cb_rent">
+            <div class="form-group">
+              <label>ماہانہ کرایہ</label>
+              <select id="f_rent" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>10,000 سے کم</option><option>10,000-20,000</option>
+                <option>20,000-35,000</option><option>35,000-50,000</option>
+                <option>50,000 سے زیادہ</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- سرکاری -->
+          <div class="cond-box" id="cb_govt">
+            <div class="form-group">
+              <label>محکمہ / ادارہ</label>
+              <input type="text" id="f_govtDept" class="form-control" placeholder="مثال: فوج، پولیس، ریلوے…">
+            </div>
+          </div>
+
+          <!-- کمپنی -->
+          <div class="cond-box" id="cb_company">
+            <div class="form-group">
+              <label>کمپنی کا نام</label>
+              <input type="text" id="f_companyName" class="form-control" placeholder="کمپنی کا نام لکھیں">
+            </div>
+          </div>
+
+          <!-- ذاتی جائیداد -->
+          <div style="margin-top:16px;background:var(--gold-pale);border:1px solid var(--gold);border-radius:10px;padding:14px;">
+            <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--green-deep);margin-bottom:10px;">🏗️ کیا آپ کی اپنی ذاتی جائیداد ہے؟</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;">
+              <label style="display:flex;align-items:center;gap:6px;background:white;border-radius:8px;padding:8px;cursor:pointer;font-size:13px;border:1.5px solid rgba(0,0,0,0.08);">
+                <input type="checkbox" id="f_hasPlot" style="accent-color:var(--green-mid)"> 🏗️ پلاٹ
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;background:white;border-radius:8px;padding:8px;cursor:pointer;font-size:13px;border:1.5px solid rgba(0,0,0,0.08);">
+                <input type="checkbox" id="f_hasHouse" style="accent-color:var(--green-mid)"> 🏠 مکان
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;background:white;border-radius:8px;padding:8px;cursor:pointer;font-size:13px;border:1.5px solid rgba(0,0,0,0.08);">
+                <input type="checkbox" id="f_hasAgri" style="accent-color:var(--green-mid)"> 🌾 زرعی زمین
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;background:white;border-radius:8px;padding:8px;cursor:pointer;font-size:13px;border:1.5px solid rgba(0,0,0,0.08);">
+                <input type="checkbox" id="f_hasShop" style="accent-color:var(--green-mid)"> 🏪 دکان
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;background:white;border-radius:8px;padding:8px;cursor:pointer;font-size:13px;border:1.5px solid rgba(0,0,0,0.08);">
+                <input type="checkbox" id="f_noProp" style="accent-color:var(--green-mid)"> ❌ کوئی نہیں
+              </label>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+              <label>جائیداد کی تفصیل</label>
+              <textarea id="f_propDetail" class="form-control" rows="2" placeholder="مثال: کراچی میں 5 مرلے کا پلاٹ…"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(8)">← پچھلا</button><button class="btn-primary" onclick="go(10)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 9 — ملک، صوبہ، شہر
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s10">
+        <div class="section-head"><span class="section-icon">📍</span><h3>ملک اور شہر — Location</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">رہائش کا مقام <span class="req">*</span></span><span class="step-counter">مرحلہ 10 / 14</span></div>
+
+          <div class="form-group" style="margin-bottom:16px;">
+            <label>کہاں رہتے ہیں؟ <span class="req">*</span></label>
+            <div class="opt-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="opt-card" onclick="pickCountry('پاکستان',this)">🇵🇰<br>پاکستان</div>
+              <div class="opt-card" onclick="pickCountry('بیرون ملک',this)">✈️<br>بیرون ملک</div>
+            </div>
+            <input type="hidden" id="f_country">
+          </div>
+
+          <!-- پاکستان -->
+          <div class="cond-box" id="cb_pk">
+            <div class="form-grid three">
+              <div class="form-group">
+                <label>صوبہ <span class="req">*</span></label>
+                <select id="f_province" class="form-control" onchange="updateCitiesByProvince()">
+                  <option value="">منتخب کریں</option>
+                  <option>پنجاب</option><option>سندھ</option>
+                  <option>خیبر پختونخوا</option><option>بلوچستان</option>
+                  <option>گلگت بلتستان</option><option>آزاد کشمیر</option>
+                  <option>اسلام آباد (وفاقی)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>شہر <span class="req">*</span></label>
+                <select id="f_city" class="form-control">
+                  <option value="">پہلے صوبہ منتخب کریں</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>علاقہ / محلہ</label>
+                <input type="text" id="f_area" class="form-control" placeholder="مثال: گلشن اقبال">
+              </div>
+            </div>
+          </div>
+
+          <!-- بیرون ملک -->
+          <div class="cond-box" id="cb_abroad">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ملک <span class="req">*</span></label>
+                <select id="f_aCountry" class="form-control">
+                  <option value="">منتخب کریں</option>
+                  <option>سعودی عرب</option><option>متحدہ عرب امارات</option>
+                  <option>برطانیہ</option><option>امریکہ</option>
+                  <option>کینیڈا</option><option>آسٹریلیا</option>
+                  <option>جرمنی</option><option>اٹلی</option>
+                  <option>قطر</option><option>کویت</option>
+                  <option>دیگر</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>شہر</label>
+                <input type="text" id="f_aCity" class="form-control" placeholder="مثال: دبئی، لندن…">
+              </div>
+              <div class="form-group">
+                <label>کتنے عرصے سے؟</label>
+                <select id="f_aDuration" class="form-control">
+                  <option value="">منتخب کریں</option>
+                  <option>1 سال سے کم</option><option>1-3 سال</option>
+                  <option>3-5 سال</option><option>5-10 سال</option>
+                  <option>10 سال سے زیادہ</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>رہائشی حیثیت</label>
+                <select id="f_visa" class="form-control">
+                  <option value="">منتخب کریں</option>
+                  <option>مستقل رہائشی (PR)</option>
+                  <option>شہری (Citizen)</option>
+                  <option>ورک ویزا</option>
+                  <option>اسٹوڈنٹ ویزا</option>
+                  <option>دیگر</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>پاکستان میں اصل شہر</label>
+                <select id="f_pkCity" class="form-control" onchange="checkPkCityOther()">
+                  <option value="">منتخب کریں</option>
+                  <option>کراچی</option><option>لاہور</option>
+                  <option>اسلام آباد</option><option>راولپنڈی</option>
+                  <option>فیصل آباد</option><option>ملتان</option>
+                  <option>پشاور</option><option>کوئٹہ</option>
+                  <option>حیدرآباد</option><option>سیالکوٹ</option>
+                  <option>گجرانوالہ</option><option>بہاولپور</option>
+                  <option>دیگر</option>
+                </select>
+              </div>
+              <div class="form-group" id="pkCityOtherGroup" style="display:none;">
+                <label>دیگر شہر کا نام لکھیں</label>
+                <input type="text" id="f_pkCityOther" class="form-control" placeholder="مثال: سکھر، ڈیرہ غازی خان...">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(9)">← پچھلا</button><button class="btn-primary" onclick="go(11)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 10 — صحت
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s11">
+        <div class="section-head"><span class="section-icon">🏥</span><h3>صحت کی معلومات — Health</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">صحت سے متعلق معلومات</span><span class="step-counter">مرحلہ 11 / 14</span></div>
+          <div class="form-grid three">
+            <div class="form-group">
+              <label>جسمانی معذوری</label>
+              <select id="f_disability" class="form-control">
+                <option>کوئی نہیں</option><option>بینائی</option>
+                <option>سماعت</option><option>جسمانی</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>جسمانی بیماری</label>
+              <select id="f_disease" class="form-control">
+                <option>کوئی نہیں</option><option>ذیابیطس</option>
+                <option>بلڈ پریشر</option><option>دل کی بیماری</option>
+                <option>دمہ</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>نشہ کی عادت</label>
+              <select id="f_addiction" class="form-control">
+                <option>کوئی نہیں</option><option>سگریٹ</option>
+                <option>تمباکو</option><option>پان</option><option>دیگر</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(10)">← پچھلا</button><button class="btn-primary" onclick="go(12)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 11 — خاندانی معلومات
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s12">
+        <div class="section-head"><span class="section-icon">👨‍👩‍👦</span><h3>خاندانی معلومات — Family</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">خاندان کی تفصیل</span><span class="step-counter">مرحلہ 12 / 14</span></div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>کل افراد خانہ (بشمول آپ)</label>
+              <input type="number" id="f_total" class="form-control" placeholder="مثال: 6" min="1">
+            </div>
+            <div class="form-group">
+              <label>والد کا نام</label>
+              <input type="text" id="f_fName" class="form-control" placeholder="مثال: محمد حسن خان">
+            </div>
+            <div class="form-group">
+              <label>والد کا پیشہ</label>
+              <select id="f_fProf" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>کاروبار</option><option>سرکاری ملازمت</option>
+                <option>ڈاکٹر</option><option>انجینئر</option>
+                <option>استاد</option><option>کسان</option>
+                <option>ریٹائرڈ</option><option>وفات ہو گئی</option><option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>والدہ کا نام</label>
+              <input type="text" id="f_mName" class="form-control" placeholder="مثال: زینب بیگم">
+            </div>
+            <div class="form-group">
+              <label>والدہ کا پیشہ</label>
+              <select id="f_mProf" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>کاروبار</option>
+                <option>سرکاری ملازمت</option>
+                <option>ڈاکٹر</option>
+                <option>استاد</option>
+                <option>ریٹائرڈ</option>
+                <option>وفات ہو گئی</option>
+                <option>دیگر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>بھائی (شادی شدہ)</label>
+              <input type="number" id="f_mBro" class="form-control" placeholder="مثال: 2" min="0">
+            </div>
+            <div class="form-group">
+              <label>بھائی (غیر شادی شدہ)</label>
+              <input type="number" id="f_uBro" class="form-control" placeholder="مثال: 1" min="0">
+            </div>
+            <div class="form-group">
+              <label>بہنیں (شادی شدہ)</label>
+              <input type="number" id="f_mSis" class="form-control" placeholder="مثال: 2" min="0">
+            </div>
+            <div class="form-group">
+              <label>بہنیں (غیر شادی شدہ)</label>
+              <input type="number" id="f_uSis" class="form-control" placeholder="مثال: 1" min="0">
+            </div>
+            <div class="form-group">
+              <label>بھائی/بہن (طلاق/خلع یافتہ)</label>
+              <select id="f_divSib" class="form-control">
+                <option value="">منتخب کریں</option>
+                <option>کوئی نہیں</option>
+                <option>ہاں — 1</option>
+                <option>ہاں — 2 یا زیادہ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>رابطہ نمبر <span class="req">*</span></label>
+              <input type="tel" id="f_contact" class="form-control" placeholder="مثال: 0300-1234567">
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(11)">← پچھلا</button><button class="btn-primary" onclick="go(13)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 12 — مطلوبہ رشتہ
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s13">
+        <div class="section-head"><span class="section-icon">❤</span><h3>مطلوبہ رشتے کی خواہشات</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">آپ کیسا رشتہ چاہتے ہیں؟</span><span class="step-counter">مرحلہ 13 / 14</span></div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>مطلوبہ ازدواجی حیثیت</label>
+              <select id="r_marital" class="form-control">
+                <option value="">کوئی بھی</option>
+                <option>پہلی شادی والا/والی</option>
+                <option>طلاق یافتہ/خلع یافتہ</option>
+                <option>بیوہ/رنڈوا</option>
+                <option>کوئی بھی قابل قبول</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ تعلیم</label>
+              <select id="r_edu" class="form-control">
+                <option value="">کوئی بھی</option>
+                <option>کم از کم میٹرک</option>
+                <option>کم از کم انٹرمیڈیٹ</option>
+                <option>کم از کم گریجویٹ</option>
+                <option>کم از کم ماسٹرز</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ دینی تعلیم</label>
+              <select id="r_relEdu" class="form-control">
+                <option value="">کوئی بھی</option>
+                <option>بنیادی اسلامی</option>
+                <option>حافظ/حافظہ</option>
+                <option>عالم/عالمہ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ کم سے کم عمر</label>
+              <input type="number" id="r_minAge" class="form-control" placeholder="مثال: 22" min="18" max="70">
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ زیادہ سے زیادہ عمر</label>
+              <input type="number" id="r_maxAge" class="form-control" placeholder="مثال: 35" min="18" max="70">
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ ذات / برادری</label>
+              <input type="text" id="r_caste" class="form-control" placeholder="مثال: سید یا کوئی بھی">
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ مسلک</label>
+              <select id="r_sect" class="form-control">
+                <option value="">کوئی بھی</option>
+                <option>سنی</option><option>شیعہ</option>
+                <option>بریلوی</option><option>دیوبندی</option>
+                <option>اہل حدیث</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>مطلوبہ رہائش</label>
+              <select id="r_res" class="form-control">
+                <option value="">کوئی بھی</option>
+                <option>پاکستان میں</option>
+                <option>بیرون ملک</option>
+                <option>دونوں قابل قبول</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label>اضافی خواہشات</label>
+            <textarea id="f_pref" class="form-control" rows="3" placeholder="کوئی خاص بات جو آپ بتانا چاہتے ہیں…"></textarea>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label>آپ کے نزدیک کامیاب شادی کی تعریف کیا ہے؟</label>
+            <textarea id="f_marriageDef" class="form-control" rows="3" placeholder="اپنے خیالات لکھیں…"></textarea>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="btn-outline" onclick="go(12)">← پچھلا</button><button class="btn-primary" onclick="go(14)">اگلا ←</button></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           STEP 13 — تصویر اور Submit
+      ═══════════════════════════════════════ -->
+      <div class="step" id="s14">
+        <div class="section-head"><span class="section-icon">📷</span><h3>تصویر اور حتمی رجسٹریشن</h3></div>
+        <div style="padding:20px;">
+          <div class="step-info"><span class="step-title-main">آخری مرحلہ</span><span class="step-counter">مرحلہ 14 / 14</span></div>
+          <div style="text-align:center;margin-bottom:20px;">
+            <div class="photo-upload-box" onclick="document.getElementById('photoIn').click()">
+              <input type="file" id="photoIn" accept="image/*" onchange="prevPhoto(this)">
+              <img id="photoPrev" class="photo-preview" alt="">
+              <div id="photoHint">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-hint">تصویر اپلوڈ کریں (اختیاری)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- خلاصہ -->
+          <div style="background:var(--green-pale);border-radius:10px;padding:16px;margin-bottom:16px;">
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--green-deep);margin-bottom:10px;">✅ معلومات کا خلاصہ</div>
+            <div id="summary" style="font-size:13px;color:var(--text-mid);line-height:2;"></div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-outline" onclick="go(13)">← پچھلا</button>
+          <button class="btn-gold" onclick="submitForm()" style="font-size:15px;padding:12px 32px;">✓ پروفائل محفوظ کریں</button>
+        </div>
+      </div>
+
+    </div><!-- end panel -->
+  </div>
+</main>
+
+<script src="../js/db.js">
+</script>
+<script src="../js/daily.js"></script>
+<script src="../js/app.js"></script>
+<script>
+// ── STATE ──────────────────────────────────────
+let cur = 1;
+const total = 14;
+let gender = '', marital = '';
+
+// ── INIT ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  updateUI();
+  document.getElementById('beardGroup').style.display = 'none';
+  document.getElementById('pardaGroup').style.display = 'none';
+
+  // URL سے gender خود بخود سیٹ کریں (?gender=boy یا ?gender=girl)
+  const urlParams = new URLSearchParams(window.location.search);
+  const gParam = urlParams.get('gender');
+  if(gParam === 'boy' || gParam === 'girl'){
+    setTimeout(() => {
+      // جنس سیٹ کریں
+      pickGender(gParam);
+      // سیدھا step 1 (نام) پر رہیں — gender پہلے سے سیٹ ہو گئی
+      document.getElementById('s1').classList.add('active');
+      document.getElementById('s2').classList.remove('active');
+      cur = 1;
+      updateUI();
+    }, 100);
+  }
+});
+
+// ── NAVIGATION ─────────────────────────────────
+function go(n) {
+  if (!validate(cur)) return;
+  document.getElementById('s'+cur).classList.remove('active');
+  // اگر step 1 سے آگے جا رہے ہیں اور gender پہلے سے سیٹ ہے تو step 2 چھوڑیں
+  if (cur === 1 && n === 2 && gender) {
+    n = 3;
+  }
+  // اگر step 3 سے پیچھے جا رہے ہیں اور gender پہلے سے سیٹ ہے تو step 2 چھوڑیں
+  if (cur === 3 && n === 2 && gender) {
+    n = 1;
+  }
+  cur = n;
+  document.getElementById('s'+cur).classList.add('active');
+  if (cur === 13) buildSummary();
+  updateUI();
+  window.scrollTo(0,0);
+}
+
+function updateUI() {
+  const pct = Math.round((cur/total)*100);
+  document.getElementById('pBar').style.width = pct+'%';
+}
+
+// ── VALIDATE ───────────────────────────────────
+function validate(step) {
+  if (step===1 && !document.getElementById('f_name').value.trim()) {
+    showToast('براہ کرم نام لکھیں','error'); return false;
+  }
+  if (step===2 && !gender) {
+    showToast('براہ کرم جنس منتخب کریں','error'); return false;
+  }
+  if (step===3 && !marital) {
+    showToast('براہ کرم ازدواجی حیثیت منتخب کریں','error'); return false;
+  }
+  if (step===5 && !document.getElementById('f_age').value) {
+    showToast('براہ کرم عمر لکھیں','error'); return false;
+  }
+  return true;
+}
+
+// ── GENDER ─────────────────────────────────────
+function pickGender(g) {
+  gender = g;
+  document.getElementById('f_gender').value = g;
+  document.getElementById('gBoy').style.cssText  = g==='boy'  ? 'border-color:var(--blue);background:var(--blue-pale);' : '';
+  document.getElementById('gGirl').style.cssText = g==='girl' ? 'border-color:var(--rose);background:var(--rose-pale);' : '';
+  document.getElementById('codeShow').textContent = g==='boy' ? PNP_DB.previewBoyId() : PNP_DB.previewGirlId();
+  // داڑھی / پردہ
+  document.getElementById('beardGroup').style.display = g==='boy'  ? 'block' : 'none';
+  document.getElementById('pardaGroup').style.display = g==='girl' ? 'block' : 'none';
+}
+
+// ── MARITAL ────────────────────────────────────
+function pickMarital(val, el) {
+  marital = val;
+  document.getElementById('f_marital').value = val;
+  document.querySelectorAll('#s3 .opt-card').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  // سب بند
+  ['cb_late','cb_remarry','cb_divorce','cb_widow'].forEach(id =>
+    document.getElementById(id).classList.remove('show'));
+  // صحیح کھولیں
+  if (val==='دیر سے شادی')
+    document.getElementById('cb_late').classList.add('show');
+  else if (['دوسری شادی','تیسری شادی','چوتھی شادی'].includes(val))
+    document.getElementById('cb_remarry').classList.add('show');
+  else if (val==='بیوہ'||val==='رنڈوا')
+    document.getElementById('cb_widow').classList.add('show');
+}
+
+// ── CHILDREN TOGGLES ───────────────────────────
+function pickDivChildren(val, el) {
+  document.getElementById('f_divChildren').value = val;
+  document.querySelectorAll('#cb_divorce .opt-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('cb_divChildDetail').style.display = val==='ہاں'?'block':'none';
+}
+function pickWidowChildren(val, el) {
+  document.getElementById('f_widowChildren').value = val;
+  document.querySelectorAll('#cb_widow .opt-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('cb_widowChildDetail').style.display = val==='ہاں'?'block':'none';
+}
+function pickRemarryChildren(val, el) {
+  document.getElementById('f_remarryChildren').value = val;
+  document.querySelectorAll('#cb_remarry .opt-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('cb_remarryChildDetail').style.display = val==='ہاں'?'block':'none';
+}
+
+// ── RESIDENCE ──────────────────────────────────
+function pickRes(val, el) {
+  document.getElementById('f_resType').value = val;
+  document.querySelectorAll('#s8 .opt-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  ['cb_own','cb_rent','cb_govt','cb_company'].forEach(id=>
+    document.getElementById(id).classList.remove('show'));
+  if (val==='اپنی ذاتی') document.getElementById('cb_own').classList.add('show');
+  else if (val==='کرائے پر') document.getElementById('cb_rent').classList.add('show');
+  else if (val==='سرکاری') document.getElementById('cb_govt').classList.add('show');
+  else if (val==='کمپنی کی طرف سے') document.getElementById('cb_company').classList.add('show');
+}
+
+// ── COUNTRY ────────────────────────────────────
+function pickCountry(val, el) {
+  document.getElementById('f_country').value = val;
+  document.querySelectorAll('#s9 .opt-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('cb_pk').classList.remove('show');
+  document.getElementById('cb_abroad').classList.remove('show');
+  if (val==='پاکستان') document.getElementById('cb_pk').classList.add('show');
+  else document.getElementById('cb_abroad').classList.add('show');
+}
+
+// ── PHOTO ──────────────────────────────────────
+function prevPhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = e => {
+    document.getElementById('photoPrev').src = e.target.result;
+    document.getElementById('photoPrev').style.display = 'block';
+    document.getElementById('photoHint').style.display = 'none';
+  };
+  r.readAsDataURL(file);
+}
+
+// ── SUMMARY ────────────────────────────────────
+function buildSummary() {
+  const city = document.getElementById('f_country').value==='بیرون ملک'
+    ? (document.getElementById('f_aCountry').value||'')
+    : (document.getElementById('f_city').value||'');
+  document.getElementById('summary').innerHTML = `
+    <b>نام:</b> ${document.getElementById('f_name').value} &nbsp;|&nbsp;
+    <b>جنس:</b> ${gender==='boy'?'لڑکا':'لڑکی'} &nbsp;|&nbsp;
+    <b>PNP Code:</b> ${document.getElementById('codeShow').textContent}<br>
+    <b>ازدواجی حیثیت:</b> ${marital} &nbsp;|&nbsp;
+    <b>عمر:</b> ${document.getElementById('f_age').value} سال<br>
+    <b>مسلک:</b> ${document.getElementById('f_sect').value} &nbsp;|&nbsp;
+    <b>ذات:</b> ${document.getElementById('f_caste').value}<br>
+    <b>تعلیم:</b> ${document.getElementById('f_education').value} &nbsp;|&nbsp;
+    <b>پیشہ:</b> ${document.getElementById('f_profession').value}<br>
+    <b>شہر:</b> ${city} &nbsp;|&nbsp;
+    <b>رہائش:</b> ${document.getElementById('f_resType').value}
+  `;
+}
+
+// ── SUBMIT ─────────────────────────────────────
+// ═══ صوبے کے مطابق شہر ═══
+const PROVINCE_CITIES = {
+  'پنجاب': [
+    'لاہور','فیصل آباد','راولپنڈی','ملتان','گوجرانوالہ',
+    'سیالکوٹ','بہاولپور','سرگودھا','شیخوپورہ','رحیم یار خان',
+    'ڈیرہ غازی خان','قصور','اوکاڑہ','وہاڑی','چنیوٹ',
+    'جھنگ','میانوالی','بھکر','حافظ آباد','منڈی بہاؤالدین',
+    'نارووال','پاکپتن','لیہ','لودھراں','خانیوال',
+    'اٹک','جہلم','چکوال','ٹوبہ ٹیک سنگھ','بہاولنگر',
+    'مظفرگڑھ','راجن پور','دیگر'
+  ],
+  'سندھ': [
+    'کراچی','حیدرآباد','سکھر','لاڑکانہ','میرپورخاص',
+    'نواب شاہ (شہید بینظیر آباد)','جیکب آباد','خیرپور',
+    'ٹھٹھہ','بدین','دادو','شکارپور','کشمور','گھوٹکی',
+    'عمرکوٹ','ٹنڈو آدم','ٹنڈو الہ یار','مٹیاری','دیگر'
+  ],
+  'خیبر پختونخوا': [
+    'پشاور','مردان','ایبٹ آباد','سوات (مینگورہ)','کوہاٹ',
+    'بنوں','ڈی آئی خان','چارسدہ','نوشہرہ','ہری پور',
+    'مانسہرہ','بٹگرام','شانگلہ','لکی مروت','ٹانک',
+    'دیر (لوئر / اپر)','دیگر'
+  ],
+  'بلوچستان': [
+    'کوئٹہ','گوادر','تربت','خضدار','سبی','ژوب',
+    'چمن','پنجگور','قلات','لسبیلہ (حب)','نصیرآباد',
+    'جعفرآباد','ڈیرہ مراد جمالی','مستونگ','بارکھان','دیگر'
+  ],
+  'گلگت بلتستان': [
+    'گلگت','اسکردو','ہنزہ','نگر','گانچھے',
+    'دیامر (چلاس)','استور','غذر','دیگر'
+  ],
+  'آزاد کشمیر': [
+    'مظفرآباد','میرپور','کوٹلی','بھمبر','باغ',
+    'راولا کوٹ','حویلی','نیلم','دیگر'
+  ],
+  'اسلام آباد (وفاقی)': [
+    'D-12','D-11','D-10','D-9',
+    'E-11','E-10','E-8','E-7','E-6','E-5',
+    'F-11','F-10','F-9','F-8','F-7','F-6','F-5',
+    'G-15','G-14','G-13','G-12','G-11','G-10',
+    'G-9','G-8','G-7','G-6',
+    'H-17','H-16','H-15','H-14','H-13','H-12',
+    'H-11','H-10','H-9','H-8',
+    'I-16','I-15','I-14','I-12','I-11','I-10','I-9','I-8',
+    'بہارہ کہو','بنی گالا','ترامڑی','کورنگ ٹاؤن',
+    'علی پور فراش','ترنول','سنگجانی','گولڑہ',
+    'شاہ اللہ دتہ','سید پور','جھنگی سیداں',
+    'نیلور','پھلگراں','چیچہ','دیگر'
+  ]
+};
+
+function updateCitiesByProvince() {
+  const province = document.getElementById('f_province').value;
+  const citySelect = document.getElementById('f_city');
+  const cities = PROVINCE_CITIES[province] || [];
+  citySelect.innerHTML = '<option value="">منتخب کریں</option>' +
+    cities.map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+// ═══ پاکستان میں اصل شہر — دیگر ═══
+function checkPkCityOther() {
+  const val = document.getElementById('f_pkCity').value;
+  document.getElementById('pkCityOtherGroup').style.display = val === 'دیگر' ? 'block' : 'none';
+}
+
+// ═══ دوسری/تیسری/چوتھی شادی وجہ ═══
+function checkRemarryReason() {
+  const val = document.getElementById('f_remarryReason').value;
+  const show = val === 'طلاق' || val === 'خلع';
+  document.getElementById('cb_remarryDivReason').style.display = show ? 'block' : 'none';
+}
+
+// ═══ آبائی علاقہ functions ═══
+const ORIGIN_CITIES = {
+  'ہندوستان': [
+    // پنجاب
+    'امرتسر (Amritsar)','جالندھر (Jalandhar)','ہوشیارپور (Hoshiarpur)',
+    'لدھیانہ (Ludhiana)','گورداسپور (Gurdaspur)','فیروزپور (Ferozepur)',
+    'انبالہ (Ambala)','روپڑ (Ropar)','پٹیالہ (Patiala)',
+    'بٹھنڈہ (Bathinda)','فریدکوٹ (Faridkot)','کپورتھلہ (Kapurthala)',
+    // ہریانہ
+    'حصار (Hisar)','روہتک (Rohtak)','کرنال (Karnal)',
+    'پانی پت (Panipat)','سونی پت (Sonipat)','گڑگاؤں (Gurgaon)',
+    // دہلی
+    'دہلی (Delhi)',
+    // اتر پردیش
+    'میرٹھ (Meerut)','مرادآباد (Moradabad)','علی گڑھ (Aligarh)',
+    'آگرہ (Agra)','لکھنؤ (Lucknow)','الہ آباد (Allahabad)',
+    'بریلی (Bareilly)','سہارنپور (Saharanpur)','رام پور (Rampur)',
+    'شاہجہانپور (Shahjahanpur)','بجنور (Bijnor)','مظفر نگر (Muzaffarnagar)',
+    // راجستھان
+    'جے پور (Jaipur)','اجمیر (Ajmer)','جودھ پور (Jodhpur)',
+    'الور (Alwar)','بیکانیر (Bikaner)',
+    // مدھیہ پردیش
+    'بھوپال (Bhopal)','اندور (Indore)','گوالیار (Gwalior)',
+    // گجرات
+    'احمدآباد (Ahmedabad)','سورت (Surat)','وڈودرا (Vadodara)',
+    // مہاراشٹر
+    'ممبئی (Mumbai)','پونے (Pune)','ناگپور (Nagpur)',
+    // حیدرآباد دکن
+    'حیدرآباد دکن (Hyderabad Deccan)',
+    // بہار
+    'پٹنہ (Patna)','گیا (Gaya)',
+    // دیگر
+    'دیگر علاقہ'
+  ],
+  'افغانستان': [
+    'کابل (Kabul)','قندہار (Kandahar)','ہرات (Herat)',
+    'جلال آباد (Jalalabad)','مزار شریف (Mazar-e-Sharif)',
+    'ننگرہار (Nangarhar)','کنڑ (Kunar)','لغمان (Laghman)',
+    'خوست (Khost)','پکتیا (Paktia)','لوگر (Logar)',
+    'دیگر علاقہ'
+  ],
+  'ایران': [
+    'زاہدان (Zahedan)','سیستان (Sistan)','خراسان (Khorasan)',
+    'اصفہان (Isfahan)','تہران (Tehran)',
+    'دیگر علاقہ'
+  ],
+  'وسط ایشیا': [
+    'بخارا (Bukhara)','سمرقند (Samarkand)','تاشقند (Tashkent)',
+    'فرغانہ (Fergana)','خوقند (Khokand)',
+    'دیگر علاقہ'
+  ],
+  'دیگر': ['دیگر علاقہ']
+};
+
+function toggleMigrant(val) {
+  document.getElementById('f_migrant').value = val;
+  document.getElementById('migBtn_yes').style.cssText = val==='yes' ? 'flex:1;padding:16px;border-color:var(--green);background:var(--green-pale);' : 'flex:1;padding:16px;';
+  document.getElementById('migBtn_no').style.cssText  = val==='no'  ? 'flex:1;padding:16px;border-color:var(--rose);background:var(--rose-pale);'   : 'flex:1;padding:16px;';
+  document.getElementById('migrantDetails').style.display = val==='yes' ? 'block' : 'none';
+}
+
+function updateOriginCities() {
+  const country = document.getElementById('f_originCountry').value;
+  const citySelect = document.getElementById('f_originCity');
+  const cities = ORIGIN_CITIES[country] || [];
+  citySelect.innerHTML = '<option value="">منتخب کریں</option>' +
+    cities.map(c => `<option value="${c}">${c}</option>`).join('');
+  document.getElementById('originCityGroup').style.display = country ? 'block' : 'none';
+  document.getElementById('otherCityGroup').style.display = 'none';
+}
+
+function checkOtherCity() {
+  const val = document.getElementById('f_originCity').value;
+  document.getElementById('otherCityGroup').style.display =
+    val === 'دیگر علاقہ' ? 'block' : 'none';
+}
+
+function submitForm() {
+  const name = document.getElementById('f_name').value.trim();
+  if (!name) { showToast('نام ضروری ہے','error'); return; }
+  if (!gender) { showToast('جنس منتخب کریں','error'); return; }
+
+  // پاکستان میں اصل شہر — دیگر ہو تو خود لکھا ہوا نام لیں
+  const pkCityVal = document.getElementById('f_pkCity').value === 'دیگر'
+    ? document.getElementById('f_pkCityOther').value
+    : document.getElementById('f_pkCity').value;
+
+  const city = document.getElementById('f_country').value==='بیرون ملک'
+    ? (pkCityVal || document.getElementById('f_aCity').value)
+    : document.getElementById('f_city').value;
+
+  const profile = {
+    name, gender,
+    maritalStatus: marital,
+    age:      document.getElementById('f_age').value,
+    city,
+    religion: document.getElementById('f_religion').value,
+    sect:     document.getElementById('f_sect').value,
+    caste:    document.getElementById('f_caste').value,
+    height:   document.getElementById('f_height').value,
+    weight:   document.getElementById('f_weight').value,
+    complexion:document.getElementById('f_complexion').value,
+    education: document.getElementById('f_education').value,
+    religiousEducation:document.getElementById('f_religiousEdu').value,
+    beard:    document.getElementById('f_beard').value,
+    parda:    document.getElementById('f_parda').value,
+    profession:document.getElementById('f_profession').value,
+    employer: document.getElementById('f_employer').value,
+    income:   document.getElementById('f_income').value,
+    residence: document.getElementById('f_resType').value,
+    marla:    document.getElementById('f_marla').value,
+    country:  document.getElementById('f_country').value,
+    province: document.getElementById('f_province').value,
+    area:     document.getElementById('f_area').value,
+    abroadCountry:document.getElementById('f_aCountry').value,
+    abroadCity:document.getElementById('f_aCity').value,
+    visaStatus:document.getElementById('f_visa').value,
+    disability:document.getElementById('f_disability').value,
+    disease:  document.getElementById('f_disease').value,
+    addiction:document.getElementById('f_addiction').value,
+    familyTotal:document.getElementById('f_total').value,
+    fatherName:document.getElementById('f_fName').value,
+    fatherProfession:document.getElementById('f_fProf').value,
+    motherName:document.getElementById('f_mName').value,
+    marriedBrothers:document.getElementById('f_mBro').value,
+    unmarriedBrothers:document.getElementById('f_uBro').value,
+    marriedSisters:document.getElementById('f_mSis').value,
+    unmarriedSisters:document.getElementById('f_uSis').value,
+    divorcedSiblings:document.getElementById('f_divSib').value,
+    contact:  document.getElementById('f_contact').value,
+    // مطلوبہ
+    reqMarital:document.getElementById('r_marital').value,
+    reqEducation:document.getElementById('r_edu').value,
+    reqReligiousEdu:document.getElementById('r_relEdu').value,
+    reqMinAge:document.getElementById('r_minAge').value,
+    reqMaxAge:document.getElementById('r_maxAge').value,
+    reqCaste: document.getElementById('r_caste').value,
+    reqSect:  document.getElementById('r_sect').value,
+    reqResidence:document.getElementById('r_res').value,
+    preferences:document.getElementById('f_pref').value,
+    // ازدواجی تفصیل
+    lateReason:document.getElementById('f_lateReason').value,
+    divorceReason:document.getElementById('f_divReason').value,
+    hasChildren:document.getElementById('f_divChildren').value || document.getElementById('f_widowChildren').value,
+    childrenTotal:document.getElementById('f_dTotal').value || document.getElementById('f_wTotal').value,
+    childrenBoys:document.getElementById('f_dBoys').value || document.getElementById('f_wBoys').value,
+    childrenGirls:document.getElementById('f_dGirls').value || document.getElementById('f_wGirls').value,
+    childrenAges:document.getElementById('f_dAges').value || document.getElementById('f_wAges').value,
+    childrenWith:document.getElementById('f_dWith').value || document.getElementById('f_wWith').value,
+    custody:  document.getElementById('f_dCustody').value || document.getElementById('f_wCustody').value,
+    maintenance:document.getElementById('f_dMaint').value || document.getElementById('f_wMaint').value,
+    propertyDetails:document.getElementById('f_propDetail').value,
+    // دوسری/تیسری/چوتھی شادی
+    remarryReason:   document.getElementById('f_remarryReason')?.value||'',
+    remarryDivDetail:document.getElementById('f_remarryDivDetail')?.value||'',
+    firstWife:       document.getElementById('f_firstWife')?.value||'',
+    // والدہ کا پیشہ
+    motherProfession:document.getElementById('f_mProf')?.value||'',
+    // کامیاب شادی کی تعریف
+    marriageDefinition:document.getElementById('f_marriageDef')?.value||'',
+    // آبائی علاقہ
+    migrant:      document.getElementById('f_migrant').value,
+    originCountry:document.getElementById('f_originCountry').value,
+    originCity:   document.getElementById('f_originCity').value==='دیگر علاقہ'
+                  ? document.getElementById('f_originCityOther').value
+                  : document.getElementById('f_originCity').value,
+    originCommunity:document.getElementById('f_originCommunity').value,
+    // تصویر
+    photo: document.getElementById('photoPrev').src?.startsWith('data:')
+           ? document.getElementById('photoPrev').src : '',
+  };
+
+  const saved = gender==='boy' ? PNP_DB.addBoy(profile) : PNP_DB.addGirl(profile);
+  PNP_DB.syncToGAS(saved);
+  showToast('✅ پروفائل محفوظ: '+saved.pnpCode,'success');
+
+  // موبائل PWA کے لیے confirm() کی بجائے custom dialog
+  showSaveSuccess(saved.pnpCode);
+}
+
+function showSaveSuccess(pnpCode) {
+  // پرانا dialog ہٹائیں
+  const old = document.getElementById('successDialog');
+  if(old) old.remove();
+
+  const div = document.createElement('div');
+  div.id = 'successDialog';
+  div.style.cssText = `
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.7);z-index:99999;
+    display:flex;align-items:center;justify-content:center;
+  `;
+  div.innerHTML = `
+    <div style="background:white;border-radius:16px;padding:28px;margin:20px;max-width:340px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+      <div style="font-size:48px;margin-bottom:12px;">✅</div>
+      <h3 style="color:#0D3B2E;font-size:18px;margin-bottom:8px;">پروفائل محفوظ ہو گئی!</h3>
+      <p style="color:#666;font-size:14px;margin-bottom:20px;">PNP Code: <strong style="color:#C9A84C;">${pnpCode}</strong></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="document.getElementById('successDialog').remove();generateRishtaCard('${pnpCode}')"
+          style="background:#C9A84C;color:#0D3B2E;border:none;padding:10px 20px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">
+          📇 رشتہ کارڈ بنائیں
+        </button>
+        <button onclick="window.location.href='profiles.html'"
+          style="background:#0D3B2E;color:white;border:none;padding:10px 20px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">
+          📋 تمام پروفائل
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(div);
+}
+</script>
+<script>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+}
+</script>
+</body>
+</html>

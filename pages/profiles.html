@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Profiles — PakNikahPoint</title>
+<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-emblem"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/><path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/><circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/><circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/></svg></div>
+    <div class="logo-text"><span class="logo-main">PakNikahPoint</span><span class="logo-urdu">پاک نکاح پوائنٹ</span><span class="logo-tag">Professional Matchmaking</span></div>
+  </div>
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-item"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="register.html?gender=boy" class="nav-item"><span class="ni">♂</span>Register Boy</a></li>
+    <li><a href="register.html?gender=girl" class="nav-item"><span class="ni">♀</span>Register Girl</a></li>
+    <li><a href="profiles.html" class="nav-item active"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="matching.html" class="nav-item"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="search.html" class="nav-item"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="admin.html" class="nav-item"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+    <li><a href="packages.html" class="nav-item"><span class="ni">💎</span>Packages &amp; Ads</a></li>
+    <li><a href="charity.html" class="nav-item"><span class="ni">🤲</span>خیراتی سیکشن</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v2.0 • 2025</div>
+</nav>
+
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <div class="breadcrumb"><span>PakNikahPoint</span> › <strong>All Profiles</strong></div>
+    </div>
+    <div class="topbar-right">
+      <div class="qs-wrap">
+        <span class="qs-icon">⌕</span>
+        <input type="text" class="qs-input" id="profileSearch" placeholder="Search profiles…" oninput="filterProfiles()">
+      </div>
+      <span class="topbar-date" id="topDate"></span>
+      <span class="admin-chip">Admin</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h1 style="font-family:'Cinzel',serif;font-size:22px;color:var(--green-deep);">All Profiles</h1>
+        <div style="font-size:13px;color:var(--text-light);" id="profileCount">Loading…</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <div class="tab-bar" style="margin:0;">
+          <button class="tab-btn active" id="tabAll" onclick="setFilter('all')">All</button>
+          <button class="tab-btn" id="tabBoys" onclick="setFilter('boy')">♂ Boys</button>
+          <button class="tab-btn" id="tabGirls" onclick="setFilter('girl')">♀ Girls</button>
+        </div>
+        <a href="register.html" class="btn-primary" style="padding:8px 18px;font-size:13px;">+ Add Profile</a>
+      </div>
+    </div>
+
+    <div class="profiles-grid" id="profilesGrid">
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+</main>
+
+<script src="../js/db.js">
+</script>
+<script src="../js/daily.js"></script>
+<script src="../js/app.js"></script>
+<script>
+let currentFilter = 'all';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  loadProfiles(); // پہلے localStorage سے
+  const result = await PNP_DB.fetchFromGAS();
+  if(result.ok) loadProfiles(); // پھر Google Sheets سے
+});
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab' + f.charAt(0).toUpperCase() + f.slice(1)).classList.add('active');
+  filterProfiles();
+}
+
+function loadProfiles() { filterProfiles(); }
+
+function filterProfiles() {
+  const query = document.getElementById('profileSearch').value.toLowerCase();
+  let profiles = [];
+  if (currentFilter === 'all') profiles = [...PNP_DB.getBoys(), ...PNP_DB.getGirls()];
+  else if (currentFilter === 'boy') profiles = PNP_DB.getBoys();
+  else profiles = PNP_DB.getGirls();
+  
+  if (query) {
+    profiles = profiles.filter(p =>
+      p.name?.toLowerCase().includes(query) ||
+      p.pnpCode?.toLowerCase().includes(query) ||
+      p.city?.toLowerCase().includes(query) ||
+      p.caste?.toLowerCase().includes(query)
+    );
+  }
+  
+  profiles.sort((a,b) => new Date(b.registeredAt) - new Date(a.registeredAt));
+  
+  const countEl = document.getElementById('profileCount');
+  const grid = document.getElementById('profilesGrid');
+  
+  countEl.textContent = `${profiles.length} profile${profiles.length !== 1 ? 's' : ''} found`;
+  
+  if (!profiles.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-light);">
+      <div style="font-size:48px;margin-bottom:12px;">👤</div>
+      <div style="font-size:16px;">No profiles found.</div>
+      <a href="register.html" style="color:var(--green-mid);font-weight:600;">Add first profile →</a>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = profiles.map(p => buildProfileCard(p)).join('');
+}
+</script>
+<script>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+}
+</script>
+</body>
+</html>

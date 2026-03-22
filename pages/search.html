@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Search — PakNikahPoint</title>
+<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-emblem"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/><path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/><circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/><circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/></svg></div><div class="logo-text"><span class="logo-main">PakNikahPoint</span><span class="logo-urdu">پاک نکاح پوائنٹ</span><span class="logo-tag">Professional Matchmaking</span></div></div>
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-item"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="register.html?gender=boy" class="nav-item"><span class="ni">♂</span>Register Boy</a></li>
+    <li><a href="register.html?gender=girl" class="nav-item"><span class="ni">♀</span>Register Girl</a></li>
+    <li><a href="profiles.html" class="nav-item"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="matching.html" class="nav-item"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="search.html" class="nav-item active"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="admin.html" class="nav-item"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+    <li><a href="packages.html" class="nav-item"><span class="ni">💎</span>Packages &amp; Ads</a></li>
+    <li><a href="charity.html" class="nav-item"><span class="ni">🤲</span>خیراتی سیکشن</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v2.0 • 2025</div>
+</nav>
+
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left"><button class="toggle-btn" onclick="toggleSidebar()">☰</button><div class="breadcrumb"><span>PakNikahPoint</span> › <strong>Advanced Search</strong></div></div>
+    <div class="topbar-right"><span class="topbar-date" id="topDate"></span><span class="admin-chip">Admin</span></div>
+  </header>
+
+  <div class="page-body">
+    <div class="panel" style="margin-bottom:20px;">
+      <div class="panel-hdr"><span class="panel-title">⌕ Advanced Search Filters</span></div>
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label class="filter-label">Gender / جنس</label>
+          <select class="form-control" id="fGender">
+            <option value="all">All</option><option value="boy">♂ Boys Only</option><option value="girl">♀ Girls Only</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">City / شہر</label>
+          <select class="form-control" id="fCity">
+            <option value="">Any City</option>
+            <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
+            <option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option>
+            <option>Peshawar</option><option>Quetta</option><option>Hyderabad</option>
+            <option>Sialkot</option><option>Gujranwala</option><option>Other</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Min Age / کم سے کم عمر</label>
+          <input type="number" class="form-control" id="fMinAge" placeholder="e.g. 22" min="18" max="70">
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Max Age / زیادہ سے زیادہ</label>
+          <input type="number" class="form-control" id="fMaxAge" placeholder="e.g. 35" min="18" max="70">
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Education / تعلیم</label>
+          <select class="form-control" id="fEducation">
+            <option value="">Any</option>
+            <option>Matric</option><option>Intermediate</option><option>Graduate</option>
+            <option>Masters</option><option>PhD</option><option>Hafiz/Hafiza</option><option>Alim/Alima</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Caste / ذات</label>
+          <input type="text" class="form-control" id="fCaste" placeholder="e.g. Syed, Pathan">
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Sect / مسلک</label>
+          <select class="form-control" id="fSect">
+            <option value="">Any</option>
+            <option>Sunni</option><option>Shia</option><option>Barelvi</option>
+            <option>Deobandi</option><option>Ahle Hadith</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Marital Status</label>
+          <select class="form-control" id="fMarital">
+            <option value="">Any</option>
+            <option>Single/Never Married</option><option>Divorced</option>
+            <option>Widowed</option><option>Separated</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Complexion / رنگت</label>
+          <select class="form-control" id="fComplexion">
+            <option value="">Any</option>
+            <option>Very Fair</option><option>Fair</option><option>Wheat</option><option>Dusky</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Disability / معذوری</label>
+          <select class="form-control" id="fDisability">
+            <option value="">Any</option><option>None</option>
+            <option>Visual</option><option>Hearing</option><option>Physical</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Disease / مرض</label>
+          <select class="form-control" id="fDisease">
+            <option value="">Any</option><option>None</option>
+            <option>Diabetes</option><option>Blood Pressure</option><option>Heart Disease</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Religion / مذہب</label>
+          <select class="form-control" id="fReligion">
+            <option value="">Any</option><option>Islam</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;padding:0 20px 20px;">
+        <button class="btn-primary" onclick="runSearch()">⌕ Search Profiles</button>
+        <button class="btn-outline" onclick="clearFilters()">Clear Filters</button>
+      </div>
+    </div>
+
+    <div id="searchStats" style="display:none;margin-bottom:12px;font-size:14px;color:var(--text-mid);padding:0 4px;"></div>
+    <div class="profiles-grid" id="searchGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-light);">
+        <div style="font-size:48px;margin-bottom:12px;">⌕</div>
+        <div>Set filters above and click Search</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="../js/db.js">
+</script>
+<script src="../js/daily.js"></script>
+<script src="../js/app.js"></script>
+<script>
+function runSearch() {
+  const filters = {
+    gender: document.getElementById('fGender').value,
+    city: document.getElementById('fCity').value,
+    minAge: document.getElementById('fMinAge').value,
+    maxAge: document.getElementById('fMaxAge').value,
+    education: document.getElementById('fEducation').value,
+    caste: document.getElementById('fCaste').value,
+    sect: document.getElementById('fSect').value,
+    maritalStatus: document.getElementById('fMarital').value,
+    complexion: document.getElementById('fComplexion').value,
+    disability: document.getElementById('fDisability').value,
+    disease: document.getElementById('fDisease').value,
+    religion: document.getElementById('fReligion').value,
+  };
+  const results = PNP_DB.search(filters);
+  const stats = document.getElementById('searchStats');
+  const grid = document.getElementById('searchGrid');
+  stats.style.display = 'block';
+  stats.textContent = `Found ${results.length} profile${results.length!==1?'s':''} matching your criteria`;
+  if (!results.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-light);">
+      <div style="font-size:48px;margin-bottom:12px;">🔍</div>
+      <div>No profiles match your criteria. Try broadening your filters.</div>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = results.map(p => buildProfileCard(p)).join('');
+}
+
+function clearFilters() {
+  document.querySelectorAll('#fGender,#fCity,#fEducation,#fSect,#fMarital,#fComplexion,#fDisability,#fDisease,#fReligion').forEach(el => el.value = '');
+  document.querySelectorAll('#fMinAge,#fMaxAge,#fCaste').forEach(el => el.value = '');
+  document.getElementById('searchStats').style.display = 'none';
+  document.getElementById('searchGrid').innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-light);"><div style="font-size:48px;margin-bottom:12px;">⌕</div><div>Set filters above and click Search</div></div>`;
+}
+</script>
+<script>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+}
+</script>
+</body>
+</html>

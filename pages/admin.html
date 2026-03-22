@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — PakNikahPoint</title>
+<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-emblem"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/><path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/><circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/><circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/></svg></div><div class="logo-text"><span class="logo-main">PakNikahPoint</span><span class="logo-urdu">پاک نکاح پوائنٹ</span><span class="logo-tag">Professional Matchmaking</span></div></div>
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-item"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="register.html?gender=boy" class="nav-item"><span class="ni">♂</span>Register Boy</a></li>
+    <li><a href="register.html?gender=girl" class="nav-item"><span class="ni">♀</span>Register Girl</a></li>
+    <li><a href="profiles.html" class="nav-item"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="matching.html" class="nav-item"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="search.html" class="nav-item"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="admin.html" class="nav-item active"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+    <li><a href="packages.html" class="nav-item"><span class="ni">💎</span>Packages &amp; Ads</a></li>
+    <li><a href="charity.html" class="nav-item"><span class="ni">🤲</span>خیراتی سیکشن</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v2.0 • 2025</div>
+</nav>
+
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left"><button class="toggle-btn" onclick="toggleSidebar()">☰</button><div class="breadcrumb"><span>PakNikahPoint</span> › <strong>Admin Panel</strong></div></div>
+    <div class="topbar-right"><span class="topbar-date" id="topDate"></span><span class="admin-chip">Admin</span></div>
+  </header>
+
+  <div class="page-body">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showTab('tProfiles',this)">All Profiles</button>
+      <button class="tab-btn" onclick="showTab('tMatches',this)">Saved Matches</button>
+      <button class="tab-btn" onclick="showTab('tSettings',this)">Settings & GAS</button>
+      <button class="tab-btn" onclick="showTab('tExport',this)">Export / Import</button>
+    </div>
+
+    <!-- PROFILES TABLE -->
+    <div id="tProfiles">
+      <div style="display:flex;gap:10px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
+        <input type="text" class="form-control" id="adminSearch" placeholder="Search by name or code…" oninput="adminFilter()" style="max-width:280px;">
+        <select class="form-control" id="adminGender" onchange="adminFilter()" style="width:auto;">
+          <option value="all">All</option><option value="boy">Boys</option><option value="girl">Girls</option>
+        </select>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <a href="register.html" class="btn-primary" style="padding:8px 16px;font-size:13px;">+ Boy</a>
+          <a href="register.html" class="btn-primary" style="padding:8px 16px;font-size:13px;background:linear-gradient(135deg,#A0294B,#C0395B);">+ Girl</a>
+        </div>
+      </div>
+      <div class="panel">
+        <div style="overflow-x:auto;">
+          <table class="data-table" id="adminTable">
+            <thead>
+              <tr>
+                <th>PNP Code</th><th>Name</th><th>Age</th><th>City</th>
+                <th>Education</th><th>Caste</th><th>Profession</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminTBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATCHES TABLE -->
+    <div id="tMatches" style="display:none;">
+      <div class="panel">
+        <div style="overflow-x:auto;">
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Boy</th><th>Girl</th><th>Score</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="matchesTBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="tSettings" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="panel">
+          <div class="panel-hdr"><span class="panel-title">Bureau Settings</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
+            <div class="form-group">
+              <label class="filter-label">Bureau Name</label>
+              <input type="text" id="sBureauName" class="form-control" placeholder="PakNikahPoint">
+            </div>
+            <div class="form-group">
+              <label class="filter-label">City</label>
+              <input type="text" id="sCity" class="form-control" placeholder="Karachi">
+            </div>
+            <div class="form-group">
+              <label class="filter-label">Phone Number</label>
+              <input type="tel" id="sPhone" class="form-control" placeholder="0300-0000000">
+            </div>
+            <div class="form-group">
+              <label class="filter-label">Email</label>
+              <input type="email" id="sEmail" class="form-control" placeholder="info@paknikahpoint.com">
+            </div>
+            <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hdr"><span class="panel-title">⚙ Google Apps Script Configuration</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
+            <div style="background:var(--gold-pale);border:1px solid var(--gold);border-radius:8px;padding:14px;font-size:13px;color:var(--text-mid);">
+              <strong style="color:var(--green-deep);">How to connect Google Sheets:</strong><br><br>
+              1. Open <code>gas/Code.gs</code> in Google Apps Script<br>
+              2. Deploy as Web App<br>
+              3. Copy the Web App URL below<br>
+              4. Enable "Anyone" access
+            </div>
+            <div class="form-group">
+              <label class="filter-label">GAS Web App URL</label>
+              <input type="url" id="sGasUrl" class="form-control" placeholder="https://script.google.com/macros/s/…/exec">
+            </div>
+            <div class="form-group">
+              <label class="filter-label">Google Drive Folder ID</label>
+              <input type="text" id="sDriveFolder" class="form-control" placeholder="1xYzAbCdEfGh…">
+            </div>
+            <button class="btn-gold" onclick="saveSettings();showToast('GAS config saved!','success')">Save GAS Config</button>
+            <button class="btn-outline" onclick="testGAS()">Test Connection</button>
+            <button class="btn-gold" onclick="syncAllNow()" style="margin-top:8px;width:100%">📤 Google Sheets میں سب Data بھیجیں</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPORT/IMPORT -->
+    <div id="tExport" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="panel">
+          <div class="panel-hdr"><span class="panel-title">Export Data</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:12px;">
+            <p style="font-size:14px;color:var(--text-mid);">Export all profiles and matches as JSON backup file.</p>
+            <button class="btn-primary" onclick="exportData()">⬇ Export All Data (JSON)</button>
+            <button class="btn-outline" onclick="exportCSV()">⬇ Export Profiles (CSV)</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hdr"><span class="panel-title">Import Data</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:12px;">
+            <p style="font-size:14px;color:var(--text-mid);">Import previously exported JSON backup.</p>
+            <div class="photo-upload-box" onclick="document.getElementById('importFile').click()" style="padding:20px;">
+              <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this)">
+              <div>📂 Click to select JSON backup file</div>
+            </div>
+            <div style="background:#fdedec;border:1px solid #e74c3c;border-radius:8px;padding:12px;font-size:12px;color:#c0392b;">
+              ⚠ Warning: Import will merge with existing data.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="../js/db.js">
+</script>
+<script src="../js/daily.js"></script>
+<script src="../js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  loadAdminTable();
+  loadSettings();
+  loadMatchesTable();
+});
+
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['tProfiles','tMatches','tSettings','tExport'].forEach(t => {
+    document.getElementById(t).style.display = t===id?'block':'none';
+  });
+}
+
+let adminData = [];
+function loadAdminTable() {
+  adminData = [...PNP_DB.getBoys(), ...PNP_DB.getGirls()].sort((a,b)=>new Date(b.registeredAt)-new Date(a.registeredAt));
+  renderAdminTable(adminData);
+}
+
+function adminFilter() {
+  const q = document.getElementById('adminSearch').value.toLowerCase();
+  const g = document.getElementById('adminGender').value;
+  let data = adminData.filter(p => {
+    if (g!=='all'&&p.gender!==g) return false;
+    if (q && !p.name?.toLowerCase().includes(q) && !p.pnpCode?.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  renderAdminTable(data);
+}
+
+function renderAdminTable(data) {
+  const tbody = document.getElementById('adminTBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--text-light);">No profiles found</td></tr>'; return; }
+  tbody.innerHTML = data.map(p => `<tr>
+    <td><span style="font-family:'Cinzel',serif;font-size:12px;color:var(--green-mid);">${p.pnpCode}</span></td>
+    <td><strong>${p.name}</strong></td>
+    <td>${p.age}</td>
+    <td>${p.city||'—'}</td>
+    <td>${p.education||'—'}</td>
+    <td>${p.caste||'—'}</td>
+    <td>${p.profession||'—'}</td>
+    <td><span class="badge badge-active">Active</span></td>
+    <td style="white-space:nowrap;">
+      <button style="background:var(--blue-pale);color:var(--blue);border:none;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:12px;margin-right:4px;" onclick="viewProfile('${p.pnpCode}')">View</button>
+      <button style="background:var(--gold-pale);color:var(--gold);border:none;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:12px;margin-right:4px;" onclick="generateRishtaCard('${p.pnpCode}')">Card</button>
+      <button style="background:#fdedec;color:#c0392b;border:none;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:12px;" onclick="if(confirm('Delete ${p.name}?')){PNP_DB.deleteProfile('${p.pnpCode}');loadAdminTable();showToast('Deleted','info');}">Del</button>
+    </td>
+  </tr>`).join('');
+}
+
+function loadMatchesTable() {
+  const matches = PNP_DB.getMatches();
+  const tbody = document.getElementById('matchesTBody');
+  if (!matches.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--text-light);">No saved matches</td></tr>'; return; }
+  tbody.innerHTML = matches.map((m,i) => {
+    const boy  = PNP_DB.getBoyById(m.boyCode);
+    const girl = PNP_DB.getGirlById(m.girlCode);
+    const cls  = m.score>=70?'score-high':m.score>=50?'score-mid':'score-low';
+    return `<tr>
+      <td>${i+1}</td>
+      <td>${boy?`<strong>${boy.name}</strong><br><small style="color:var(--text-light)">${m.boyCode}</small>`:'—'}</td>
+      <td>${girl?`<strong>${girl.name}</strong><br><small style="color:var(--text-light)">${m.girlCode}</small>`:'—'}</td>
+      <td><span class="match-score-ring ${cls}" style="width:42px;height:42px;display:inline-flex;"><span style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;">${m.score}</span></span></td>
+      <td>${new Date(m.savedAt).toLocaleDateString('en-PK',{year:'numeric',month:'short',day:'numeric'})}</td>
+      <td><button style="background:#dcf8c6;color:#075e54;border:none;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:12px;" onclick="shareOnWhatsApp('${m.boyCode}')">WA</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function loadSettings() {
+  const s = PNP_DB.getSettings();
+  document.getElementById('sBureauName').value = s.bureauName||'';
+  document.getElementById('sCity').value = s.city||'';
+  document.getElementById('sPhone').value = s.phone||'';
+  document.getElementById('sEmail').value = s.email||'';
+  document.getElementById('sGasUrl').value = s.gasUrl||'https://script.google.com/macros/s/AKfycbxek-gphMpD_M3s8b4VI76wsIxjlufMdfc3VPpXnpsYF3WdVhiOVRqKU4e0KyveIpEjAA/exec';
+  document.getElementById('sDriveFolder').value = s.driveFolder||'';
+}
+
+function saveSettings() {
+  PNP_DB.saveSettings({
+    bureauName: document.getElementById('sBureauName').value,
+    city: document.getElementById('sCity').value,
+    phone: document.getElementById('sPhone').value,
+    email: document.getElementById('sEmail').value,
+    gasUrl: document.getElementById('sGasUrl').value,
+    driveFolder: document.getElementById('sDriveFolder').value,
+  });
+  showToast('Settings saved!','success');
+}
+
+async function syncAllNow() {
+  showToast('⏳ Google Sheets میں data بھیجا جا رہا ہے...','info');
+  const res = await PNP_DB.syncAllToGAS();
+  showToast(res.ok ? '✅ ' + res.msg : '❌ Error: ' + res.msg, res.ok?'success':'error');
+}
+
+async function testGAS() {
+  const s = PNP_DB.getSettings();
+  if (!s.gasUrl) { showToast('Please enter GAS URL first','error'); return; }
+  showToast('Testing connection…','info');
+  const res = await PNP_DB.syncToGAS({test:true});
+  showToast(res.ok ? 'GAS connected!' : 'Connection failed: '+res.msg, res.ok?'success':'error');
+}
+
+function exportData() {
+  const data = PNP_DB.exportAll();
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `pnp-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('Data exported!','success');
+}
+
+function exportCSV() {
+  const all = [...PNP_DB.getBoys(),...PNP_DB.getGirls()];
+  const headers = ['PNP Code','Name','Age','City','Education','Caste','Sect','Profession','Marital Status','Height','Complexion'];
+  const rows = all.map(p=>[p.pnpCode,p.name,p.age,p.city,p.education,p.caste,p.sect,p.profession,p.maritalStatus,p.height,p.complexion].map(v=>`"${v||''}"`).join(','));
+  const csv = [headers.join(','),...rows].join('\n');
+  const blob = new Blob([csv],{type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download=`pnp-profiles-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('CSV exported!','success');
+}
+
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (confirm(`Import ${data.boys?.length||0} boys and ${data.girls?.length||0} girls?`)) {
+        PNP_DB.importAll(data);
+        showToast('Data imported!','success');
+        loadAdminTable();
+      }
+    } catch (err) { showToast('Invalid JSON file','error'); }
+  };
+  reader.readAsText(file);
+}
+</script>
+<script>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+}
+</script>
+</body>
+</html>

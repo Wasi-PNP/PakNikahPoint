@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0D3B2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packages & Ads — PakNikahPoint</title>
+<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin:20px 0;}
+.pkg-card{background:white;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:2px solid transparent;transition:all 0.3s;position:relative;}
+.pkg-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.pkg-card.popular{border-color:var(--gold);}
+.pkg-badge{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--green-deep);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;font-family:'Cinzel',serif;}
+.pkg-header{padding:24px 20px 16px;text-align:center;}
+.pkg-icon{font-size:36px;margin-bottom:8px;}
+.pkg-name{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--green-deep);margin-bottom:4px;}
+.pkg-price{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--green-mid);}
+.pkg-dur{font-size:12px;color:var(--text-light);}
+.pkg-features{padding:0 20px 20px;}
+.pkg-feat{display:flex;align-items:center;gap:8px;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+.pkg-feat:last-child{border:none;}
+.feat-yes{color:var(--green-mid);font-weight:700;}
+.feat-no{color:var(--text-light);}
+.pkg-btn{margin:0 20px 20px;display:block;text-align:center;padding:10px;border-radius:8px;font-family:'Cinzel',serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+
+.ad-card{background:white;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(0,0,0,0.08);}
+.ad-header{padding:14px 18px;background:linear-gradient(135deg,var(--green-deep),var(--green-mid));display:flex;align-items:center;justify-content:space-between;}
+.ad-title{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);font-weight:700;}
+.ad-badge{font-size:10px;background:var(--gold);color:var(--green-deep);padding:2px 8px;border-radius:10px;font-weight:700;}
+.ad-body{padding:16px;}
+.ad-img{width:100%;height:120px;object-fit:cover;border-radius:8px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:10px;}
+.ad-biz-name{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--text-dark);}
+.ad-biz-cat{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.ad-biz-desc{font-size:13px;color:var(--text-mid);line-height:1.5;}
+.ad-contact{display:flex;gap:8px;margin-top:10px;}
+.ad-wa-btn{flex:1;background:#25d366;color:white;border:none;padding:8px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;}
+.ad-call-btn{flex:1;background:var(--blue-pale);color:var(--blue);border:none;padding:8px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;}
+
+.ver-status{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;}
+.ver-yes{background:#d5f5e3;color:#1e8449;}
+.ver-no{background:#fdecea;color:#c0392b;}
+.ver-pending{background:#fef9e7;color:#b7950b;}
+</style>
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-emblem"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 45,25 63,25 49,36 54,53 40,43 26,53 31,36 17,25 35,25" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/><path d="M40,20 A14,14 0 1,1 40,58 A9,9 0 1,0 40,20Z" fill="#C9A84C" opacity="0.85"/><circle cx="40" cy="68" r="5.5" fill="none" stroke="#C9A84C" stroke-width="1.8"/><circle cx="40" cy="68" r="2.5" fill="#C9A84C" opacity="0.7"/></svg></div><div class="logo-text"><span class="logo-main">PakNikahPoint</span><span class="logo-urdu">پاک نکاح پوائنٹ</span><span class="logo-tag">Professional Matchmaking</span></div></div>
+  <div class="nav-label">Main Menu</div>
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-item"><span class="ni">⌂</span>Dashboard</a></li>
+    <li><a href="register.html" class="nav-item"><span class="ni">✎</span>Register Profile</a></li>
+    <li><a href="profiles.html" class="nav-item"><span class="ni">▤</span>All Profiles</a></li>
+    <li><a href="matching.html" class="nav-item"><span class="ni">❤</span>Smart Matching</a></li>
+    <li><a href="search.html" class="nav-item"><span class="ni">⌕</span>Advanced Search</a></li>
+  </ul>
+  <div class="nav-label">Tools</div>
+  <ul class="nav-list">
+    <li><a href="admin.html" class="nav-item"><span class="ni">⚙</span>Admin Panel</a></li>
+    <li><a href="gallery.html" class="nav-item"><span class="ni">⊞</span>Photo Gallery</a></li>
+    <li><a href="packages.html" class="nav-item active"><span class="ni">💎</span>Packages & Ads</a></li>
+  </ul>
+  <div class="sidebar-footer">PNP v4.0 • 2025</div>
+</nav>
+
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left"><button class="toggle-btn" onclick="toggleSidebar()">☰</button><div class="breadcrumb"><span>PakNikahPoint</span> › <strong>Packages & Ads</strong></div></div>
+    <div class="topbar-right"><span class="topbar-date" id="topDate"></span><span class="admin-chip">Admin</span></div>
+  </header>
+
+  <div class="page-body">
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showTab('tPkg',this)">💎 پیکجز</button>
+      <button class="tab-btn" onclick="showTab('tVer',this)">✅ Verification</button>
+      <button class="tab-btn" onclick="showTab('tAds',this)">📢 اشتہارات</button>
+      <button class="tab-btn" onclick="showTab('tEarn',this)">💰 کمائی کا منصوبہ</button>
+    </div>
+
+    <!-- ══════════════ PACKAGES TAB ══════════════ -->
+    <div id="tPkg">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:10px;">
+        <div>
+          <h2 class="section-heading">سروس پیکجز</h2>
+          <p style="font-size:13px;color:var(--text-light);">یہ پیکجز صرف Admin کو نظر آتے ہیں — Google Form پر نہیں دکھتے</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" id="showPkgOnForm" onchange="togglePkgOnForm(this.checked)" style="accent-color:var(--green-mid);width:16px;height:16px;">
+            Form پر دکھائیں
+          </label>
+          <button class="btn-primary" style="padding:8px 16px;font-size:13px;" onclick="openAddPkg()">+ نیا پیکج</button>
+        </div>
+      </div>
+
+      <div class="pkg-grid" id="pkgGrid">
+        <!-- خودبخود بنے گا -->
+      </div>
+    </div>
+
+    <!-- ══════════════ VERIFICATION TAB ══════════════ -->
+    <div id="tVer" style="display:none;">
+      <h2 class="section-heading" style="margin-bottom:16px;">✅ Profile Verification سسٹم</h2>
+
+      <!-- Verification کا طریقہ -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+        <div class="panel" style="padding:0;">
+          <div class="panel-hdr"><span class="panel-title">Verification کا طریقہ</span></div>
+          <div class="panel-body">
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="background:var(--green-pale);border-radius:10px;padding:14px;border-left:4px solid var(--green-mid);">
+                <div style="font-weight:700;font-size:13px;color:var(--green-deep);margin-bottom:6px;">مرحلہ 1 — CNIC نمبر</div>
+                <div style="font-size:12px;color:var(--text-mid);">پروفائل بنانے والے سے CNIC نمبر لیں اور سسٹم میں ڈالیں</div>
+              </div>
+              <div style="background:var(--blue-pale);border-radius:10px;padding:14px;border-left:4px solid var(--blue);">
+                <div style="font-weight:700;font-size:13px;color:var(--blue);margin-bottom:6px;">مرحلہ 2 — CNIC تصویر</div>
+                <div style="font-size:12px;color:var(--text-mid);">CNIC کی اگلی پچھلی تصویر WhatsApp پر لیں</div>
+              </div>
+              <div style="background:var(--gold-pale);border-radius:10px;padding:14px;border-left:4px solid var(--gold);">
+                <div style="font-weight:700;font-size:13px;color:var(--gold);margin-bottom:6px;">مرحلہ 3 — فون تصدیق</div>
+                <div style="font-size:12px;color:var(--text-mid);">فون نمبر پر call کریں اور تصدیق کریں</div>
+              </div>
+              <div style="background:#fdecea;border-radius:10px;padding:14px;border-left:4px solid #e74c3c;">
+                <div style="font-weight:700;font-size:13px;color:#c0392b;margin-bottom:6px;">مرحلہ 4 — Admin منظوری</div>
+                <div style="font-size:12px;color:var(--text-mid);">آپ منظور کریں تو پروفائل پر ✅ Verified نشان آئے</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="padding:0;">
+          <div class="panel-hdr"><span class="panel-title">Verification اعداد و شمار</span></div>
+          <div class="panel-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+              <div style="background:var(--green-pale);border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--green-mid);" id="verCount">0</div>
+                <div style="font-size:12px;color:var(--text-light);">Verified پروفائل</div>
+              </div>
+              <div style="background:#fef9e7;border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:#b7950b;" id="pendCount">0</div>
+                <div style="font-size:12px;color:var(--text-light);">زیر التوا</div>
+              </div>
+              <div style="background:#fdecea;border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:#c0392b;" id="unverCount">0</div>
+                <div style="font-size:12px;color:var(--text-light);">غیر تصدیق شدہ</div>
+              </div>
+              <div style="background:var(--cream);border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--text-dark);" id="totalVerProfiles">0</div>
+                <div style="font-size:12px;color:var(--text-light);">کل پروفائل</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verification Table -->
+      <div class="panel">
+        <div class="panel-hdr">
+          <span class="panel-title">تمام پروفائل — Verification حیثیت</span>
+          <div style="display:flex;gap:8px;">
+            <select class="form-control" id="verFilter" onchange="loadVerTable()" style="width:auto;padding:4px 10px;font-size:12px;">
+              <option value="all">سب</option>
+              <option value="unverified">غیر تصدیق شدہ</option>
+              <option value="pending">زیر التوا</option>
+              <option value="verified">تصدیق شدہ</option>
+            </select>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="data-table" id="verTable">
+            <thead><tr><th>PNP Code</th><th>نام</th><th>جنس</th><th>رابطہ</th><th>CNIC</th><th>حیثیت</th><th>عمل</th></tr></thead>
+            <tbody id="verTBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ ADS TAB ══════════════ -->
+    <div id="tAds" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+        <div>
+          <h2 class="section-heading">📢 اشتہار سسٹم</h2>
+          <p style="font-size:13px;color:var(--text-light);">کاروباری اشتہار لگائیں اور کمائیں</p>
+        </div>
+        <button class="btn-primary" style="padding:8px 16px;font-size:13px;" onclick="openAddAd()">+ نیا اشتہار</button>
+      </div>
+
+      <!-- اشتہار کی اقسام -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;">
+        <div style="background:white;border-radius:10px;padding:16px;box-shadow:var(--shadow);text-align:center;border-top:3px solid var(--gold);">
+          <div style="font-size:28px;margin-bottom:8px;">🏷️</div>
+          <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--green-deep);">Banner اشتہار</div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Dashboard پر</div>
+          <div style="font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--gold);margin-top:8px;">1,000/ماہ</div>
+        </div>
+        <div style="background:white;border-radius:10px;padding:16px;box-shadow:var(--shadow);text-align:center;border-top:3px solid var(--blue);">
+          <div style="font-size:28px;margin-bottom:8px;">📋</div>
+          <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--green-deep);">Card اشتہار</div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Profiles کے درمیان</div>
+          <div style="font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--blue);margin-top:8px;">1,500/ماہ</div>
+        </div>
+        <div style="background:white;border-radius:10px;padding:16px;box-shadow:var(--shadow);text-align:center;border-top:3px solid var(--rose);">
+          <div style="font-size:28px;margin-bottom:8px;">⭐</div>
+          <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--green-deep);">Featured اشتہار</div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">سب سے اوپر</div>
+          <div style="font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--rose);margin-top:8px;">2,500/ماہ</div>
+        </div>
+      </div>
+
+      <!-- موجودہ اشتہار -->
+      <div class="panel-hdr" style="border-radius:10px 10px 0 0;"><span class="panel-title">موجودہ اشتہار</span></div>
+      <div id="adsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:16px;background:white;border-radius:0 0 10px 10px;box-shadow:var(--shadow);">
+        <div style="text-align:center;padding:40px;color:var(--text-light);grid-column:1/-1;">
+          <div style="font-size:40px;margin-bottom:10px;">📢</div>
+          <div>ابھی کوئی اشتہار نہیں۔ پہلا اشتہار شامل کریں!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ EARNING PLAN TAB ══════════════ -->
+    <div id="tEarn" style="display:none;">
+      <h2 class="section-heading" style="margin-bottom:20px;">💰 کمائی کا مکمل منصوبہ</h2>
+
+      <!-- ماہانہ کمائی کا اندازہ -->
+      <div style="background:linear-gradient(135deg,var(--green-deep),var(--green-mid));border-radius:14px;padding:24px;margin-bottom:24px;color:white;">
+        <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:8px;">ماہانہ متوقع کمائی</div>
+        <div style="font-family:'Cinzel',serif;font-size:36px;font-weight:700;color:var(--gold);" id="totalEarning">0 روپے</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:4px;">تمام ذرائع سے مجموعی</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+        <!-- کمائی کے ذرائع -->
+        <div class="panel" style="padding:0;">
+          <div class="panel-hdr"><span class="panel-title">💰 کمائی کے ذرائع</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:12px;">
+
+            <div style="background:var(--green-pale);border-radius:10px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-weight:700;font-size:13px;">1️⃣ رجسٹریشن فیس</span>
+                <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--green-mid);" id="e1">0</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="number" id="regCount" class="form-control" placeholder="ماہانہ رجسٹریشن" value="20" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+                <span style="font-size:12px;color:var(--text-light);">×</span>
+                <input type="number" id="regFee" class="form-control" placeholder="فیس روپے" value="2000" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+              </div>
+            </div>
+
+            <div style="background:var(--blue-pale);border-radius:10px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-weight:700;font-size:13px;">2️⃣ اشتہار فیس</span>
+                <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--blue);" id="e2">0</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="number" id="adCount" class="form-control" placeholder="اشتہار کتنے" value="5" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+                <span style="font-size:12px;color:var(--text-light);">×</span>
+                <input type="number" id="adFee" class="form-control" placeholder="فی اشتہار" value="1000" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+              </div>
+            </div>
+
+            <div style="background:var(--gold-pale);border-radius:10px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-weight:700;font-size:13px;">3️⃣ Featured پروفائل</span>
+                <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--gold);" id="e3">0</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="number" id="featCount" class="form-control" placeholder="Featured کتنے" value="3" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+                <span style="font-size:12px;color:var(--text-light);">×</span>
+                <input type="number" id="featFee" class="form-control" placeholder="فی ماہ" value="500" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+              </div>
+            </div>
+
+            <div style="background:#fdecea;border-radius:10px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-weight:700;font-size:13px;">4️⃣ کمیشن (شادی ہال وغیرہ)</span>
+                <span style="font-family:'Cinzel',serif;font-weight:700;color:#c0392b;" id="e4">0</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="number" id="comCount" class="form-control" placeholder="ریفرل کتنے" value="2" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+                <span style="font-size:12px;color:var(--text-light);">×</span>
+                <input type="number" id="comFee" class="form-control" placeholder="فی کمیشن" value="2000" style="font-size:12px;padding:6px;" onchange="calcEarning()">
+              </div>
+            </div>
+
+            <button class="btn-primary" onclick="calcEarning()">🔄 حساب لگائیں</button>
+          </div>
+        </div>
+
+        <!-- مفت کمائی کے طریقے -->
+        <div class="panel" style="padding:0;">
+          <div class="panel-hdr"><span class="panel-title">🆓 مفت کمائی کے طریقے</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:10px;">
+
+            <div style="background:white;border:1.5px solid var(--green-light);border-radius:10px;padding:14px;">
+              <div style="font-weight:700;font-size:13px;color:var(--green-deep);margin-bottom:6px;">📱 WhatsApp Business Channel</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+                مفت WhatsApp Channel بنائیں → شادی سے متعلق کاروبار کے Paid اشتہار لگائیں → ہر اشتہار 500-1000 روپے
+              </div>
+              <a href="https://wa.me" target="_blank" style="color:var(--green-mid);font-size:12px;font-weight:700;margin-top:6px;display:block;">→ ابھی بنائیں</a>
+            </div>
+
+            <div style="background:white;border:1.5px solid var(--blue);border-radius:10px;padding:14px;">
+              <div style="font-weight:700;font-size:13px;color:var(--blue);margin-bottom:6px;">🌐 Facebook Page</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+                Facebook پر PakNikahPoint Page بنائیں → Boost کریں → زیادہ رجسٹریشن → زیادہ کمائی
+              </div>
+              <a href="https://facebook.com/pages/create" target="_blank" style="color:var(--blue);font-size:12px;font-weight:700;margin-top:6px;display:block;">→ ابھی بنائیں</a>
+            </div>
+
+            <div style="background:white;border:1.5px solid var(--gold);border-radius:10px;padding:14px;">
+              <div style="font-weight:700;font-size:13px;color:var(--gold);margin-bottom:6px;">💍 شادی ہال کمیشن</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+                علاقے کے شادی ہالوں سے بات کریں → آپ کے ذریعے بکنگ پر 5-10% کمیشن → بالکل مفت
+              </div>
+            </div>
+
+            <div style="background:white;border:1.5px solid #8e44ad;border-radius:10px;padding:14px;">
+              <div style="font-weight:700;font-size:13px;color:#8e44ad;margin-bottom:6px;">📸 فوٹوگرافر پارٹنرشپ</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+                شادی فوٹوگرافروں سے Referral deal کریں → ہر ریفرل پر 1,000-2,000 روپے
+              </div>
+            </div>
+
+            <div style="background:white;border:1.5px solid #e74c3c;border-radius:10px;padding:14px;">
+              <div style="font-weight:700;font-size:13px;color:#e74c3c;margin-bottom:6px;">🌍 Google AdSense</div>
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+                سسٹم کو Netlify پر مفت Online کریں → Google AdSense لگائیں → ہر وزٹ پر خودبخود پیسے
+              </div>
+              <a href="https://adsense.google.com" target="_blank" style="color:#e74c3c;font-size:12px;font-weight:700;margin-top:6px;display:block;">→ Apply کریں</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ADD PACKAGE MODAL -->
+<div class="modal-overlay" id="addPkgModal" onclick="closeModal('addPkgModal')">
+  <div class="modal-box" onclick="event.stopPropagation()" style="max-width:560px;">
+    <div class="modal-hdr"><h3>💎 نیا پیکج شامل کریں</h3><button class="modal-close" onclick="closeModal('addPkgModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>پیکج کا نام</label><input type="text" id="pkg_name" class="form-control" placeholder="مثال: بنیادی، معیاری…"></div>
+        <div class="form-group"><label>فیس (روپے)</label><input type="number" id="pkg_price" class="form-control" placeholder="مثال: 2000"></div>
+        <div class="form-group"><label>مدت</label><select id="pkg_dur" class="form-control"><option>1 ماہ</option><option>3 ماہ</option><option>6 ماہ</option><option>1 سال</option><option>2 سال</option><option>نکاح تک</option></select></div>
+        <div class="form-group"><label>میچ کی تعداد</label><select id="pkg_match" class="form-control"><option>5 میچ</option><option>10 میچ</option><option>15 میچ</option><option>لامحدود</option></select></div>
+        <div class="form-group"><label>رشتہ کارڈ</label><select id="pkg_card" class="form-control"><option>1 بار</option><option>5 بار</option><option>لامحدود</option></select></div>
+        <div class="form-group"><label>Verification</label><select id="pkg_ver" class="form-control"><option>نہیں</option><option>ہاں</option></select></div>
+      </div>
+      <div class="form-group" style="margin-top:10px;"><label>اضافی سروسز</label><textarea id="pkg_extra" class="form-control" rows="2" placeholder="مثال: گھر بیٹھے سروس، ذاتی مشاورت…"></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="pkg_popular" style="accent-color:var(--gold)"> ⭐ Popular بیج لگائیں</label>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end;">
+        <button class="btn-outline" onclick="closeModal('addPkgModal')">منسوخ</button>
+        <button class="btn-primary" onclick="savePkg()">✓ پیکج محفوظ کریں</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD AD MODAL -->
+<div class="modal-overlay" id="addAdModal" onclick="closeModal('addAdModal')">
+  <div class="modal-box" onclick="event.stopPropagation()" style="max-width:520px;">
+    <div class="modal-hdr"><h3>📢 نیا اشتہار شامل کریں</h3><button class="modal-close" onclick="closeModal('addAdModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>کاروبار کا نام <span style="color:red">*</span></label><input type="text" id="ad_name" class="form-control" placeholder="مثال: گلشن شادی ہال"></div>
+        <div class="form-group"><label>قسم</label><select id="ad_cat" class="form-control"><option>شادی ہال</option><option>بیوٹی پارلر</option><option>فوٹوگرافر</option><option>کیٹرنگ</option><option>جیولری</option><option>کپڑے</option><option>ہنی مون ٹور</option><option>فرنیچر</option><option>دیگر</option></select></div>
+        <div class="form-group"><label>فون نمبر</label><input type="tel" id="ad_phone" class="form-control" placeholder="0300-0000000"></div>
+        <div class="form-group"><label>WhatsApp نمبر</label><input type="tel" id="ad_wa" class="form-control" placeholder="92300-0000000"></div>
+        <div class="form-group"><label>شہر</label><input type="text" id="ad_city" class="form-control" placeholder="مثال: کراچی"></div>
+        <div class="form-group"><label>ماہانہ فیس (روپے)</label><input type="number" id="ad_fee" class="form-control" placeholder="مثال: 1000"></div>
+      </div>
+      <div class="form-group" style="margin-top:10px;"><label>تفصیل</label><textarea id="ad_desc" class="form-control" rows="2" placeholder="کاروبار کی مختصر تفصیل…"></textarea></div>
+      <div class="form-group" style="margin-top:10px;"><label>اشتہار کی قسم</label><select id="ad_type" class="form-control"><option value="card">Card — 1,500/ماہ</option><option value="banner">Banner — 1,000/ماہ</option><option value="featured">Featured — 2,500/ماہ</option></select></div>
+      <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end;">
+        <button class="btn-outline" onclick="closeModal('addAdModal')">منسوخ</button>
+        <button class="btn-primary" onclick="saveAd()">✓ اشتہار محفوظ کریں</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VERIFY MODAL -->
+<div class="modal-overlay" id="verModal" onclick="closeModal('verModal')">
+  <div class="modal-box" onclick="event.stopPropagation()" style="max-width:480px;">
+    <div class="modal-hdr"><h3 id="verModalTitle">Profile Verify کریں</h3><button class="modal-close" onclick="closeModal('verModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group" style="margin-bottom:12px;"><label>CNIC نمبر</label><input type="text" id="v_cnic" class="form-control" placeholder="مثال: 42201-1234567-1" maxlength="15"></div>
+      <div class="form-group" style="margin-bottom:12px;"><label>Verification حیثیت</label>
+        <select id="v_status" class="form-control">
+          <option value="pending">⏳ زیر التوا</option>
+          <option value="verified">✅ تصدیق شدہ</option>
+          <option value="rejected">❌ مسترد</option>
+        </select>
+      </div>
+      <div class="form-group"><label>نوٹ</label><textarea id="v_note" class="form-control" rows="2" placeholder="کوئی نوٹ…"></textarea></div>
+      <input type="hidden" id="v_code">
+      <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end;">
+        <button class="btn-outline" onclick="closeModal('verModal')">منسوخ</button>
+        <button class="btn-primary" onclick="saveVerification()">✓ محفوظ کریں</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/db.js">
+</script>
+<script src="../js/daily.js"></script>
+<script src="../js/app.js"></script>
+<script>
+// ── TABS ──────────────────────────────────────
+function showTab(id, btn) {
+  ['tPkg','tVer','tAds','tEarn'].forEach(t => document.getElementById(t).style.display = t===id?'block':'none');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (id==='tVer') loadVerTable();
+  if (id==='tEarn') calcEarning();
+}
+
+// ── PACKAGES ──────────────────────────────────
+const DEFAULT_PKGS = [
+  { id:1, name:'بنیادی', price:1500, dur:'3 ماہ', match:'5 میچ', card:'1 بار', ver:'نہیں', extra:'', popular:false, icon:'🥉', color:'#7f8c8d' },
+  { id:2, name:'معیاری', price:4000, dur:'6 ماہ', match:'15 میچ', card:'5 بار', ver:'نہیں', extra:'WhatsApp شیئر', popular:false, icon:'🥈', color:'#95a5a6' },
+  { id:3, name:'پریمیم', price:8000, dur:'1 سال', match:'لامحدود', card:'لامحدود', ver:'ہاں', extra:'Verified بیج + ترجیحی دکھائی', popular:true, icon:'🥇', color:'var(--gold)' },
+  { id:4, name:'VIP', price:20000, dur:'2 سال', match:'لامحدود', card:'لامحدود', ver:'ہاں', extra:'گھر بیٹھے سروس + ذاتی مشاورت + نکاح تک ساتھ', popular:false, icon:'👑', color:'#8e44ad' },
+];
+
+function getPackages() {
+  const d = localStorage.getItem('pnp_packages');
+  return d ? JSON.parse(d) : DEFAULT_PKGS;
+}
+function savePackages(pkgs) { localStorage.setItem('pnp_packages', JSON.stringify(pkgs)); }
+
+document.addEventListener('DOMContentLoaded', () => { loadPkgs(); calcEarning(); loadVerStats(); });
+
+function loadPkgs() {
+  const pkgs = getPackages();
+  document.getElementById('pkgGrid').innerHTML = pkgs.map(p => `
+    <div class="pkg-card ${p.popular?'popular':''}">
+      ${p.popular ? '<div class="pkg-badge">⭐ مقبول</div>' : ''}
+      <div class="pkg-header">
+        <div class="pkg-icon">${p.icon||'💎'}</div>
+        <div class="pkg-name">${p.name}</div>
+        <div class="pkg-price">₨ ${parseInt(p.price).toLocaleString()}</div>
+        <div class="pkg-dur">${p.dur}</div>
+      </div>
+      <div class="pkg-features">
+        <div class="pkg-feat"><span class="feat-yes">✓</span> ${p.match} میچ</div>
+        <div class="pkg-feat"><span class="feat-yes">✓</span> رشتہ کارڈ ${p.card}</div>
+        <div class="pkg-feat"><span class="${p.ver==='ہاں'?'feat-yes':'feat-no'}">${p.ver==='ہاں'?'✓':'✗'}</span> Verification</div>
+        ${p.extra ? `<div class="pkg-feat"><span class="feat-yes">✓</span> ${p.extra}</div>` : ''}
+      </div>
+      <button class="pkg-btn" style="background:var(--green-pale);color:var(--green-mid);" onclick="editPkg(${p.id})">✎ ترمیم</button>
+      <button class="pkg-btn" style="background:#fdecea;color:#c0392b;margin-top:-10px;" onclick="deletePkg(${p.id})">🗑 حذف</button>
+    </div>`).join('');
+}
+
+function openAddPkg() {
+  ['pkg_name','pkg_price','pkg_extra'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('pkg_popular').checked = false;
+  openModal('addPkgModal');
+}
+
+function savePkg() {
+  const name = document.getElementById('pkg_name').value.trim();
+  if (!name) { showToast('پیکج کا نام ضروری ہے','error'); return; }
+  const pkgs = getPackages();
+  const newPkg = {
+    id: Date.now(),
+    name,
+    price: document.getElementById('pkg_price').value,
+    dur:   document.getElementById('pkg_dur').value,
+    match: document.getElementById('pkg_match').value,
+    card:  document.getElementById('pkg_card').value,
+    ver:   document.getElementById('pkg_ver').value,
+    extra: document.getElementById('pkg_extra').value,
+    popular: document.getElementById('pkg_popular').checked,
+    icon: '💎'
+  };
+  pkgs.push(newPkg);
+  savePackages(pkgs);
+  loadPkgs();
+  closeModal('addPkgModal');
+  showToast('✅ پیکج محفوظ ہو گیا','success');
+}
+
+function deletePkg(id) {
+  if (!confirm('کیا یہ پیکج حذف کریں؟')) return;
+  const pkgs = getPackages().filter(p => p.id !== id);
+  savePackages(pkgs);
+  loadPkgs();
+  showToast('پیکج حذف ہو گیا','info');
+}
+
+function editPkg(id) {
+  const pkg = getPackages().find(p => p.id===id);
+  if (!pkg) return;
+  document.getElementById('pkg_name').value  = pkg.name;
+  document.getElementById('pkg_price').value = pkg.price;
+  document.getElementById('pkg_extra').value = pkg.extra||'';
+  document.getElementById('pkg_popular').checked = pkg.popular;
+  openModal('addPkgModal');
+}
+
+function togglePkgOnForm(show) {
+  localStorage.setItem('pnp_pkg_on_form', show?'1':'0');
+  showToast(show ? '✅ پیکجز Form پر دکھیں گے' : 'پیکجز Form پر نہیں دکھیں گے', 'info');
+}
+
+// ── ADS ───────────────────────────────────────
+function getAds() { const d=localStorage.getItem('pnp_ads'); return d?JSON.parse(d):[]; }
+function saveAds(ads) { localStorage.setItem('pnp_ads', JSON.stringify(ads)); }
+
+function openAddAd() {
+  ['ad_name','ad_phone','ad_wa','ad_city','ad_fee','ad_desc'].forEach(id => document.getElementById(id).value='');
+  openModal('addAdModal');
+}
+
+function saveAd() {
+  const name = document.getElementById('ad_name').value.trim();
+  if (!name) { showToast('کاروبار کا نام ضروری ہے','error'); return; }
+  const ads = getAds();
+  ads.push({
+    id: Date.now(),
+    name,
+    cat:   document.getElementById('ad_cat').value,
+    phone: document.getElementById('ad_phone').value,
+    wa:    document.getElementById('ad_wa').value,
+    city:  document.getElementById('ad_city').value,
+    fee:   document.getElementById('ad_fee').value,
+    desc:  document.getElementById('ad_desc').value,
+    type:  document.getElementById('ad_type').value,
+    active: true
+  });
+  saveAds(ads);
+  loadAds();
+  closeModal('addAdModal');
+  showToast('✅ اشتہار محفوظ ہو گیا','success');
+}
+
+function loadAds() {
+  const ads = getAds();
+  const grid = document.getElementById('adsGrid');
+  if (!ads.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light);grid-column:1/-1;"><div style="font-size:40px;margin-bottom:10px;">📢</div><div>ابھی کوئی اشتہار نہیں۔</div></div>';
+    return;
+  }
+  const catIcons = {'شادی ہال':'🏛️','بیوٹی پارلر':'💄','فوٹوگرافر':'📸','کیٹرنگ':'🍽️','جیولری':'💍','کپڑے':'👗','ہنی مون ٹور':'✈️','فرنیچر':'🛋️','دیگر':'🏪'};
+  grid.innerHTML = ads.map(ad => `
+    <div class="ad-card">
+      <div class="ad-header">
+        <div>
+          <div class="ad-biz-cat">${ad.cat}</div>
+          <div class="ad-title">${ad.name}</div>
+        </div>
+        <span class="ad-badge">${ad.type==='featured'?'⭐ Featured':ad.type==='banner'?'🏷️ Banner':'📋 Card'}</span>
+      </div>
+      <div class="ad-body">
+        <div class="ad-img">${catIcons[ad.cat]||'🏪'}</div>
+        <div class="ad-biz-name">${ad.name}</div>
+        <div style="font-size:12px;color:var(--text-light);">${ad.city||''}</div>
+        <div class="ad-biz-desc">${ad.desc||''}</div>
+        <div class="ad-contact">
+          ${ad.wa ? `<button class="ad-wa-btn" onclick="window.open('https://wa.me/${ad.wa.replace(/[^0-9]/g,'')}')">📱 WhatsApp</button>` : ''}
+          ${ad.phone ? `<button class="ad-call-btn" onclick="window.open('tel:${ad.phone}')">📞 Call</button>` : ''}
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px;">
+          <span style="font-size:11px;color:var(--text-light);">فیس: ₨${parseInt(ad.fee||0).toLocaleString()}/ماہ</span>
+          <button onclick="deleteAd(${ad.id})" style="background:#fdecea;color:#c0392b;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;font-size:11px;">حذف</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function deleteAd(id) {
+  if (!confirm('اشتہار حذف کریں؟')) return;
+  saveAds(getAds().filter(a => a.id!==id));
+  loadAds();
+  showToast('اشتہار حذف ہو گیا','info');
+}
+
+// ── VERIFICATION ──────────────────────────────
+function loadVerStats() {
+  const all = [...PNP_DB.getBoys(),...PNP_DB.getGirls()];
+  const ver = all.filter(p=>p.verified==='verified').length;
+  const pend= all.filter(p=>p.verified==='pending').length;
+  const unver=all.filter(p=>!p.verified||p.verified==='unverified').length;
+  document.getElementById('verCount').textContent = ver;
+  document.getElementById('pendCount').textContent = pend;
+  document.getElementById('unverCount').textContent = unver;
+  document.getElementById('totalVerProfiles').textContent = all.length;
+}
+
+function loadVerTable() {
+  const filter = document.getElementById('verFilter').value;
+  let all = [...PNP_DB.getBoys(),...PNP_DB.getGirls()];
+  if (filter==='verified') all = all.filter(p=>p.verified==='verified');
+  else if (filter==='pending') all = all.filter(p=>p.verified==='pending');
+  else if (filter==='unverified') all = all.filter(p=>!p.verified||p.verified==='unverified');
+
+  const tbody = document.getElementById('verTBody');
+  if (!all.length) { tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--text-light);">کوئی پروفائل نہیں</td></tr>'; return; }
+
+  tbody.innerHTML = all.map(p => {
+    const vs = p.verified||'unverified';
+    const badge = vs==='verified'
+      ? '<span class="ver-status ver-yes">✅ تصدیق شدہ</span>'
+      : vs==='pending'
+      ? '<span class="ver-status ver-pending">⏳ زیر التوا</span>'
+      : '<span class="ver-status ver-no">❌ غیر تصدیق</span>';
+    return `<tr>
+      <td><span style="font-family:'Cinzel',serif;font-size:12px;color:var(--green-mid);">${p.pnpCode}</span></td>
+      <td><strong>${p.name}</strong></td>
+      <td>${p.gender==='boy'?'♂ لڑکا':'♀ لڑکی'}</td>
+      <td>${p.contact||'—'}</td>
+      <td style="font-size:12px;">${p.cnic||'—'}</td>
+      <td>${badge}</td>
+      <td>
+        <button onclick="openVerModal('${p.pnpCode}')" style="background:var(--blue-pale);color:var(--blue);border:none;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;">Verify ✓</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openVerModal(code) {
+  const p = PNP_DB.getProfileByCode(code);
+  if (!p) return;
+  document.getElementById('verModalTitle').textContent = 'Verify کریں: ' + p.name;
+  document.getElementById('v_code').value = code;
+  document.getElementById('v_cnic').value = p.cnic||'';
+  document.getElementById('v_status').value = p.verified||'pending';
+  document.getElementById('v_note').value = p.verNote||'';
+  openModal('verModal');
+}
+
+function saveVerification() {
+  const code = document.getElementById('v_code').value;
+  const status = document.getElementById('v_status').value;
+  const cnic = document.getElementById('v_cnic').value;
+  const note = document.getElementById('v_note').value;
+
+  const updates = { verified:status, cnic, verNote:note, verDate:new Date().toISOString() };
+
+  if (code.startsWith('L-')) PNP_DB.updateBoy(code, updates);
+  else PNP_DB.updateGirl(code, updates);
+
+  closeModal('verModal');
+  loadVerTable();
+  loadVerStats();
+  showToast(status==='verified' ? '✅ پروفائل تصدیق شدہ ہو گئی!' : '✅ حیثیت اپ ڈیٹ ہو گئی', 'success');
+}
+
+// ── EARNING CALCULATOR ────────────────────────
+function calcEarning() {
+  const e1 = (parseInt(document.getElementById('regCount').value)||0) * (parseInt(document.getElementById('regFee').value)||0);
+  const e2 = (parseInt(document.getElementById('adCount').value)||0)  * (parseInt(document.getElementById('adFee').value)||0);
+  const e3 = (parseInt(document.getElementById('featCount').value)||0)* (parseInt(document.getElementById('featFee').value)||0);
+  const e4 = (parseInt(document.getElementById('comCount').value)||0) * (parseInt(document.getElementById('comFee').value)||0);
+  const total = e1+e2+e3+e4;
+  document.getElementById('e1').textContent = '₨ '+e1.toLocaleString();
+  document.getElementById('e2').textContent = '₨ '+e2.toLocaleString();
+  document.getElementById('e3').textContent = '₨ '+e3.toLocaleString();
+  document.getElementById('e4').textContent = '₨ '+e4.toLocaleString();
+  document.getElementById('totalEarning').textContent = '₨ '+total.toLocaleString()+' روپے';
+}
+</script>
+<script>
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+}
+</script>
+</body>
+</html>

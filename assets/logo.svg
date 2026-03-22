@@ -1,0 +1,31 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="96" fill="#0D3B2E"/>
+  <circle cx="100" cy="100" r="93" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Islamic 8-point star background -->
+  <polygon points="100,18 108,42 132,34 124,58 148,58 132,76 148,100 124,100 132,124 108,116 100,140 92,116 68,124 76,100 52,100 68,76 52,58 76,58 68,34 92,42" 
+           fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.18"/>
+
+  <!-- Crescent moon -->
+  <path d="M100 44 A40 40 0 1 1 100 156 A26 26 0 1 0 100 44 Z" fill="#C9A84C" opacity="0.92"/>
+
+  <!-- Star in crescent -->
+  <polygon points="122,72 125,82 135,82 127,88 130,98 122,92 114,98 117,88 109,82 119,82" 
+           fill="#0D3B2E" opacity="0.9" transform="scale(0.7) translate(53,40)"/>
+
+  <!-- Nikah ring bottom -->
+  <circle cx="100" cy="164" r="14" fill="none" stroke="#C9A84C" stroke-width="3"/>
+  <circle cx="100" cy="164" r="6"  fill="#C9A84C" opacity="0.7"/>
+  <!-- Ring sparkle -->
+  <circle cx="109" cy="157" r="2" fill="#E8C96A"/>
+
+  <!-- Text: PNP -->
+  <text x="100" y="196" text-anchor="middle" font-family="Georgia, serif" font-size="10" font-weight="bold" fill="#C9A84C" letter-spacing="3">PNP</text>
+
+  <!-- Decorative dots -->
+  <circle cx="40"  cy="100" r="3" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="160" cy="100" r="3" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="100" cy="40"  r="3" fill="#C9A84C" opacity="0.5"/>
+</svg>
