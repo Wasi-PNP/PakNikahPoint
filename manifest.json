@@ -2,7 +2,7 @@
   "name": "PakNikahPoint",
   "short_name": "PNP",
   "description": "پاک نکاح پوائنٹ — رشتے عزت کے ساتھ",
-  "start_url": "/",
+  "start_url": "/PakNikahPoint/",
   "display": "standalone",
   "background_color": "#0D3B2E",
   "theme_color": "#0D3B2E",

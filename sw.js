@@ -1,21 +1,21 @@
 // PakNikahPoint — Service Worker v3
 const CACHE_NAME = 'pnp-cache-v3';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/css/main.css',
-  '/js/app.js',
-  '/js/db.js',
-  '/js/dashboard.js',
-  '/js/daily.js',
-  '/pages/register.html',
-  '/pages/profiles.html',
-  '/pages/matching.html',
-  '/pages/search.html',
-  '/pages/admin.html',
-  '/pages/gallery.html',
-  '/assets/logo.svg'
+  '/PakNikahPoint/',
+  '/PakNikahPoint/index.html',
+  '/PakNikahPoint/manifest.json',
+  '/PakNikahPoint/css/main.css',
+  '/PakNikahPoint/js/app.js',
+  '/PakNikahPoint/js/db.js',
+  '/PakNikahPoint/js/dashboard.js',
+  '/PakNikahPoint/js/daily.js',
+  '/PakNikahPoint/pages/register.html',
+  '/PakNikahPoint/pages/profiles.html',
+  '/PakNikahPoint/pages/matching.html',
+  '/PakNikahPoint/pages/search.html',
+  '/PakNikahPoint/pages/admin.html',
+  '/PakNikahPoint/pages/gallery.html',
+  '/PakNikahPoint/assets/logo.svg'
 ];
 
 // Install
