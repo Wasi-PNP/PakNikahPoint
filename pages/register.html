@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register Profile — PakNikahPoint</title>
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/PakNikahPoint/manifest.json">
 <meta name="theme-color" content="#0D3B2E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1533,7 +1533,7 @@ function showSaveSuccess(pnpCode) {
 </script>
 <script>
 if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
+  navigator.serviceWorker.register("/PakNikahPoint/sw.js").then(r=>console.log("SW OK")).catch(e=>console.log("SW Err",e));
 }
 </script>
 </body>
