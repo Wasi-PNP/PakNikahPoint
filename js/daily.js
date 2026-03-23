@@ -61,53 +61,30 @@ const PNP_DAILY = {
     const today  = new Date().toLocaleDateString('ur-PK', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
 
     return `
-    <div id="dailyWidget" style="margin-bottom:24px;">
+    <div id="dailyWidget" style="margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;">
 
       <!-- قرآنی آیت -->
-      <div style="background:linear-gradient(135deg,#0D3B2E,#1A5C45);border-radius:14px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml,%3Csvg width=40 height=40 viewBox=0 0 40 40 xmlns=http://www.w3.org/2000/svg%3E%3Cpath d=M20 0 L40 20 L20 40 L0 20Z fill=none stroke=rgba(201,168,76,0.06) stroke-width=1/%3E%3C/svg%3E');background-size:40px;"></div>
-        <div style="position:relative;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span style="font-size:22px;">📖</span>
-              <div>
-                <div style="font-family:'Cinzel',serif;font-size:12px;color:#C9A84C;letter-spacing:1px;">آج کی قرآنی آیت</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.5);">${today}</div>
-              </div>
-            </div>
-            <div style="background:rgba(201,168,76,0.2);padding:4px 12px;border-radius:20px;font-size:11px;color:#C9A84C;font-weight:700;">${ayat.no}</div>
-          </div>
-          <div style="font-size:22px;line-height:2;color:#C9A84C;text-align:center;margin-bottom:14px;font-weight:400;">${ayat.arabic}</div>
-          <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;">
-            <div style="font-size:14px;color:rgba(255,255,255,0.9);line-height:1.8;text-align:right;">${ayat.urdu}</div>
-          </div>
-          <div style="margin-top:10px;font-size:11px;color:rgba(201,168,76,0.8);text-align:center;">— ${ayat.ref} —</div>
+      <div style="flex:1;min-width:280px;background:linear-gradient(135deg,#0D3B2E,#1A5C45);border-radius:12px;padding:14px;position:relative;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span style="font-size:16px;">📖</span>
+          <div style="font-family:'Cinzel',serif;font-size:11px;color:#C9A84C;letter-spacing:1px;">آج کی قرآنی آیت</div>
+          <div style="margin-right:auto;background:rgba(201,168,76,0.2);padding:2px 8px;border-radius:20px;font-size:10px;color:#C9A84C;">${ayat.no}</div>
         </div>
+        <div style="font-size:16px;line-height:1.8;color:#C9A84C;text-align:center;margin-bottom:8px;">${ayat.arabic}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;text-align:right;">${ayat.urdu}</div>
+        <div style="margin-top:6px;font-size:10px;color:rgba(201,168,76,0.7);text-align:center;">— ${ayat.ref} —</div>
       </div>
 
       <!-- حدیث مبارکہ -->
-      <div style="background:linear-gradient(135deg,#1a3a5c,#2471a3);border-radius:14px;padding:24px;position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml,%3Csvg width=40 height=40 viewBox=0 0 40 40 xmlns=http://www.w3.org/2000/svg%3E%3Ccircle cx=20 cy=20 r=15 fill=none stroke=rgba(255,255,255,0.04) stroke-width=1/%3E%3C/svg%3E');background-size:40px;"></div>
-        <div style="position:relative;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span style="font-size:22px;">📜</span>
-              <div>
-                <div style="font-family:'Cinzel',serif;font-size:12px;color:#f9e79f;letter-spacing:1px;">آج کی حدیث مبارکہ</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.5);">${hadees.kitab} • ${hadees.no}</div>
-              </div>
-            </div>
-            <div style="background:rgba(249,231,159,0.2);padding:4px 12px;border-radius:20px;font-size:11px;color:#f9e79f;font-weight:700;">${hadees.grade}</div>
-          </div>
-          <div style="font-size:20px;line-height:2;color:#f9e79f;text-align:center;margin-bottom:14px;">${hadees.arabic}</div>
-          <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;">
-            <div style="font-size:14px;color:rgba(255,255,255,0.9);line-height:1.8;text-align:right;">${hadees.urdu}</div>
-          </div>
-          <div style="margin-top:10px;display:flex;justify-content:space-between;font-size:11px;color:rgba(249,231,159,0.7);">
-            <span>راوی: ${hadees.raawi}</span>
-            <span>${hadees.kitab} — ${hadees.no}</span>
-          </div>
+      <div style="flex:1;min-width:280px;background:linear-gradient(135deg,#1a3a5c,#2471a3);border-radius:12px;padding:14px;position:relative;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span style="font-size:16px;">📜</span>
+          <div style="font-family:'Cinzel',serif;font-size:11px;color:#f9e79f;letter-spacing:1px;">آج کی حدیث</div>
+          <div style="margin-right:auto;background:rgba(249,231,159,0.2);padding:2px 8px;border-radius:20px;font-size:10px;color:#f9e79f;">${hadees.grade}</div>
         </div>
+        <div style="font-size:15px;line-height:1.8;color:#f9e79f;text-align:center;margin-bottom:8px;">${hadees.arabic}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;text-align:right;">${hadees.urdu}</div>
+        <div style="margin-top:6px;font-size:10px;color:rgba(249,231,159,0.6);text-align:left;">راوی: ${hadees.raawi} • ${hadees.kitab}</div>
       </div>
     </div>`;
   }
