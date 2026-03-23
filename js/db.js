@@ -40,14 +40,34 @@ const PNP_DB = {
 
   getBoys(){const d=localStorage.getItem(this.KEYS.BOYS);return d?JSON.parse(d):[];},
   saveBoys(arr){localStorage.setItem(this.KEYS.BOYS,JSON.stringify(arr));},
-  addBoy(p){p.pnpCode=this.nextBoyId();p.gender='boy';p.registeredAt=new Date().toISOString();p.status='active';const a=this.getBoys();a.push(p);this.saveBoys(a);return p;},
+  addBoy(p){
+    p.pnpCode=this.nextBoyId();
+    p.gender='boy';
+    p.registeredAt=new Date().toISOString();
+    p.status='active';
+    // تصویر compress کریں
+    if(p.photo && p.photo.startsWith('data:')) {
+      p.photo = this._compressPhoto(p.photo);
+    }
+    const a=this.getBoys();a.push(p);this.saveBoys(a);return p;
+  },
   updateBoy(code,u){const a=this.getBoys();const i=a.findIndex(b=>b.pnpCode===code);if(i>=0){a[i]={...a[i],...u};this.saveBoys(a);}},
   deleteBoy(code){this.saveBoys(this.getBoys().filter(b=>b.pnpCode!==code));},
   getBoyById(code){return this.getBoys().find(b=>b.pnpCode===code);},
 
   getGirls(){const d=localStorage.getItem(this.KEYS.GIRLS);return d?JSON.parse(d):[];},
   saveGirls(arr){localStorage.setItem(this.KEYS.GIRLS,JSON.stringify(arr));},
-  addGirl(p){p.pnpCode=this.nextGirlId();p.gender='girl';p.registeredAt=new Date().toISOString();p.status='active';const a=this.getGirls();a.push(p);this.saveGirls(a);return p;},
+  addGirl(p){
+    p.pnpCode=this.nextGirlId();
+    p.gender='girl';
+    p.registeredAt=new Date().toISOString();
+    p.status='active';
+    // تصویر compress کریں
+    if(p.photo && p.photo.startsWith('data:')) {
+      p.photo = this._compressPhoto(p.photo);
+    }
+    const a=this.getGirls();a.push(p);this.saveGirls(a);return p;
+  },
   updateGirl(code,u){const a=this.getGirls();const i=a.findIndex(g=>g.pnpCode===code);if(i>=0){a[i]={...a[i],...u};this.saveGirls(a);}},
   deleteGirl(code){this.saveGirls(this.getGirls().filter(g=>g.pnpCode!==code));},
   getGirlById(code){return this.getGirls().find(g=>g.pnpCode===code);},
@@ -160,6 +180,27 @@ const PNP_DB = {
       p.name?.toLowerCase().includes(q)||p.pnpCode?.toLowerCase().includes(q)||
       p.city?.toLowerCase().includes(q)||p.caste?.toLowerCase().includes(q)
     ).slice(0,10);
+  },
+
+  // تصویر compress کریں — localStorage کے لیے
+  _compressPhoto(dataUrl){
+    try{
+      const img = new Image();
+      img.src = dataUrl;
+      const canvas = document.createElement('canvas');
+      const MAX = 300; // زیادہ سے زیادہ 300px
+      let w = img.width || 300;
+      let h = img.height || 300;
+      if(w > MAX){ h = Math.round(h * MAX / w); w = MAX; }
+      if(h > MAX){ w = Math.round(w * MAX / h); h = MAX; }
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      return canvas.toDataURL('image/jpeg', 0.6); // 60% quality
+    }catch(e){
+      return dataUrl;
+    }
   },
 
   exportAll(){return{boys:this.getBoys(),girls:this.getGirls(),matches:this.getMatches(),exportedAt:new Date().toISOString(),version:this.version};},

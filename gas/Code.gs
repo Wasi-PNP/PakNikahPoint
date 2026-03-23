@@ -464,6 +464,44 @@ function _jsonCors(obj) {
     .setMimeType(ContentService.MimeType.JSON);
   return output;
 }
+function fixAndFormatSheets() {
+  fixColumns();
+  formatSheets();
+  return {status:'ok', msg:'✅ Columns اور Format ٹھیک ہو گئے'};
+}
+
+function fixColumns() {
+  const ss = _getSheet();
+  [BOYS_SHEET, GIRLS_SHEET].forEach(shName => {
+    const sh = ss.getSheetByName(shName);
+    if (!sh) return;
+    
+    // موجودہ headers
+    const existing = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+    
+    // COLS کے مطابق ہر column ڈھونڈیں یا بنائیں
+    COLS.forEach((colName, idx) => {
+      const colNum = idx + 1;
+      const existingIdx = existing.indexOf(colName);
+      
+      if (existingIdx === -1) {
+        // یہ column موجود نہیں — آخر میں شامل کریں
+        const lastCol = sh.getLastColumn();
+        sh.getRange(1, lastCol + 1).setValue(colName);
+        Logger.log('نیا column: ' + colName);
+      }
+    });
+    
+    // پہلی row کو COLS کے مطابق ترتیب دیں
+    const newHeaders = sh.getRange(1, 1, 1, Math.max(sh.getLastColumn(), COLS.length)).getValues()[0];
+    COLS.forEach((colName, idx) => {
+      sh.getRange(1, idx + 1).setValue(colName);
+    });
+    
+    Logger.log('✅ ' + shName + ' columns ٹھیک ہو گئے');
+  });
+}
+
 function formatSheets() {
   const ss = _getSheet();
   
