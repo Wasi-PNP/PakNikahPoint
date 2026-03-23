@@ -470,6 +470,43 @@ function fixAndFormatSheets() {
   return {status:'ok', msg:'✅ Columns اور Format ٹھیک ہو گئے'};
 }
 
+function cleanDuplicateColumns() {
+  const ss = _getSheet();
+  [BOYS_SHEET, GIRLS_SHEET].forEach(shName => {
+    const sh = ss.getSheetByName(shName);
+    if (!sh) return;
+    
+    const lastCol = sh.getLastColumn();
+    const headers = sh.getRange(1, 1, 1, lastCol).getValues()[0];
+    
+    // پہلے COLS کے مطابق صرف پہلی بار والے columns رکھیں
+    // duplicate columns ڈھونڈیں اور delete کریں
+    const seen = [];
+    const toDelete = [];
+    
+    for (let i = headers.length - 1; i >= 0; i--) {
+      const h = headers[i];
+      if (!h) { toDelete.push(i + 1); continue; }
+      if (seen.includes(h)) {
+        toDelete.push(i + 1); // duplicate — delete کریں
+      } else {
+        seen.unshift(h);
+      }
+    }
+    
+    // پیچھے سے delete کریں تاکہ index نہ بدلے
+    toDelete.sort((a,b) => b - a);
+    toDelete.forEach(col => {
+      sh.deleteColumn(col);
+      Logger.log('Deleted duplicate column: ' + col);
+    });
+    
+    Logger.log('✅ ' + shName + ': ' + toDelete.length + ' duplicate columns ہٹائے گئے');
+  });
+  
+  return {status:'ok', msg:'✅ Duplicate columns ہٹ گئے'};
+}
+
 function fixColumns() {
   const ss = _getSheet();
   [BOYS_SHEET, GIRLS_SHEET].forEach(shName => {
