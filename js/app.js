@@ -277,8 +277,13 @@ function generateRishtaCard(code) {
         <div class="item"><div class="item-key">Religious Edu</div><div class="item-val">${p.religiousEducation||'—'}</div></div>
       </div>
       <div class="footer">
-        <div>📞 ${settings.phone||''} &nbsp;|&nbsp; ${settings.bureauName||'PakNikahPoint'}</div>
-        <div style="margin-top:6px;">Managed with trust, respect & responsibility</div>
+        <div style="font-family:'Cinzel',serif;font-size:15px;color:#0D3B2E;font-weight:700;margin-bottom:8px;">${settings.bureauName||'PakNikahPoint'}</div>
+        <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:6px;">
+          ${settings.phone ? `<span>📞 ${settings.phone}</span>` : ''}
+          ${settings.email ? `<span>📧 ${settings.email}</span>` : ''}
+          ${settings.city  ? `<span>📍 ${settings.city}</span>`  : ''}
+        </div>
+        <div style="margin-top:6px;font-size:11px;">رشتے عزت، اعتماد اور ذمہ داری کے ساتھ</div>
         <div style="margin-top:4px;color:#C9A84C;">اللهم بارك لهم وبارك عليهم وجمع بينهما في خير</div>
       </div>
     </div>

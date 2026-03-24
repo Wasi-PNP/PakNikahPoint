@@ -168,11 +168,13 @@
 (function(){
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbxek-gphMpD_M3s8b4VI76wsIxjlufMdfc3VPpXnpsYF3WdVhiOVRqKU4e0KyveIpEjAA/exec';
   const s = PNP_DB.getSettings();
-  if(!s.gasUrl || s.gasUrl !== GAS_URL){
-    s.gasUrl = GAS_URL;
-    PNP_DB.saveSettings(s);
-    console.log('✅ GAS URL محفوظ ہو گیا');
-  }
+  // GAS URL اور bureau info auto set کریں
+  let changed = false;
+  if(!s.gasUrl || s.gasUrl !== GAS_URL){ s.gasUrl = GAS_URL; changed = true; }
+  if(!s.bureauName){ s.bureauName = 'PakNikahPoint'; changed = true; }
+  if(!s.phone){ s.phone = ''; changed = true; }
+  if(!s.email){ s.email = ''; changed = true; }
+  if(changed){ PNP_DB.saveSettings(s); console.log('✅ Settings محفوظ ہو گئیں'); }
 })();
 </script>
 
