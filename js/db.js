@@ -88,13 +88,17 @@ const PNP_DB = {
     const s = this.getSettings();
     if(!s.gasUrl) return;
     try{
+      // GET method سے delete کریں — no-cors کے ساتھ بھی کام کرے گا
+      const url = s.gasUrl + '?action=deleteProfile&pnpCode=' + encodeURIComponent(code);
+      await fetch(url, {mode:'no-cors'});
+      // POST بھی بھیجیں backup کے طور پر
       await fetch(s.gasUrl, {
         method:'POST',
         mode:'no-cors',
         headers:{'Content-Type':'text/plain'},
         body: JSON.stringify({action:'deleteProfile', pnpCode:code})
       });
-      console.log('✅ GAS سے delete:', code);
+      console.log('✅ GAS سے delete بھیجا گیا:', code);
     }catch(e){
       console.error('❌ GAS delete error:', e.message);
     }

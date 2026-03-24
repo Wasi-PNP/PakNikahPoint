@@ -142,7 +142,7 @@ function viewProfile(code) {
       <button class="btn-primary" onclick="findMatchFor('${p.pnpCode}');closeModal('profileModal')">❤ Find Match</button>
       <button class="btn-gold" onclick="generateRishtaCard('${p.pnpCode}')">📄 Rishta Card</button>
       <button class="btn-outline" onclick="shareOnWhatsApp('${p.pnpCode}')">📱 WhatsApp Share</button>
-      <button style="padding:10px 20px;border:2px solid #c0392b;color:#c0392b;border-radius:8px;font-size:13px;font-weight:600;" onclick="if(confirm('Delete this profile?')){PNP_DB.deleteProfile('${p.pnpCode}');closeModal('profileModal');showToast('Profile deleted','info');location.reload();}">Delete</button>
+      <button style="padding:10px 20px;border:2px solid #c0392b;color:#c0392b;border-radius:8px;font-size:13px;font-weight:600;" onclick="confirmDelete('${p.pnpCode}')">🗑 حذف کریں</button>
     </div>`;
   openModal('profileModal');
 }
@@ -219,6 +219,47 @@ function copyWAText() {
 
 
 // ── RISHTA CARD ───────────────────────────────────────────────────────
+// ═══ Profile Delete Confirm ═══
+function confirmDelete(code) {
+  const old = document.getElementById('deleteConfirmModal');
+  if(old) old.remove();
+
+  const p = PNP_DB.getProfileByCode(code);
+  if(!p) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'deleteConfirmModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:99999;display:flex;align-items:center;justify-content:center;';
+  modal.innerHTML = `
+    <div style="background:white;border-radius:16px;padding:28px;margin:20px;max-width:340px;width:100%;text-align:center;">
+      <div style="font-size:48px;margin-bottom:12px;">🗑</div>
+      <h3 style="color:#c0392b;font-size:18px;margin-bottom:8px;">پروفائل حذف کریں؟</h3>
+      <p style="color:#666;font-size:14px;margin-bottom:8px;"><strong>${p.name}</strong> — ${p.pnpCode}</p>
+      <p style="color:#999;font-size:12px;margin-bottom:20px;">یہ عمل واپس نہیں ہو سکتا۔ Google Sheet سے بھی حذف ہو جائے گا۔</p>
+      <div style="display:flex;gap:10px;">
+        <button onclick="doDelete('${code}')" 
+          style="flex:1;background:#c0392b;color:white;border:none;padding:12px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">
+          ✅ ہاں، حذف کریں
+        </button>
+        <button onclick="document.getElementById('deleteConfirmModal').remove()" 
+          style="flex:1;background:#f5f5f5;color:#333;border:none;padding:12px;border-radius:8px;font-weight:700;cursor:pointer;">
+          منسوخ
+        </button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+function doDelete(code) {
+  PNP_DB.deleteProfile(code);
+  document.getElementById('deleteConfirmModal').remove();
+  closeModal('profileModal');
+  showToast('✅ پروفائل حذف ہو گئی', 'info');
+  // profiles page پر refresh کریں
+  if(typeof filterProfiles === 'function') filterProfiles();
+  else setTimeout(() => location.reload(), 500);
+}
+
 function generateRishtaCard(code) {
   const p = PNP_DB.getProfileByCode(code);
   if (!p) return;

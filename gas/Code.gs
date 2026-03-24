@@ -87,6 +87,10 @@ function doGet(e) {
     }
     
     if (a === 'ping')        return _cors(_json({status:'ok', msg:'PakNikahPoint ✅ چل رہا ہے'}));
+    if (a === 'deleteProfile' && e.parameter.pnpCode) {
+      const res = deleteProfile(e.parameter.pnpCode);
+      return _cors(_json(res));
+    }
     if (a === 'getAllBoys')  return _cors(_json(getProfiles(BOYS_SHEET)));
     if (a === 'getAllGirls') return _cors(_json(getProfiles(GIRLS_SHEET)));
     if (a === 'getMatches')  return _cors(_json(getAllMatches()));
