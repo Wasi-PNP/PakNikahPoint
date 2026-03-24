@@ -227,6 +227,68 @@
     <div id="tEarn" style="display:none;">
       <h2 class="section-heading" style="margin-bottom:20px;">💰 کمائی کا مکمل منصوبہ</h2>
 
+      <!-- ═══ PAYMENT DETAILS ═══ -->
+      <div style="background:linear-gradient(135deg,#0D3B2E,#1A5C45);border-radius:16px;padding:24px;margin-bottom:24px;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;opacity:0.05;background-image:repeating-linear-gradient(45deg,#C9A84C 0,#C9A84C 1px,transparent 0,transparent 50%);background-size:20px 20px;"></div>
+        <div style="position:relative;">
+          <div style="font-family:'Cinzel',serif;font-size:11px;color:#C9A84C;letter-spacing:2px;margin-bottom:16px;text-align:center;">💳 ادائیگی کی تفصیل</div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+
+            <!-- Easypaisa -->
+            <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:16px;border:1px solid rgba(201,168,76,0.3);">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                <div style="width:40px;height:40px;border-radius:50%;background:#7B2D8B;display:flex;align-items:center;justify-content:center;font-size:18px;">📱</div>
+                <div>
+                  <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#C9A84C;">Easypaisa</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.5);">موبائل ادائیگی</div>
+                </div>
+              </div>
+              <div style="font-size:20px;font-weight:700;color:white;letter-spacing:1px;margin-bottom:4px;">0321-7600102</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.7);">Muhammad Wasim</div>
+              <button onclick="copyText('0321-7600102','Easypaisa')" style="margin-top:10px;width:100%;background:#7B2D8B;color:white;border:none;padding:8px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+                📋 نمبر کاپی کریں
+              </button>
+            </div>
+
+            <!-- JazzCash -->
+            <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:16px;border:1px solid rgba(201,168,76,0.3);">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                <div style="width:40px;height:40px;border-radius:50%;background:#CC0000;display:flex;align-items:center;justify-content:center;font-size:18px;">💳</div>
+                <div>
+                  <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#C9A84C;">JazzCash</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.5);">موبائل ادائیگی</div>
+                </div>
+              </div>
+              <div style="font-size:20px;font-weight:700;color:white;letter-spacing:1px;margin-bottom:4px;">0321-7600102</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.7);">Amina Younus</div>
+              <button onclick="copyText('0321-7600102','JazzCash')" style="margin-top:10px;width:100%;background:#CC0000;color:white;border:none;padding:8px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">
+                📋 نمبر کاپی کریں
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Bank Account - Coming Soon -->
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;border:1px dashed rgba(201,168,76,0.3);text-align:center;">
+            <div style="font-size:20px;margin-bottom:6px;">🏦</div>
+            <div style="font-family:'Cinzel',serif;font-size:12px;color:#C9A84C;margin-bottom:4px;">بینک اکاؤنٹ</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);">جلد شامل ہوگا</div>
+          </div>
+
+          <!-- ادائیگی کی ہدایت -->
+          <div style="margin-top:16px;background:rgba(201,168,76,0.1);border-radius:10px;padding:14px;border-left:3px solid #C9A84C;">
+            <div style="font-size:12px;color:rgba(255,255,255,0.9);line-height:1.8;">
+              <strong style="color:#C9A84C;">ادائیگی کا طریقہ:</strong><br>
+              1️⃣ اوپر دیے گئے نمبر پر رقم بھیجیں<br>
+              2️⃣ Transaction ID WhatsApp پر بھیجیں: <strong style="color:#25D366;">0321-7600102</strong><br>
+              3️⃣ تصدیق کے بعد پروفائل Activate ہوگی
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <!-- ماہانہ کمائی کا اندازہ -->
       <div style="background:linear-gradient(135deg,var(--green-deep),var(--green-mid));border-radius:14px;padding:24px;margin-bottom:24px;color:white;">
         <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:8px;">ماہانہ متوقع کمائی</div>
@@ -420,6 +482,22 @@
 <script src="../js/app.js"></script>
 <script>
 // ── TABS ──────────────────────────────────────
+function copyText(text, label) {
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✅ ' + label + ' نمبر کاپی ہو گیا: ' + text, 'success');
+    });
+  } else {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast('✅ ' + label + ' نمبر کاپی ہو گیا', 'success');
+  }
+}
+
 function showTab(id, btn) {
   ['tPkg','tVer','tAds','tEarn'].forEach(t => document.getElementById(t).style.display = t===id?'block':'none');
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
