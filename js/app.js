@@ -287,10 +287,66 @@ function generateRishtaCard(code) {
         <div style="margin-top:4px;color:#C9A84C;">اللهم بارك لهم وبارك عليهم وجمع بينهما في خير</div>
       </div>
     </div>
-    <div class="no-print" style="position:fixed;top:20px;right:20px;display:flex;gap:10px;">
-      <button onclick="window.print()" style="background:#0D3B2E;color:#C9A84C;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">🖨 Print / Save PDF</button>
-      <button onclick="window.close()" style="background:white;border:2px solid #ccc;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:14px;">Close</button>
+    <div class="no-print" style="position:fixed;top:20px;right:20px;display:flex;flex-direction:column;gap:10px;max-width:220px;">
+
+      <!-- تصویر show/hide -->
+      <div style="background:white;border:2px solid #ddd;border-radius:10px;padding:12px;">
+        <div style="font-size:12px;font-weight:700;color:#0D3B2E;margin-bottom:8px;">📷 تصویر آپشن</div>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+          <input type="checkbox" id="showPhoto" checked onchange="toggleCardPhoto(this.checked)" style="width:16px;height:16px;">
+          تصویر دکھائیں
+        </label>
+      </div>
+
+      <!-- PDF -->
+      <button onclick="window.print()" style="background:#0D3B2E;color:#C9A84C;border:none;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700;width:100%;">
+        📄 PDF / Print کریں
+      </button>
+
+      <!-- WhatsApp -->
+      <button onclick="shareCardWA()" style="background:#25D366;color:white;border:none;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700;width:100%;">
+        💬 WhatsApp بھیجیں
+      </button>
+
+      <!-- بند کریں -->
+      <button onclick="window.close()" style="background:white;border:2px solid #ccc;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:13px;width:100%;">
+        ✕ بند کریں
+      </button>
     </div>
+
+    <script>
+    function toggleCardPhoto(show) {
+      const ps = document.querySelector('.photo-section');
+      if(ps) ps.style.display = show ? 'flex' : 'none';
+    }
+    function shareCardWA() {
+      const name   = document.querySelector('.main-name') ? document.querySelector('.main-name').textContent : '';
+      const pnp    = document.querySelector('.pnp-chip')  ? document.querySelector('.pnp-chip').textContent  : '';
+      const bureau = document.querySelector('.bureau-name') ? document.querySelector('.bureau-name').textContent : 'PakNikahPoint';
+      const items  = document.querySelectorAll('.item');
+      let details  = '';
+      items.forEach(function(item) {
+        const k = item.querySelector('.item-key');
+        const v = item.querySelector('.item-val');
+        if(k && v) details += '• *' + k.textContent + ':* ' + v.textContent + '\n';
+      });
+      const footer = document.querySelector('.footer');
+      const phone  = footer ? footer.querySelector('span:first-child') : null;
+      const email  = footer ? footer.querySelector('span:nth-child(2)') : null;
+
+      const msg = 'السلام علیکم!\n\n' +
+        '📋 *رشتہ کارڈ — ' + pnp + '*\n\n' +
+        '👤 *نام:* ' + name + '\n\n' +
+        details + '\n' +
+        '🏢 *' + bureau + '*\n' +
+        (phone ? '📞 ' + phone.textContent + '\n' : '') +
+        (email ? '📧 ' + email.textContent + '\n' : '') +
+        '\n_رشتے عزت، اعتماد اور ذمہ داری کے ساتھ_ 🤝\n\n' +
+        '⚠️ تصویر سمیت PDF کے لیے Print بٹن استعمال کریں';
+
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    }
+    </script>
   </body></html>`);
   win.document.close();
 }
