@@ -254,6 +254,15 @@ function addProfile(p) {
     if (data[i][0] === p.pnpCode) return updateProfile(p);
   }
 
+  // تصویر Google Drive پر upload کریں
+  let photoUrl = '';
+  if (p.photo && p.photo.startsWith('data:')) {
+    photoUrl = _uploadPhoto(p.photo, p.pnpCode) || '';
+    Logger.log('✅ Photo Drive URL: ' + photoUrl);
+  } else if (p.photo && p.photo.startsWith('http')) {
+    photoUrl = p.photo; // پہلے سے URL ہے
+  }
+
   const row = [
     p.pnpCode||'', p.name||'', p.age||'', p.city||'',
     p.education||'', p.religiousEducation||'',
@@ -266,7 +275,7 @@ function addProfile(p) {
     p.fatherName||'', p.fatherProfession||'',
     p.motherName||'', p.contact||'',
     p.preferences||'', p.additionalInfo||'',
-    '', // photo - base64 GAS میں save نہیں ہوتی
+    photoUrl, // تصویر کا Google Drive link
     p.divorceReason||'', p.hasChildren||'',
     p.totalChildren||'', p.childrenBoys||'',
     p.childrenGirls||'', p.childrenAges||'',
@@ -318,6 +327,13 @@ function updateProfile(p) {
       sh.getRange(r,5).setValue(p.education     || data[i][4]);
       sh.getRange(r,7).setValue(p.profession    || data[i][6]);
       sh.getRange(r,8).setValue(p.maritalStatus || data[i][7]);
+      // تصویر update کریں
+      if (p.photo && p.photo.startsWith('data:')) {
+        const newPhotoUrl = _uploadPhoto(p.photo, p.pnpCode) || '';
+        if (newPhotoUrl) sh.getRange(r,25).setValue(newPhotoUrl);
+      } else if (p.photo && p.photo.startsWith('http')) {
+        sh.getRange(r,25).setValue(p.photo);
+      }
       return {status:'ok', msg:'✅ اپ ڈیٹ ہو گیا'};
     }
   }
@@ -455,6 +471,50 @@ function _sendEmail(subject, body) {
       MailApp.sendEmail(ADMIN_EMAIL, subject, body);
   } catch(e) {}
 }
+function _uploadPhoto(base64, code) {
+  try {
+    const m = base64.match(/^data:(.+);base64,(.+)$/);
+    if (!m) return null;
+    const mimeType = m[1];
+    const ext = mimeType.includes('png') ? '.png' : '.jpg';
+    const fileName = 'PNP_' + code + '_' + new Date().getTime() + ext;
+    const blob = Utilities.newBlob(
+      Utilities.base64Decode(m[2]), mimeType, fileName
+    );
+    // PakNikahPoint_Photos folder ڈھونڈیں یا بنائیں
+    let folder;
+    const folders = DriveApp.getFoldersByName('PakNikahPoint_Photos');
+    folder = folders.hasNext() ? folders.next() : DriveApp.createFolder('PakNikahPoint_Photos');
+    // پرانی تصویر ہو تو ہٹائیں
+    try {
+      const oldFiles = folder.getFilesByName(fileName);
+      while (oldFiles.hasNext()) oldFiles.next().setTrashed(true);
+    } catch(e) {}
+    // نئی تصویر save کریں
+    const file = folder.createFile(blob);
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    const photoUrl = 'https://drive.google.com/uc?export=view&id=' + file.getId();
+    Logger.log('✅ تصویر Drive میں: ' + photoUrl);
+    return photoUrl;
+  } catch(e) {
+    Logger.log('❌ Photo upload error: ' + e.message);
+    return null;
+  }
+}
+
+// Google Form کی تصویر کا link لیں
+function _getFormPhotoUrl(driveFileId) {
+  try {
+    if (!driveFileId) return '';
+    // Form کی تصویر پہلے سے Drive میں ہوتی ہے
+    const file = DriveApp.getFileById(driveFileId);
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return 'https://drive.google.com/uc?export=view&id=' + driveFileId;
+  } catch(e) {
+    return '';
+  }
+}
+
 function _json(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))

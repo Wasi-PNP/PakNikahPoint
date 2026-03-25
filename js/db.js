@@ -240,24 +240,44 @@ const PNP_DB = {
     const s=this.getSettings();
     if(!s.gasUrl)return{ok:false,msg:'GAS URL not configured'};
     try{
-      // GAS کو data بھیجیں — no-cors mode میں POST
-      const payload = JSON.stringify({action:'addProfile',profile});
-      // Method 1: POST
+      // تصویر compress کریں بھیجنے سے پہلے
+      let profileToSend = Object.assign({},profile);
+      if(profileToSend.photo && profileToSend.photo.startsWith('data:')){
+        profileToSend.photo = await this._compressForUpload(profileToSend.photo);
+      }
+      const payload = JSON.stringify({action:'addProfile',profile:profileToSend});
+      // POST بھیجیں
       fetch(s.gasUrl,{
         method:'POST',
         mode:'no-cors',
         headers:{'Content-Type':'text/plain'},
         body:payload
       });
-      // Method 2: GET fallback (backup)
-      const getUrl = s.gasUrl+'?action=addProfile&payload='+encodeURIComponent(payload);
-      fetch(getUrl,{method:'GET',mode:'no-cors'});
       console.log('✅ GAS sync بھیجا:',profile.pnpCode);
       return{ok:true};
     }catch(e){
       console.error('❌ GAS sync error:',e.message);
       return{ok:false,msg:e.message};
     }
+  },
+
+  // تصویر Drive upload کے لیے compress کریں
+  _compressForUpload(dataUrl){
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX = 400;
+        let w = img.width, h = img.height;
+        if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}
+        else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+        canvas.width=w; canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        resolve(canvas.toDataURL('image/jpeg',0.7));
+      };
+      img.onerror=()=>resolve(dataUrl);
+      img.src=dataUrl;
+    });
   },
 
   async syncAllToGAS(){
