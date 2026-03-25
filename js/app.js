@@ -319,7 +319,7 @@ function generateRishtaCard(code) {
       </div>
       <div class="footer">
         <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;">
-          <img src="/PakNikahPoint/assets/logo-pnp.jpg" alt="PNP" style="width:50px;height:50px;border-radius:50%;border:2px solid #C9A84C;object-fit:cover;">
+          <img src="/PakNikahPoint/assets/logo-pnp.png" alt="PNP" style="width:70px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
           <div style="font-family:'Cinzel',serif;font-size:15px;color:#0D3B2E;font-weight:700;">${settings.bureauName||'PakNikahPoint'}</div>
         </div>
         <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:6px;">
