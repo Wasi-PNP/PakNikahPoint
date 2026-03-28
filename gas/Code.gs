@@ -11,9 +11,10 @@ const GIRLS_SHEET   = 'Girls_Profiles';
 const MATCHES_SHEET = 'Saved_Matches';
 
 const COLS = [
-  'PNP Code','نام','عمر','شہر','تعلیم','دینی تعلیم',
-  'پیشہ','ازدواجی حیثیت','ذات/برادری','رہائش کی نوعیت',
-  'قد','وزن','رنگت','مسلک','مذہب',
+  'PNP Code','نام','تاریخ پیدائش','عمر','تعلیم','دینی تعلیم',
+  'قد','وزن','مذہب','مسلک','ذات/برادری',
+  'رہائش کی نوعیت','پیشہ','ازدواجی حیثیت',
+  'رنگت',
   'جسمانی معذوری','دائمی بیماری','نشہ',
   'والد کا نام','والد کا پیشہ','والدہ کا نام','رابطہ نمبر',
   'خواہشات','اضافی معلومات','تصویر',
@@ -151,19 +152,19 @@ function onFormSubmit(e) {
     const row = [
       pnpCode,
       name,
+      _v(vals,'تاریخ پیدائش') || _v(vals,'Date of Birth') || '',
       _v(vals,'عمر') || _v(vals,'Age / عمر') || _v(vals,'Age') || '',
-      _v(vals,'شہر') || _v(vals,'City / شہر') || _v(vals,'City') || '',
       _v(vals,'تعلیم') || _v(vals,'Education / تعلیم') || _v(vals,'Education') || '',
       _v(vals,'دینی تعلیم') || _v(vals,'Religious Education / دینی تعلیم') || '',
-      _v(vals,'پیشہ') || _v(vals,'Profession / پیشہ') || _v(vals,'Profession') || '',
-      _v(vals,'ازدواجی حیثیت') || _v(vals,'Marital Status / ازدواجی حیثیت') || _v(vals,'Marital Status') || '',
-      _v(vals,'ذات / برادری') || _v(vals,'Caste/Biradari / ذات برادری') || _v(vals,'Caste') || '',
-      _v(vals,'رہائش کی نوعیت') || '',
       _v(vals,'قد') || _v(vals,'Height / قد') || _v(vals,'Height') || '',
       _v(vals,'وزن') || _v(vals,'Weight / وزن') || _v(vals,'Weight') || '',
-      _v(vals,'رنگت') || _v(vals,'Complexion / رنگت') || '',
-      _v(vals,'مسلک') || _v(vals,'Sect / مسلک') || _v(vals,'Sect') || '',
       'اسلام',
+      _v(vals,'مسلک') || _v(vals,'Sect / مسلک') || _v(vals,'Sect') || '',
+      _v(vals,'ذات / برادری') || _v(vals,'Caste/Biradari / ذات برادری') || _v(vals,'Caste') || '',
+      _v(vals,'رہائش کی نوعیت') || '',
+      _v(vals,'پیشہ') || _v(vals,'Profession / پیشہ') || _v(vals,'Profession') || '',
+      _v(vals,'ازدواجی حیثیت') || _v(vals,'Marital Status / ازدواجی حیثیت') || _v(vals,'Marital Status') || '',
+      _v(vals,'رنگت') || _v(vals,'Complexion / رنگت') || '',
       _v(vals,'جسمانی معذوری') || 'کوئی نہیں',
       _v(vals,'دائمی بیماری') || 'کوئی نہیں',
       _v(vals,'نشہ') || 'کوئی نہیں',
@@ -264,7 +265,7 @@ function addProfile(p) {
   }
 
   const row = [
-    p.pnpCode||'', p.name||'', p.age||'', p.city||'',
+    p.pnpCode||'', p.name||'', p.dob||'', p.age||'', p.city||'',
     p.education||'', p.religiousEducation||'',
     p.profession||'', p.maritalStatus||'',
     p.caste||'', p.residenceType||p.residence||'',

@@ -45,9 +45,10 @@ const PNP_DB = {
     p.gender='boy';
     p.registeredAt=new Date().toISOString();
     p.status='active';
-    // تصویر compress کریں
+    // base64 تصویر localStorage میں save نہ کریں — صرف Drive URL رکھیں
     if(p.photo && p.photo.startsWith('data:')) {
-      p.photo = this._compressPhoto(p.photo);
+      p._photoBase64 = p.photo; // GAS بھیجنے کے لیے
+      p.photo = ''; // localStorage میں خالی رکھیں
     }
     const a=this.getBoys();a.push(p);this.saveBoys(a);return p;
   },
@@ -62,9 +63,10 @@ const PNP_DB = {
     p.gender='girl';
     p.registeredAt=new Date().toISOString();
     p.status='active';
-    // تصویر compress کریں
+    // base64 تصویر localStorage میں save نہ کریں
     if(p.photo && p.photo.startsWith('data:')) {
-      p.photo = this._compressPhoto(p.photo);
+      p._photoBase64 = p.photo;
+      p.photo = '';
     }
     const a=this.getGirls();a.push(p);this.saveGirls(a);return p;
   },
@@ -242,9 +244,12 @@ const PNP_DB = {
     try{
       // تصویر compress کریں بھیجنے سے پہلے
       let profileToSend = Object.assign({},profile);
-      if(profileToSend.photo && profileToSend.photo.startsWith('data:')){
-        profileToSend.photo = await this._compressForUpload(profileToSend.photo);
+      // _photoBase64 ہو تو وہ بھیجیں (نئی تصویر)
+      const photoSource = profileToSend._photoBase64 || profileToSend.photo;
+      if(photoSource && photoSource.startsWith('data:')){
+        profileToSend.photo = await this._compressForUpload(photoSource);
       }
+      delete profileToSend._photoBase64;
       const payload = JSON.stringify({action:'addProfile',profile:profileToSend});
       // POST بھیجیں
       fetch(s.gasUrl,{
