@@ -265,41 +265,78 @@ function addProfile(p) {
   }
 
   const row = [
-    p.pnpCode||'', p.name||'', p.dob||'', p.age||'', p.city||'',
-    p.education||'', p.religiousEducation||'',
-    p.profession||'', p.maritalStatus||'',
-    p.caste||'', p.residenceType||p.residence||'',
-    p.height||'', p.weight||'', p.complexion||'',
-    p.sect||'', p.religion||'اسلام',
-    p.disability||'کوئی نہیں', p.disease||'کوئی نہیں',
-    p.addiction||'کوئی نہیں',
-    p.fatherName||'', p.fatherProfession||'',
-    p.motherName||'', p.contact||'',
-    p.preferences||'', p.additionalInfo||'',
-    photoUrl, // تصویر کا Google Drive link
-    p.divorceReason||'', p.hasChildren||'',
-    p.totalChildren||'', p.childrenBoys||'',
-    p.childrenGirls||'', p.childrenAges||'',
-    p.childrenWith||'', p.custody||'',
-    p.maintenance||'', p.lateReason||'',
-    p.country||'پاکستان', p.province||'',
-    p.area||'', p.abroadCountry||'',
-    p.abroadCity||'', p.visaStatus||'',
-    p.houseArea||'', p.rent||'',
-    p.propertyDetails||'',
-    p.prayer||'', p.fasting||'', p.parda||'',
-    p.familyMembers||'', p.brothers||'',
-    p.sisters||'', p.income||'', p.jobLocation||'',
-    p.reqMarital||'', p.reqEducation||'',
-    p.reqMinAge||'', p.reqMaxAge||'',
-    p.reqCaste||'', p.reqSect||'',
-    p.reqResidence||'', p.reqReligiousEdu||'',
-    p.reqJobType||'',
-    p.originCountry||'', p.originCity||'', p.originCommunity||'',
-    p.remarryReason||'', p.remarryDivDetail||'',
-    p.motherProfession||'', p.marriageDefinition||'',
-    'HTML System', p.status||'active',
-    p.registeredAt || new Date().toISOString()
+    // COLS کی بالکل ایک جیسی ترتیب
+    p.pnpCode||'',           // 1: PNP Code
+    p.name||'',              // 2: نام
+    p.dob||'',               // 3: تاریخ پیدائش
+    p.age||'',               // 4: عمر
+    p.education||'',         // 5: تعلیم
+    p.religiousEducation||'',// 6: دینی تعلیم
+    p.height||'',            // 7: قد
+    p.weight||'',            // 8: وزن
+    p.religion||'اسلام',    // 9: مذہب
+    p.sect||'',              // 10: مسلک
+    p.caste||'',             // 11: ذات/برادری
+    p.residenceType||p.residence||'', // 12: رہائش کی نوعیت
+    p.profession||'',        // 13: پیشہ
+    p.maritalStatus||'',     // 14: ازدواجی حیثیت
+    p.complexion||'',        // 15: رنگت
+    p.disability||'کوئی نہیں', // 16: جسمانی معذوری
+    p.disease||'کوئی نہیں', // 17: دائمی بیماری
+    p.addiction||'کوئی نہیں',// 18: نشہ
+    p.fatherName||'',        // 19: والد کا نام
+    p.fatherProfession||'',  // 20: والد کا پیشہ
+    p.motherName||'',        // 21: والدہ کا نام
+    p.contact||'',           // 22: رابطہ نمبر
+    p.preferences||'',       // 23: خواہشات
+    p.additionalInfo||'',    // 24: اضافی معلومات
+    photoUrl,                // 25: تصویر (Drive URL)
+    p.divorceReason||'',     // 26: طلاق/خلع وجہ
+    p.hasChildren||'',       // 27: بچے ہیں؟
+    p.totalChildren||'',     // 28: کل بچے
+    p.childrenBoys||'',      // 29: لڑکے
+    p.childrenGirls||'',     // 30: لڑکیاں
+    p.childrenAges||'',      // 31: بچوں کی عمریں
+    p.childrenWith||'',      // 32: بچے کس کے ساتھ
+    p.custody||'',           // 33: Custody
+    p.maintenance||'',       // 34: نان نفقہ
+    p.lateReason||'',        // 35: دیر سے شادی وجہ
+    p.country||'پاکستان',   // 36: ملک
+    p.province||'',          // 37: صوبہ
+    p.area||'',              // 38: علاقہ
+    p.abroadCountry||'',     // 39: بیرون ملک ملک
+    p.abroadCity||'',        // 40: بیرون ملک شہر
+    p.visaStatus||'',        // 41: ویزا حیثیت
+    p.houseArea||'',         // 42: مکان رقبہ
+    p.rent||'',              // 43: کرایہ
+    p.propertyDetails||'',   // 44: جائیداد تفصیل
+    p.prayer||'',            // 45: نماز
+    p.fasting||'',           // 46: روزے
+    p.parda||'',             // 47: پردہ
+    p.familyMembers||'',     // 48: افراد خانہ
+    p.brothers||'',          // 49: بھائی
+    p.sisters||'',           // 50: بہنیں
+    p.income||'',            // 51: آمدن
+    p.jobLocation||'',       // 52: ملازمت مقام
+    p.reqMarital||'',        // 53: مطلوبہ ازدواجی
+    p.reqEducation||'',      // 54: مطلوبہ تعلیم
+    p.reqMinAge||'',         // 55: مطلوبہ کم عمر
+    p.reqMaxAge||'',         // 56: مطلوبہ زیادہ عمر
+    p.reqCaste||'',          // 57: مطلوبہ ذات
+    p.reqSect||'',           // 58: مطلوبہ مسلک
+    p.reqResidence||'',      // 59: مطلوبہ رہائش
+    p.reqReligiousEdu||'',   // 60: مطلوبہ دینی تعلیم
+    p.reqJobType||'',        // 61: مطلوبہ ملازمت
+    p.originCountry||'',     // 62: آبائی ملک
+    p.originCity||'',        // 63: آبائی علاقہ
+    p.originCommunity||'',   // 64: آبائی برادری
+    p.remarryReason||'',     // 65: شادی وجہ
+    p.remarryDivDetail||'',  // 66: طلاق خلع وجہ
+    p.motherProfession||'',  // 67: والدہ پیشہ
+    p.marriageDefinition||'',// 68: شادی تعریف
+    'HTML System',           // 69: ذریعہ
+    p.status||'active',      // 70: حیثیت
+    p.registeredAt || new Date().toISOString() // 71: تاریخ
   ];
 
   sheet.appendRow(row);
@@ -384,20 +421,34 @@ function getProfiles(sheetName) {
   for (let i = 1; i < data.length; i++) {
     if (!data[i][0]) continue;
     profiles.push({
-      pnpCode:data[i][0], name:data[i][1], age:data[i][2],
-      city:data[i][3], education:data[i][4],
-      religiousEducation:data[i][5], profession:data[i][6],
-      maritalStatus:data[i][7], caste:data[i][8],
-      residence:data[i][9], height:data[i][10],
-      weight:data[i][11], complexion:data[i][12],
-      sect:data[i][13], religion:data[i][14],
-      disability:data[i][15], disease:data[i][16],
-      addiction:data[i][17], fatherName:data[i][18],
-      fatherProfession:data[i][19], motherName:data[i][20],
-      contact:data[i][21], photo:data[i][24],
-      gender:sheetName === BOYS_SHEET ? 'boy' : 'girl',
-      status:data[i][COLS.length-2] || 'active',
-      registeredAt:data[i][COLS.length-1] || ''
+      // COLS کی ترتیب کے مطابق
+      pnpCode:           data[i][0],
+      name:              data[i][1],
+      dob:               data[i][2],
+      age:               data[i][3],
+      education:         data[i][4],
+      religiousEducation:data[i][5],
+      height:            data[i][6],
+      weight:            data[i][7],
+      religion:          data[i][8],
+      sect:              data[i][9],
+      caste:             data[i][10],
+      residence:         data[i][11],
+      profession:        data[i][12],
+      maritalStatus:     data[i][13],
+      complexion:        data[i][14],
+      disability:        data[i][15],
+      disease:           data[i][16],
+      addiction:         data[i][17],
+      fatherName:        data[i][18],
+      fatherProfession:  data[i][19],
+      motherName:        data[i][20],
+      contact:           data[i][21],
+      photo:             data[i][24],
+      city:              data[i][36], // ملک/شہر
+      gender:            sheetName === BOYS_SHEET ? 'boy' : 'girl',
+      status:            data[i][COLS.length-2] || 'active',
+      registeredAt:      data[i][COLS.length-1] || ''
     });
   }
   return {status:'ok', profiles};

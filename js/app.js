@@ -306,16 +306,18 @@ function generateRishtaCard(code) {
         <div style="color:#7A7A7A;font-size:14px;margin-top:4px;">${p.age} years old • ${p.city}</div>
       </div>
       <div class="grid">
-        <div class="item"><div class="item-key">Education</div><div class="item-val">${p.education||'—'}</div></div>
-        <div class="item"><div class="item-key">Profession</div><div class="item-val">${p.profession||'—'}</div></div>
-        <div class="item"><div class="item-key">Caste / Biradari</div><div class="item-val">${p.caste||'—'}</div></div>
-        <div class="item"><div class="item-key">Sect</div><div class="item-val">${p.sect||'—'}</div></div>
-        <div class="item"><div class="item-key">Marital Status</div><div class="item-val">${p.maritalStatus||'—'}</div></div>
-        <div class="item"><div class="item-key">Religion</div><div class="item-val">${p.religion||'—'}</div></div>
-        <div class="item"><div class="item-key">Height</div><div class="item-val">${p.height||'—'}</div></div>
-        <div class="item"><div class="item-key">Complexion</div><div class="item-val">${p.complexion||'—'}</div></div>
-        <div class="item"><div class="item-key">Residence</div><div class="item-val">${p.residence||'—'}</div></div>
-        <div class="item"><div class="item-key">Religious Edu</div><div class="item-val">${p.religiousEducation||'—'}</div></div>
+        <div class="item"><div class="item-key">تاریخ پیدائش</div><div class="item-val">${p.dob||'—'}</div></div>
+        <div class="item"><div class="item-key">عمر</div><div class="item-val">${p.age||'—'} سال</div></div>
+        <div class="item"><div class="item-key">تعلیم</div><div class="item-val">${p.education||'—'}</div></div>
+        <div class="item"><div class="item-key">دینی تعلیم</div><div class="item-val">${p.religiousEducation||'—'}</div></div>
+        <div class="item"><div class="item-key">قد</div><div class="item-val">${p.height||'—'}</div></div>
+        <div class="item"><div class="item-key">وزن</div><div class="item-val">${p.weight||'—'}</div></div>
+        <div class="item"><div class="item-key">مذہب / مسلک</div><div class="item-val">${p.religion||'اسلام'} / ${p.sect||'—'}</div></div>
+        <div class="item"><div class="item-key">ذات / برادری</div><div class="item-val">${p.caste||'—'}</div></div>
+        <div class="item"><div class="item-key">رہائش</div><div class="item-val">${p.city||'—'}</div></div>
+        <div class="item"><div class="item-key">پیشہ</div><div class="item-val">${p.profession||'—'}</div></div>
+        <div class="item"><div class="item-key">ازدواجی حیثیت</div><div class="item-val">${p.maritalStatus||'—'}</div></div>
+        <div class="item"><div class="item-key">رنگت</div><div class="item-val">${p.complexion||'—'}</div></div>
       </div>
       <div class="footer">
         <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;">
