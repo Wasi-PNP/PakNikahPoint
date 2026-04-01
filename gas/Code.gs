@@ -421,31 +421,37 @@ function getProfiles(sheetName) {
   for (let i = 1; i < data.length; i++) {
     if (!data[i][0]) continue;
     profiles.push({
-      // COLS کی ترتیب کے مطابق
-      pnpCode:           data[i][0],
-      name:              data[i][1],
-      dob:               data[i][2],
-      age:               data[i][3],
-      education:         data[i][4],
-      religiousEducation:data[i][5],
-      height:            data[i][6],
-      weight:            data[i][7],
-      religion:          data[i][8],
-      sect:              data[i][9],
-      caste:             data[i][10],
-      residence:         data[i][11],
-      profession:        data[i][12],
-      maritalStatus:     data[i][13],
-      complexion:        data[i][14],
-      disability:        data[i][15],
-      disease:           data[i][16],
-      addiction:         data[i][17],
-      fatherName:        data[i][18],
-      fatherProfession:  data[i][19],
-      motherName:        data[i][20],
-      contact:           data[i][21],
-      photo:             data[i][24],
-      city:              data[i][36], // ملک/شہر
+      pnpCode:           data[i][0],   // PNP Code
+      name:              data[i][1],   // نام
+      dob:               data[i][2],   // تاریخ پیدائش
+      age:               data[i][3],   // عمر
+      education:         data[i][4],   // تعلیم
+      religiousEducation:data[i][5],   // دینی تعلیم
+      height:            data[i][6],   // قد
+      weight:            data[i][7],   // وزن
+      religion:          data[i][8],   // مذہب
+      sect:              data[i][9],   // مسلک
+      caste:             data[i][10],  // ذات/برادری
+      residence:         data[i][11],  // رہائش کی نوعیت
+      profession:        data[i][12],  // پیشہ
+      maritalStatus:     data[i][13],  // ازدواجی حیثیت
+      complexion:        data[i][14],  // رنگت
+      disability:        data[i][15],  // جسمانی معذوری
+      disease:           data[i][16],  // دائمی بیماری
+      addiction:         data[i][17],  // نشہ
+      fatherName:        data[i][18],  // والد کا نام
+      fatherProfession:  data[i][19],  // والد کا پیشہ
+      motherName:        data[i][20],  // والدہ کا نام
+      contact:           data[i][21],  // رابطہ نمبر
+      preferences:       data[i][22],  // خواہشات
+      additionalInfo:    data[i][23],  // اضافی معلومات
+      photo:             data[i][24],  // تصویر
+      divorceReason:     data[i][25],  // طلاق/خلع وجہ
+      hasChildren:       data[i][26],  // بچے ہیں؟
+      country:           data[i][35],  // ملک
+      province:          data[i][36],  // صوبہ
+      city:              data[i][37],  // علاقہ/شہر
+      income:            data[i][50],  // آمدن
       gender:            sheetName === BOYS_SHEET ? 'boy' : 'girl',
       status:            data[i][COLS.length-2] || 'active',
       registeredAt:      data[i][COLS.length-1] || ''

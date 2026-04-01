@@ -60,12 +60,12 @@ function buildProfileCard(p, showActions=true) {
         ${badge}
       </div>
       <div class="profile-card-body">
-        <div class="profile-detail-row"><span class="detail-key">Education</span><span class="detail-val">${p.education||'—'}</span></div>
-        <div class="profile-detail-row"><span class="detail-key">Profession</span><span class="detail-val">${p.profession||'—'}</span></div>
-        <div class="profile-detail-row"><span class="detail-key">Caste</span><span class="detail-val">${p.caste||'—'}</span></div>
-        <div class="profile-detail-row"><span class="detail-key">Marital</span><span class="detail-val">${p.maritalStatus||'—'}</span></div>
-        <div class="profile-detail-row"><span class="detail-key">Height</span><span class="detail-val">${p.height||'—'}</span></div>
-        <div class="profile-detail-row"><span class="detail-key">Sect</span><span class="detail-val">${p.sect||'—'}</span></div>
+        <div class="profile-detail-row"><span class="detail-key">تعلیم</span><span class="detail-val">${p.education||'—'}</span></div>
+        <div class="profile-detail-row"><span class="detail-key">پیشہ</span><span class="detail-val">${p.profession||'—'}</span></div>
+        <div class="profile-detail-row"><span class="detail-key">ذات</span><span class="detail-val">${p.caste||'—'}</span></div>
+        <div class="profile-detail-row"><span class="detail-key">ازدواجی</span><span class="detail-val">${p.maritalStatus||'—'}</span></div>
+        <div class="profile-detail-row"><span class="detail-key">قد</span><span class="detail-val">${p.height||'—'}</span></div>
+        <div class="profile-detail-row"><span class="detail-key">مسلک</span><span class="detail-val">${p.sect||'—'}</span></div>
       </div>
       ${actions}
     </div>`;
@@ -115,28 +115,31 @@ function viewProfile(code) {
       ${photoHtml}
       <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-top:10px;">${p.pnpCode}</div>
       <div style="font-family:'Cinzel',serif;font-size:18px;color:white;font-weight:700;">${p.name}</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.7)">${p.age} yrs • ${p.city}</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7)">${p.age||'—'} سال • ${p.city||'—'}</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-      ${detailRow('Education',p.education)}
-      ${detailRow('Profession',p.profession)}
-      ${detailRow('Caste / Biradari',p.caste)}
-      ${detailRow('Sect',p.sect)}
-      ${detailRow('Religion',p.religion)}
-      ${detailRow('Marital Status',p.maritalStatus)}
-      ${detailRow('Height',p.height)}
-      ${detailRow('Weight',p.weight)}
-      ${detailRow('Complexion',p.complexion)}
-      ${detailRow('Residence',p.residence)}
-      ${detailRow('Religious Education',p.religiousEducation)}
-      ${detailRow('Disability',p.disability)}
-      ${detailRow('Disease',p.disease)}
-      ${detailRow('Addiction',p.addiction)}
+      ${detailRow('تاریخ پیدائش',p.dob)}
+      ${detailRow('عمر',p.age ? p.age+' سال' : '—')}
+      ${detailRow('تعلیم',p.education)}
+      ${detailRow('دینی تعلیم',p.religiousEducation)}
+      ${detailRow('قد',p.height)}
+      ${detailRow('وزن',p.weight)}
+      ${detailRow('مذہب',p.religion)}
+      ${detailRow('مسلک',p.sect)}
+      ${detailRow('ذات / برادری',p.caste)}
+      ${detailRow('رہائش',p.residence)}
+      ${detailRow('پیشہ',p.profession)}
+      ${detailRow('ازدواجی حیثیت',p.maritalStatus)}
+      ${detailRow('رنگت',p.complexion)}
+      ${detailRow('جسمانی معذوری',p.disability)}
+      ${detailRow('دائمی بیماری',p.disease)}
+      ${detailRow('نشہ',p.addiction)}
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;background:var(--cream);border-radius:8px;margin-bottom:16px;">
-      ${detailRow("Father's Name",p.fatherName)}
-      ${detailRow("Father's Profession",p.fatherProfession)}
-      ${detailRow("Mother's Name",p.motherName)}
+      ${detailRow('والد کا نام',p.fatherName)}
+      ${detailRow('والد کا پیشہ',p.fatherProfession)}
+      ${detailRow('والدہ کا نام',p.motherName)}
+      ${detailRow('رابطہ نمبر',p.contact)}
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <button class="btn-primary" onclick="findMatchFor('${p.pnpCode}');closeModal('profileModal')">❤ Find Match</button>
@@ -174,6 +177,8 @@ function shareOnWhatsApp(code) {
     "*عمر:* " + p.age + " سال\n" +
     "*شہر:* " + (p.city||"—") + "\n" +
     "*تعلیم:* " + (p.education||"—") + "\n" +
+    "*دینی تعلیم:* " + (p.religiousEducation||"—") + "\n" +
+    "*قد:* " + (p.height||"—") + "  |  *وزن:* " + (p.weight||"—") + "\n" +
     "*پیشہ:* " + (p.profession||"—") + "\n" +
     "*ذات:* " + (p.caste||"—") + "\n" +
     "*مسلک:* " + (p.sect||"—") + "\n" +
