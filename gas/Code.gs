@@ -421,37 +421,45 @@ function getProfiles(sheetName) {
   for (let i = 1; i < data.length; i++) {
     if (!data[i][0]) continue;
     profiles.push({
-      pnpCode:           data[i][0],   // PNP Code
-      name:              data[i][1],   // نام
-      dob:               data[i][2],   // تاریخ پیدائش
-      age:               data[i][3],   // عمر
-      education:         data[i][4],   // تعلیم
-      religiousEducation:data[i][5],   // دینی تعلیم
-      height:            data[i][6],   // قد
-      weight:            data[i][7],   // وزن
-      religion:          data[i][8],   // مذہب
-      sect:              data[i][9],   // مسلک
-      caste:             data[i][10],  // ذات/برادری
-      residence:         data[i][11],  // رہائش کی نوعیت
-      profession:        data[i][12],  // پیشہ
-      maritalStatus:     data[i][13],  // ازدواجی حیثیت
-      complexion:        data[i][14],  // رنگت
-      disability:        data[i][15],  // جسمانی معذوری
-      disease:           data[i][16],  // دائمی بیماری
-      addiction:         data[i][17],  // نشہ
-      fatherName:        data[i][18],  // والد کا نام
-      fatherProfession:  data[i][19],  // والد کا پیشہ
-      motherName:        data[i][20],  // والدہ کا نام
-      contact:           data[i][21],  // رابطہ نمبر
-      preferences:       data[i][22],  // خواہشات
-      additionalInfo:    data[i][23],  // اضافی معلومات
-      photo:             data[i][24],  // تصویر
-      divorceReason:     data[i][25],  // طلاق/خلع وجہ
-      hasChildren:       data[i][26],  // بچے ہیں؟
-      country:           data[i][35],  // ملک
-      province:          data[i][36],  // صوبہ
-      city:              data[i][37],  // علاقہ/شہر
-      income:            data[i][50],  // آمدن
+      // Sheet columns کے بالکل مطابق
+      pnpCode:           data[i][0],   // A: PNP Code
+      name:              data[i][1],   // B: نام
+      dob:               data[i][2],   // C: تاریخ پیدائش
+      age:               data[i][3],   // D: عمر
+      city:              data[i][4],   // E: رہائش/شہر
+      education:         data[i][5],   // F: تعلیم
+      religiousEducation:data[i][6],   // G: دینی تعلیم
+      profession:        data[i][7],   // H: پیشہ
+      maritalStatus:     data[i][8],   // I: ازدواجی حیثیت
+      caste:             data[i][9],   // J: ذات/برادری
+      residence:         data[i][10],  // K: رہائش کی نوعیت
+      height:            data[i][11],  // L: قد
+      weight:            data[i][12],  // M: وزن
+      complexion:        data[i][13],  // N: رنگت
+      sect:              data[i][14],  // O: مسلک
+      religion:          data[i][15],  // P: مذہب
+      disability:        data[i][16],  // Q: جسمانی معذوری
+      disease:           data[i][17],  // R: دائمی بیماری
+      addiction:         data[i][18],  // S: نشہ
+      fatherName:        data[i][19],  // T: والد کا نام
+      fatherProfession:  data[i][20],  // U: والد کا پیشہ
+      motherName:        data[i][21],  // V: والدہ کا نام
+      contact:           data[i][22],  // W: رابطہ نمبر
+      photo:             data[i][24],  // Y: تصویر
+      prayer:            data[i][36],  // AK: نماز
+      fasting:           data[i][37],  // AL: روزے
+      parda:             data[i][38],  // AM: پردہ
+      originArea:        data[i][48],  // AW: آبائی علاقہ
+      marriageDef:       data[i][51],  // AZ: شادی تعریف
+      reqMarital:        data[i][53],  // BB: مطلوبہ ازدواجی
+      reqEducation:      data[i][54],  // BC: مطلوبہ تعلیم
+      reqMinAge:         data[i][55],  // BD: مطلوبہ کم عمر
+      reqMaxAge:         data[i][56],  // BE: مطلوبہ زیادہ عمر
+      reqCaste:          data[i][57],  // BF: مطلوبہ ذات
+      reqSect:           data[i][58],  // BG: مطلوبہ مسلک
+      reqResidence:      data[i][59],  // BH: مطلوبہ رہائش
+      reqReligiousEdu:   data[i][60],  // BI: مطلوبہ دینی تعلیم
+      reqJobType:        data[i][61],  // BJ: مطلوبہ ملازمت
       gender:            sheetName === BOYS_SHEET ? 'boy' : 'girl',
       status:            data[i][COLS.length-2] || 'active',
       registeredAt:      data[i][COLS.length-1] || ''

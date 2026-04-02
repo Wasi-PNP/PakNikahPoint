@@ -120,17 +120,17 @@ function viewProfile(code) {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
       ${detailRow('تاریخ پیدائش',p.dob)}
       ${detailRow('عمر',p.age ? p.age+' سال' : '—')}
+      ${detailRow('رہائش',p.city)}
+      ${detailRow('ازدواجی حیثیت',p.maritalStatus)}
       ${detailRow('تعلیم',p.education)}
       ${detailRow('دینی تعلیم',p.religiousEducation)}
+      ${detailRow('پیشہ',p.profession)}
       ${detailRow('قد',p.height)}
       ${detailRow('وزن',p.weight)}
+      ${detailRow('رنگت',p.complexion)}
       ${detailRow('مذہب',p.religion)}
       ${detailRow('مسلک',p.sect)}
       ${detailRow('ذات / برادری',p.caste)}
-      ${detailRow('رہائش',p.residence)}
-      ${detailRow('پیشہ',p.profession)}
-      ${detailRow('ازدواجی حیثیت',p.maritalStatus)}
-      ${detailRow('رنگت',p.complexion)}
       ${detailRow('جسمانی معذوری',p.disability)}
       ${detailRow('دائمی بیماری',p.disease)}
       ${detailRow('نشہ',p.addiction)}
@@ -138,9 +138,20 @@ function viewProfile(code) {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;background:var(--cream);border-radius:8px;margin-bottom:16px;">
       ${detailRow('والد کا نام',p.fatherName)}
       ${detailRow('والد کا پیشہ',p.fatherProfession)}
-      ${detailRow('والدہ کا نام',p.motherName)}
       ${detailRow('رابطہ نمبر',p.contact)}
     </div>
+    ${(p.reqMarital||p.reqEducation) ? `
+    <div style="padding:14px;background:#FFF8E7;border-radius:8px;margin-bottom:16px;border:1px solid #C9A84C;">
+      <div style="font-family:'Cinzel',serif;font-size:11px;color:#C9A84C;margin-bottom:10px;letter-spacing:1px;">مطلوبہ رشتے کی خواہشات</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        ${p.reqMarital ? detailRow('ازدواجی حیثیت',p.reqMarital) : ''}
+        ${p.reqEducation ? detailRow('تعلیم',p.reqEducation) : ''}
+        ${p.reqMinAge||p.reqMaxAge ? detailRow('عمر',`${p.reqMinAge||'—'} سے ${p.reqMaxAge||'—'} سال`) : ''}
+        ${p.reqCaste ? detailRow('ذات',p.reqCaste) : ''}
+        ${p.reqSect ? detailRow('مسلک',p.reqSect) : ''}
+        ${p.reqResidence ? detailRow('رہائش',p.reqResidence) : ''}
+      </div>
+    </div>` : ''}
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <button class="btn-primary" onclick="findMatchFor('${p.pnpCode}');closeModal('profileModal')">❤ Find Match</button>
       <button class="btn-gold" onclick="generateRishtaCard('${p.pnpCode}')">📄 Rishta Card</button>
@@ -310,20 +321,46 @@ function generateRishtaCard(code) {
         <div class="main-name">${p.name}</div>
         <div style="color:#7A7A7A;font-size:14px;margin-top:4px;">${p.age} years old • ${p.city}</div>
       </div>
+      <!-- مرکزی معلومات -->
+      <div style="font-family:'Cinzel',serif;font-size:11px;color:#C9A84C;text-align:center;margin-bottom:10px;letter-spacing:2px;">ذاتی معلومات</div>
       <div class="grid">
         <div class="item"><div class="item-key">تاریخ پیدائش</div><div class="item-val">${p.dob||'—'}</div></div>
         <div class="item"><div class="item-key">عمر</div><div class="item-val">${p.age||'—'} سال</div></div>
+        <div class="item"><div class="item-key">رہائش</div><div class="item-val">${p.city||'—'}</div></div>
+        <div class="item"><div class="item-key">ازدواجی حیثیت</div><div class="item-val">${p.maritalStatus||'—'}</div></div>
         <div class="item"><div class="item-key">تعلیم</div><div class="item-val">${p.education||'—'}</div></div>
         <div class="item"><div class="item-key">دینی تعلیم</div><div class="item-val">${p.religiousEducation||'—'}</div></div>
+        <div class="item"><div class="item-key">پیشہ</div><div class="item-val">${p.profession||'—'}</div></div>
         <div class="item"><div class="item-key">قد</div><div class="item-val">${p.height||'—'}</div></div>
         <div class="item"><div class="item-key">وزن</div><div class="item-val">${p.weight||'—'}</div></div>
-        <div class="item"><div class="item-key">مذہب / مسلک</div><div class="item-val">${p.religion||'اسلام'} / ${p.sect||'—'}</div></div>
-        <div class="item"><div class="item-key">ذات / برادری</div><div class="item-val">${p.caste||'—'}</div></div>
-        <div class="item"><div class="item-key">رہائش</div><div class="item-val">${p.city||'—'}</div></div>
-        <div class="item"><div class="item-key">پیشہ</div><div class="item-val">${p.profession||'—'}</div></div>
-        <div class="item"><div class="item-key">ازدواجی حیثیت</div><div class="item-val">${p.maritalStatus||'—'}</div></div>
         <div class="item"><div class="item-key">رنگت</div><div class="item-val">${p.complexion||'—'}</div></div>
+        <div class="item"><div class="item-key">مذہب</div><div class="item-val">${p.religion||'اسلام'}</div></div>
+        <div class="item"><div class="item-key">مسلک</div><div class="item-val">${p.sect||'—'}</div></div>
+        <div class="item"><div class="item-key">ذات / برادری</div><div class="item-val">${p.caste||'—'}</div></div>
+        <div class="item"><div class="item-key">جسمانی معذوری</div><div class="item-val">${p.disability||'کوئی نہیں'}</div></div>
+        <div class="item"><div class="item-key">دائمی بیماری</div><div class="item-val">${p.disease||'کوئی نہیں'}</div></div>
+        <div class="item"><div class="item-key">نشہ</div><div class="item-val">${p.addiction||'کوئی نہیں'}</div></div>
       </div>
+      <!-- والد کی معلومات -->
+      ${p.fatherName || p.fatherProfession ? `
+      <div style="font-family:'Cinzel',serif;font-size:11px;color:#C9A84C;text-align:center;margin:14px 0 10px;letter-spacing:2px;">خاندانی معلومات</div>
+      <div class="grid">
+        <div class="item"><div class="item-key">والد کا نام</div><div class="item-val">${p.fatherName||'—'}</div></div>
+        <div class="item"><div class="item-key">والد کا پیشہ</div><div class="item-val">${p.fatherProfession||'—'}</div></div>
+        ${p.contact ? `<div class="item" style="grid-column:1/-1"><div class="item-key">رابطہ نمبر</div><div class="item-val" style="font-size:16px;font-weight:700;color:#0D3B2E;">${p.contact}</div></div>` : ''}
+      </div>` : ''}
+      <!-- مطلوبہ رشتے کی خواہشات -->
+      ${p.reqMarital || p.reqEducation || p.reqMinAge ? `
+      <div style="font-family:'Cinzel',serif;font-size:11px;color:#C9A84C;text-align:center;margin:14px 0 10px;letter-spacing:2px;">مطلوبہ رشتے کی خواہشات</div>
+      <div class="grid" style="background:#F5F0E8;border-radius:8px;padding:10px;">
+        ${p.reqMarital ? `<div class="item"><div class="item-key">ازدواجی حیثیت</div><div class="item-val">${p.reqMarital}</div></div>` : ''}
+        ${p.reqEducation ? `<div class="item"><div class="item-key">تعلیم</div><div class="item-val">${p.reqEducation}</div></div>` : ''}
+        ${p.reqMinAge || p.reqMaxAge ? `<div class="item"><div class="item-key">عمر</div><div class="item-val">${p.reqMinAge||'—'} سے ${p.reqMaxAge||'—'} سال</div></div>` : ''}
+        ${p.reqCaste ? `<div class="item"><div class="item-key">ذات</div><div class="item-val">${p.reqCaste}</div></div>` : ''}
+        ${p.reqSect ? `<div class="item"><div class="item-key">مسلک</div><div class="item-val">${p.reqSect}</div></div>` : ''}
+        ${p.reqResidence ? `<div class="item"><div class="item-key">رہائش</div><div class="item-val">${p.reqResidence}</div></div>` : ''}
+        ${p.reqReligiousEdu ? `<div class="item"><div class="item-key">دینی تعلیم</div><div class="item-val">${p.reqReligiousEdu}</div></div>` : ''}
+      </div>` : ''}
       <div class="footer">
         <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;">
           <img src="/PakNikahPoint/assets/logo-pnp.png" alt="PNP" style="width:70px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
